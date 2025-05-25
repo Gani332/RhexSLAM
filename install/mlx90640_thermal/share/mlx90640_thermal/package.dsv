@@ -1,0 +1,6 @@
+source;share/mlx90640_thermal/hook/pythonpath.dsv
+source;share/mlx90640_thermal/hook/pythonpath.sh
+source;share/mlx90640_thermal/hook/ament_prefix_path.dsv
+source;share/mlx90640_thermal/hook/ament_prefix_path.sh
+source;../../build/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath_develop.dsv
+source;../../build/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath_develop.sh

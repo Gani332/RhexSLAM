@@ -1,0 +1,4 @@
+[console_scripts]
+inference_node = mlx90640_thermal.inference_node:main
+publisher_node = mlx90640_thermal.publisher_node:main
+thermal_marker_node = mlx90640_thermal.thermal_marker_node:main

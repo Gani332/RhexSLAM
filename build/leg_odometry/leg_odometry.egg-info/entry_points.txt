@@ -1,0 +1,2 @@
+[console_scripts]
+leg_odometry_node = leg_odometry.leg_odometry_node:main

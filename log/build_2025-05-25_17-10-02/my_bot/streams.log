@@ -1,0 +1,51 @@
+[0.849s] Invoking command in '/home/innovation/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/my_bot -- -j4 -l4
+[0.911s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.437s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.452s] -- Found ament_lint_auto: 0.17.2 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[1.653s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.659s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.659s] -- Configured 'flake8' exclude dirs and/or files: 
+[1.660s] -- Added test 'lint_cmake' to check CMake code style
+[1.660s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.663s] -- Added test 'xmllint' to check XML markup files
+[1.665s] -- Configuring done (0.8s)
+[1.701s] -- Generating done (0.0s)
+[1.713s] -- Build files have been written to: /home/innovation/dev_ws/build/my_bot
+[1.762s] Invoked command in '/home/innovation/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/my_bot -- -j4 -l4
+[1.763s] Invoking command in '/home/innovation/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/my_bot
+[1.780s] -- Install configuration: ""
+[1.781s] -- Execute custom install script
+[1.782s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/ekf.yaml
+[1.782s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/empty.yaml
+[1.782s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/madgwick_params.yaml
+[1.785s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/my_slam_params.yaml
+[1.785s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/nav2_params.yaml
+[1.785s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/config/view_bot.rviz
+[1.788s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/chassis.stl
+[1.788s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/left_leg.stl
+[1.788s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/lidar.stl
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/right_leg.stl
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/stereo_camera.stl
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/meshes/thermal_camera.stl
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/description/xacro/rhex.urdf.xacro
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/launch/custom_navigation_launch.py
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/launch/display.launch.py
+[1.789s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/launch/slam.launch.py
+[1.793s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/worlds/empty.world
+[1.794s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/ament_index/resource_index/package_run_dependencies/my_bot
+[1.795s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/ament_index/resource_index/parent_prefix_path/my_bot
+[1.795s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/environment/ament_prefix_path.sh
+[1.795s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/environment/ament_prefix_path.dsv
+[1.796s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/environment/path.sh
+[1.796s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/environment/path.dsv
+[1.796s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/local_setup.bash
+[1.797s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/local_setup.sh
+[1.797s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/local_setup.zsh
+[1.797s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/local_setup.dsv
+[1.797s] -- Symlinking: /home/innovation/dev_ws/install/my_bot/share/my_bot/package.dsv
+[1.818s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/ament_index/resource_index/packages/my_bot
+[1.819s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/cmake/my_botConfig.cmake
+[1.820s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/cmake/my_botConfig-version.cmake
+[1.821s] -- Up-to-date symlink: /home/innovation/dev_ws/install/my_bot/share/my_bot/package.xml
+[1.822s] -- Installing: /home/innovation/dev_ws/install/my_bot/lib/my_bot/marker_goal_sender.py
+[1.829s] Invoked command in '/home/innovation/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/my_bot

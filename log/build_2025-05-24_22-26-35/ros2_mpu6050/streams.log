@@ -1,0 +1,69 @@
+[0.782s] Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/ros2_mpu6050 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/ros2_mpu6050
+[0.950s] -- The C compiler identification is GNU 13.3.0
+[1.112s] -- The CXX compiler identification is GNU 13.3.0
+[1.145s] -- Detecting C compiler ABI info
+[1.394s] -- Detecting C compiler ABI info - done
+[1.420s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.420s] -- Detecting C compile features
+[1.421s] -- Detecting C compile features - done
+[1.440s] -- Detecting CXX compiler ABI info
+[1.730s] -- Detecting CXX compiler ABI info - done
+[1.746s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.746s] -- Detecting CXX compile features
+[1.747s] -- Detecting CXX compile features - done
+[1.754s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.165s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.383s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.491s] -- Found rclcpp: 28.1.9 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.589s] -- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.628s] -- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.669s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.722s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.889s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.902s] -- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.143s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.178s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.238s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.420s] -- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[3.779s] -- Configuring done (3.0s)
+[3.810s] -- Generating done (0.0s)
+[3.813s] -- Build files have been written to: /home/innovation/dev_ws/build/ros2_mpu6050
+[3.837s] Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/ros2_mpu6050 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/ros2_mpu6050
+[3.839s] Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[3.950s] [ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050_hal.cpp.o[0m
+[3.950s] [ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050.cpp.o[0m
+[3.953s] [ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050.cpp.o[0m
+[3.953s] [ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050_hal.cpp.o[0m
+[4.809s] [ 62%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050_calibrate.cpp.o[0m
+[4.975s] [ 75%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050_node.cpp.o[0m
+[5.484s] [ 87%] [32m[1mLinking CXX executable ros2_mpu6050_calibrate[0m
+[5.669s] [ 87%] Built target ros2_mpu6050_calibrate
+[12.927s] [100%] [32m[1mLinking CXX executable ros2_mpu6050[0m
+[13.459s] [100%] Built target ros2_mpu6050
+[13.485s] Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[13.487s] Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050
+[13.504s] -- Install configuration: ""
+[13.505s] -- Execute custom install script
+[13.506s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050.h
+[13.525s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_hal.h
+[13.546s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_node.h
+[13.568s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050
+[13.586s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050_calibrate
+[13.606s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/config/params.yaml
+[13.626s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/launch/ros2_mpu6050.launch.py
+[13.647s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/package_run_dependencies/ros2_mpu6050
+[13.669s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/parent_prefix_path/ros2_mpu6050
+[13.688s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.sh
+[13.707s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.dsv
+[13.726s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.sh
+[13.747s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.dsv
+[13.769s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.bash
+[13.788s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.sh
+[13.808s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.zsh
+[13.827s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.dsv
+[13.851s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.dsv
+[13.871s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/packages/ros2_mpu6050
+[13.890s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config.cmake
+[13.909s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config-version.cmake
+[13.928s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.xml
+[13.956s] Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/innovation/dev_ws/install/mlx90640_thermal:/home/innovation/dev_ws/install/leg_odometry:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050

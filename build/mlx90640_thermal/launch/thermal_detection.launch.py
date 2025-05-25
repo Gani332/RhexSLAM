@@ -1,0 +1,1 @@
+/home/innovation/dev_ws/src/mlx90640_thermal/launch/thermal_detection.launch.py

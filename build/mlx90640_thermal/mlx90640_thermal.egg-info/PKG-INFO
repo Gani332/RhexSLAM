@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: mlx90640-thermal
+Version: 0.0.0
+Summary: MLX90640 human detection ROS2 nodes
+Maintainer: riyaadh gani
+Maintainer-email: riyaadh.gani2@gmail.com
+License: MIT

@@ -1,0 +1,63 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 28.1.9 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+-- Configuring done (3.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/innovation/dev_ws/build/ros2_mpu6050
+[ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050_hal.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050_hal.cpp.o[0m
+[ 62%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050_calibrate.dir/src/mpu6050_calibrate.cpp.o[0m
+[ 75%] [32mBuilding CXX object CMakeFiles/ros2_mpu6050.dir/src/mpu6050_node.cpp.o[0m
+[ 87%] [32m[1mLinking CXX executable ros2_mpu6050_calibrate[0m
+[ 87%] Built target ros2_mpu6050_calibrate
+[100%] [32m[1mLinking CXX executable ros2_mpu6050[0m
+[100%] Built target ros2_mpu6050
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050.h
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_hal.h
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_node.h
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050_calibrate
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/config/params.yaml
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/launch/ros2_mpu6050.launch.py
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/package_run_dependencies/ros2_mpu6050
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/parent_prefix_path/ros2_mpu6050
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.sh
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.dsv
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.sh
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.dsv
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.bash
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.sh
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.zsh
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.dsv
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.dsv
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/packages/ros2_mpu6050
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config.cmake
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config-version.cmake
+-- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.xml

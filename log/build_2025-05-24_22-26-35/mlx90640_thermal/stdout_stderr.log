@@ -1,0 +1,26 @@
+running develop
+running egg_info
+creating mlx90640_thermal.egg-info
+writing mlx90640_thermal.egg-info/PKG-INFO
+writing dependency_links to mlx90640_thermal.egg-info/dependency_links.txt
+writing entry points to mlx90640_thermal.egg-info/entry_points.txt
+writing requirements to mlx90640_thermal.egg-info/requires.txt
+writing top-level names to mlx90640_thermal.egg-info/top_level.txt
+writing manifest file 'mlx90640_thermal.egg-info/SOURCES.txt'
+reading manifest file 'mlx90640_thermal.egg-info/SOURCES.txt'
+writing manifest file 'mlx90640_thermal.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages/mlx90640-thermal.egg-link (link to .)
+Installing inference_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+Installing publisher_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+Installing thermal_marker_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+
+Installed /home/innovation/dev_ws/build/mlx90640_thermal
+running symlink_data
+creating /home/innovation/dev_ws/install/mlx90640_thermal/share/ament_index
+creating /home/innovation/dev_ws/install/mlx90640_thermal/share/ament_index/resource_index
+creating /home/innovation/dev_ws/install/mlx90640_thermal/share/ament_index/resource_index/packages
+symbolically linking /home/innovation/dev_ws/build/mlx90640_thermal/resource/mlx90640_thermal -> /home/innovation/dev_ws/install/mlx90640_thermal/share/ament_index/resource_index/packages
+symbolically linking /home/innovation/dev_ws/build/mlx90640_thermal/package.xml -> /home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal
+creating /home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/launch
+symbolically linking /home/innovation/dev_ws/build/mlx90640_thermal/launch/thermal_detection.launch.py -> /home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/launch

@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="hexapod">
+
+  <!-- Constants -->
+  <xacro:property name="scale" value="1 1 1"/>
+  <xacro:property name="imu_mass" value="0.01"/>
+
+  <!-- Materials -->
+  <material name="ibm_blue"><color rgba="0.02 0.19 0.68 1.0"/></material>
+  <material name="white"><color rgba="1 1 1 1.0"/></material>
+  <material name="black"><color rgba="0 0 0 1.0"/></material>
+  <material name="gray"><color rgba="0.6 0.6 0.6 1.0"/></material>
+  <material name="red"><color rgba="1 0 0 1.0"/></material>
+
+  <!-- Macros -->
+  <xacro:macro name="leg_link" params="name mesh">
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <mesh filename="package://my_bot/description/meshes/${mesh}" scale="${scale}"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://my_bot/description/meshes/${mesh}" scale="${scale}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.0531"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="1.1196568631880727e-05" ixy="0.0" ixz="0.0"
+                iyy="1.1196568631880727e-05" iyz="0.0"
+                izz="1.1196568631880727e-05"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+
+  <xacro:macro name="leg_joint" params="name parent child xyz">
+    <joint name="${name}" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <dynamics damping="0.1" friction="0.1"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Base link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_bot/description/meshes/chassis.stl" scale="${scale}"/>
+      </geometry>
+      <material name="ibm_blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://my_bot/description/meshes/chassis.stl" scale="${scale}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.98948"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.004697066484148314" ixy="0.0" ixz="0.0"
+              iyy="0.004697066484148314" iyz="0.0"
+              izz="0.004697066484148314"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="base_link">
+    <gravity>1</gravity>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- Legs -->
+  <xacro:leg_link name="front_left_leg" mesh="left_leg.stl"/>
+  <xacro:leg_link name="centre_left_leg" mesh="left_leg.stl"/>
+  <xacro:leg_link name="back_left_leg" mesh="left_leg.stl"/>
+  <xacro:leg_link name="front_right_leg" mesh="right_leg.stl"/>
+  <xacro:leg_link name="centre_right_leg" mesh="right_leg.stl"/>
+  <xacro:leg_link name="back_right_leg" mesh="right_leg.stl"/>
+
+  <!-- Leg joints -->
+  <xacro:leg_joint name="front_left_leg_joint" parent="base_link" child="front_left_leg" xyz="0.11035 -0.135 0.04"/>
+  <xacro:leg_joint name="centre_left_leg_joint" parent="base_link" child="centre_left_leg" xyz="0.1495 0 0.04"/>
+  <xacro:leg_joint name="back_left_leg_joint" parent="base_link" child="back_left_leg" xyz="0.11035 0.135 0.04"/>
+  <xacro:leg_joint name="front_right_leg_joint" parent="base_link" child="front_right_leg" xyz="-0.11035 -0.135 0.04"/>
+  <xacro:leg_joint name="centre_right_leg_joint" parent="base_link" child="centre_right_leg" xyz="-0.1495 0 0.04"/>
+  <xacro:leg_joint name="back_right_leg_joint" parent="base_link" child="back_right_leg" xyz="-0.11035 0.135 0.04"/>
+
+  <!-- Sensors -->
+  <link name="laser">
+    <visual>
+      <!-- This keeps the visual in the old (unrotated) orientation -->
+      <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://my_bot/description/meshes/lidar.stl" scale="${scale}"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial>
+      <mass value="0.17"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="4.948e-05" ixy="0.0" ixz="0.0"
+              iyy="4.948e-05" iyz="0.0"
+              izz="4.948e-05"/>
+    </inertial>
+  </link>
+
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0 -0.045 0.1" rpy="0 0 -1.5708"/>  <!-- Rotate the scan only -->
+  </joint>
+
+
+  <link name="stereo_camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_bot/description/meshes/stereo_camera.stl" scale="${scale}"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial>
+      <mass value="0.04"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="2.884499140614818e-06" ixy="0.0" ixz="0.0"
+              iyy="2.884499140614818e-06" iyz="0.0"
+              izz="2.884499140614818e-06"/>
+    </inertial>
+
+  </link>
+  <joint name="stereo_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="stereo_camera_link"/>
+    <origin xyz="0 -0.17589 0.05365" rpy="0 0 0"/>
+  </joint>
+
+  <link name="thermal_camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://my_bot/description/meshes/thermal_camera.stl" scale="${scale}"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial>
+      <mass value="0.02"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="3.333333333333346e-07" ixy="0.0" ixz="0.0"
+              iyy="3.333333333333346e-07" iyz="0.0"
+              izz="3.333333333333346e-07"/>
+    </inertial>
+  </link>
+  <joint name="thermal_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="thermal_camera_link"/>
+    <origin xyz="-0.00728 -0.18088 0.077" rpy="0 0 -1.5708"/>
+  </joint>
+
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.002"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0 0 0"/>
+      <inertia
+        ixx="8.67e-07" ixy="0.0" ixz="0.0"
+        iyy="8.67e-07" iyz="0.0"
+        izz="1.67e-06"/>
+    </inertial>
+
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </joint>
+
+</robot>

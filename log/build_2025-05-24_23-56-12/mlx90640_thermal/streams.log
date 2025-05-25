@@ -1,0 +1,19 @@
+[2.016s] Invoking command in '/home/innovation/dev_ws/build/mlx90640_thermal': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/mlx90640_thermal/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/mlx90640_thermal/build --no-deps symlink_data
+[2.503s] running develop
+[2.780s] running egg_info
+[2.808s] writing mlx90640_thermal.egg-info/PKG-INFO
+[2.809s] writing dependency_links to mlx90640_thermal.egg-info/dependency_links.txt
+[2.809s] writing entry points to mlx90640_thermal.egg-info/entry_points.txt
+[2.810s] writing requirements to mlx90640_thermal.egg-info/requires.txt
+[2.811s] writing top-level names to mlx90640_thermal.egg-info/top_level.txt
+[2.864s] reading manifest file 'mlx90640_thermal.egg-info/SOURCES.txt'
+[2.865s] writing manifest file 'mlx90640_thermal.egg-info/SOURCES.txt'
+[2.893s] running build_ext
+[2.894s] Creating /home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages/mlx90640-thermal.egg-link (link to .)
+[2.895s] Installing inference_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+[2.896s] Installing publisher_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+[2.896s] Installing thermal_marker_node script to /home/innovation/dev_ws/install/mlx90640_thermal/lib/mlx90640_thermal
+[2.896s] 
+[2.897s] Installed /home/innovation/dev_ws/build/mlx90640_thermal
+[2.897s] running symlink_data
+[3.047s] Invoked command in '/home/innovation/dev_ws/build/mlx90640_thermal' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/mlx90640_thermal/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/mlx90640_thermal/build --no-deps symlink_data

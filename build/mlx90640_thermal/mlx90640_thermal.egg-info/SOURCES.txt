@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+launch/thermal_detection.launch.py
+mlx90640_thermal/__init__.py
+mlx90640_thermal/inference_node.py
+mlx90640_thermal/publisher_node.py
+mlx90640_thermal/thermal_marker_node.py
+mlx90640_thermal.egg-info/PKG-INFO
+mlx90640_thermal.egg-info/SOURCES.txt
+mlx90640_thermal.egg-info/dependency_links.txt
+mlx90640_thermal.egg-info/entry_points.txt
+mlx90640_thermal.egg-info/requires.txt
+mlx90640_thermal.egg-info/top_level.txt
+mlx90640_thermal.egg-info/zip-safe
+resource/mlx90640_thermal

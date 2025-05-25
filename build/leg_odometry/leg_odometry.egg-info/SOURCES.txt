@@ -1,0 +1,14 @@
+package.xml
+setup.cfg
+setup.py
+leg_odometry/__init__.py
+leg_odometry/encoder_reader_node.py
+leg_odometry/leg_odometry_node.py
+leg_odometry.egg-info/PKG-INFO
+leg_odometry.egg-info/SOURCES.txt
+leg_odometry.egg-info/dependency_links.txt
+leg_odometry.egg-info/entry_points.txt
+leg_odometry.egg-info/requires.txt
+leg_odometry.egg-info/top_level.txt
+leg_odometry.egg-info/zip-safe
+resource/leg_odometry

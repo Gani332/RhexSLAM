@@ -1,0 +1,1 @@
+/home/innovation/dev_ws/build/ros2_mpu6050/ament_cmake_core/ros2_mpu6050Config.cmake
