@@ -1,0 +1,17 @@
+[2.899s] Invoking command in '/home/innovation/dev_ws/build/leg_odometry': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/leg_odometry/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/leg_odometry/build --no-deps symlink_data
+[3.385s] running develop
+[3.669s] running egg_info
+[3.694s] writing leg_odometry.egg-info/PKG-INFO
+[3.695s] writing dependency_links to leg_odometry.egg-info/dependency_links.txt
+[3.695s] writing entry points to leg_odometry.egg-info/entry_points.txt
+[3.695s] writing requirements to leg_odometry.egg-info/requires.txt
+[3.695s] writing top-level names to leg_odometry.egg-info/top_level.txt
+[3.752s] reading manifest file 'leg_odometry.egg-info/SOURCES.txt'
+[3.754s] writing manifest file 'leg_odometry.egg-info/SOURCES.txt'
+[3.781s] running build_ext
+[3.782s] Creating /home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages/leg-odometry.egg-link (link to .)
+[3.783s] Installing leg_odometry_node script to /home/innovation/dev_ws/install/leg_odometry/lib/leg_odometry
+[3.783s] 
+[3.783s] Installed /home/innovation/dev_ws/build/leg_odometry
+[3.786s] running symlink_data
+[3.917s] Invoked command in '/home/innovation/dev_ws/build/leg_odometry' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/leg_odometry/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/leg_odometry/build --no-deps symlink_data
