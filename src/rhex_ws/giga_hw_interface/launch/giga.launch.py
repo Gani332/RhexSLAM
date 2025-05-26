@@ -16,8 +16,7 @@ def generate_launch_description():
     ])
 
     urdf_path = PathJoinSubstitution([
-        FindPackageShare("rhex_ws"),
-        "rhex_description",
+        FindPackageShare("rhex_description"),
         "urdf",
         "rhex.xacro"
     ])
