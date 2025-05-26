@@ -7,7 +7,7 @@
         <hardware>
           <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
-        <xacro:include filename="package://rhex_description/urdf/joints_interfaces.xacro"/>
+        <xacro:include filename="$(find rhex_description)/urdf/joints_interfaces.xacro"/>
       </ros2_control>
     </xacro:if>
 
@@ -16,7 +16,7 @@
         <hardware>
           <plugin>giga_hw_interface/GigaHardwareInterface</plugin>
         </hardware>
-        <xacro:include filename="package://rhex_description/urdf/joints_interfaces.xacro"/>
+        <xacro:include filename="$(find rhex_description)/urdf/joints_interfaces.xacro"/>
       </ros2_control>
     </xacro:unless>
 
