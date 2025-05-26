@@ -1,0 +1,30 @@
+[0.099s] Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[0.638s] [ 50%] Built target ros2_mpu6050_calibrate
+[0.787s] [100%] Built target ros2_mpu6050
+[0.812s] Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[0.816s] Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050
+[0.835s] -- Install configuration: ""
+[0.837s] -- Execute custom install script
+[0.837s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050.h
+[0.838s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_hal.h
+[0.838s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/include/include/ros2_mpu6050/mpu6050_node.h
+[0.840s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050
+[0.842s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/lib/ros2_mpu6050/ros2_mpu6050_calibrate
+[0.843s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/config/params.yaml
+[0.844s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/launch/ros2_mpu6050.launch.py
+[0.845s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/package_run_dependencies/ros2_mpu6050
+[0.845s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/parent_prefix_path/ros2_mpu6050
+[0.846s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.sh
+[0.846s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/ament_prefix_path.dsv
+[0.847s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.sh
+[0.849s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/environment/path.dsv
+[0.853s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.bash
+[0.853s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.sh
+[0.853s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.zsh
+[0.853s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/local_setup.dsv
+[0.854s] -- Symlinking: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.dsv
+[0.878s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ament_index/resource_index/packages/ros2_mpu6050
+[0.879s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config.cmake
+[0.880s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/cmake/ros2_mpu6050Config-version.cmake
+[0.880s] -- Up-to-date symlink: /home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.xml
+[0.884s] Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050

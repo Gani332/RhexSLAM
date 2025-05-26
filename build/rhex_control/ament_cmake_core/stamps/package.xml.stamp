@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>rhex_control</name>
+  <version>0.0.1</version>
+  <description>Control package for the RHex robot</description>
+
+  <maintainer email="riyaadh.gani2@gmail.com">Riyaadh Gani</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>controller_manager</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>builtin_interfaces</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

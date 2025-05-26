@@ -1,0 +1,54 @@
+[0.067s] Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/rhex_ws/giga_hw_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/giga_hw_interface
+[0.919s] -- The C compiler identification is GNU 13.3.0
+[1.192s] -- The CXX compiler identification is GNU 13.3.0
+[1.262s] -- Detecting C compiler ABI info
+[1.539s] -- Detecting C compiler ABI info - done
+[1.554s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.555s] -- Detecting C compile features
+[1.556s] -- Detecting C compile features - done
+[1.578s] -- Detecting CXX compiler ABI info
+[1.863s] -- Detecting CXX compiler ABI info - done
+[1.878s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.878s] -- Detecting CXX compile features
+[1.880s] -- Detecting CXX compile features - done
+[1.921s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.267s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.490s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.655s] -- Found hardware_interface: 4.29.0 (/opt/ros/jazzy/share/hardware_interface/cmake)
+[2.849s] -- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.947s] -- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[3.062s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.148s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.904s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.079s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[4.091s] -- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[4.204s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.537s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[4.571s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.617s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[4.629s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.663s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.689s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[6.011s] -- Configuring done (5.8s)
+[6.119s] -- Generating done (0.1s)
+[6.126s] -- Build files have been written to: /home/innovation/dev_ws/build/giga_hw_interface
+[6.164s] Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/rhex_ws/giga_hw_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/giga_hw_interface
+[6.167s] Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[6.284s] [ 50%] [32mBuilding CXX object CMakeFiles/giga_hw_interface.dir/src/giga_hardware_interface.cpp.o[0m
+[15.466s] [100%] [32m[1mLinking CXX shared library libgiga_hw_interface.so[0m
+[18.008s] [100%] Built target giga_hw_interface
+[18.035s] Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[18.037s] Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface
+[18.060s] -- Install configuration: ""
+[18.060s] -- Execute custom install script
+[18.061s] -- Symlinking: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface//giga_hardware_plugins.xml
+[18.080s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/giga_hardware_plugins.xml
+[18.080s] [31mCMake Error at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:100 (message):
+[18.080s]   ament_cmake_symlink_install_directory() can't find
+[18.080s]   '/home/innovation/dev_ws/src/rhex_ws/giga_hw_interface/include/'
+[18.080s] Call Stack (most recent call first):
+[18.080s]   ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:320 (ament_cmake_symlink_install_directory)
+[18.080s]   cmake_install.cmake:46 (include)
+[18.080s] 
+[18.081s] [0m
+[18.083s] Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface

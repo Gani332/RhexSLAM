@@ -1,0 +1,8 @@
+[31mCMake Error at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:100 (message):
+  ament_cmake_symlink_install_directory() can't find
+  '/home/innovation/dev_ws/src/rhex_ws/giga_hw_interface/include/'
+Call Stack (most recent call first):
+  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:320 (ament_cmake_symlink_install_directory)
+  cmake_install.cmake:46 (include)
+
+[0m

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="rhex_control" params="use_sim:=false">
+
+    <xacro:if value="${use_sim}">
+      <ros2_control name="RHexHardware" type="system">
+        <hardware>
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+        <xacro:include filename="$(find rhex_description)/urdf/joints_interfaces.xacro"/>
+      </ros2_control>
+    </xacro:if>
+
+    <xacro:unless value="${use_sim}">
+      <ros2_control name="GigaHardware" type="system">
+        <hardware>
+          <plugin>giga_hw_interface/GigaHardwareInterface</plugin>
+        </hardware>
+        <xacro:include filename="$(find rhex_description)/urdf/joints_interfaces.xacro"/>
+      </ros2_control>
+    </xacro:unless>
+
+  </xacro:macro>
+</robot>

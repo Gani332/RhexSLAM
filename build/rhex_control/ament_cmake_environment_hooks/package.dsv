@@ -1,0 +1,4 @@
+source;share/rhex_control/local_setup.bash
+source;share/rhex_control/local_setup.dsv
+source;share/rhex_control/local_setup.sh
+source;share/rhex_control/local_setup.zsh

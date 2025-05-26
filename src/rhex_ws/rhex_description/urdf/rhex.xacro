@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="hexapod">
+
+  <!-- Includes -->
+  <xacro:include filename="materials.xacro"/>
+  <xacro:include filename="macros.xacro"/>
+  <xacro:include filename="rhex.gazebo"/>
+  <xacro:include filename="rhex.trans"/>
+  <xacro:include filename="rhex.control.xacro"/>
+
+
+  <!-- Constants -->
+  <xacro:property name="scale" value="1 1 1"/>
+  <xacro:property name="imu_mass" value="0.01"/>
+
+
+  <!-- Base link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="$(find rhex_description)/meshes/Chassis.stl" scale="${scale}"/>
+      </geometry>
+      <material name="ibm_blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="$(find rhex_description)/meshes/Chassis.stl" scale="${scale}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.5"/>
+      <origin xyz="0 0 0.05"/>
+      <inertia ixx="2.222e-2" ixy="4.654e-6" ixz="1.02836e-5" iyy="1.129e-2" iyz="4.82214e-5" izz="2.96e-2"/>
+    </inertial>
+  </link>
+
+  <link name="lidar_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(find rhex_description)/meshes/lidar.stl" scale="1 1 1"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+  <inertial>
+    <mass value="0.073"/>
+    <origin xyz="0 0 0"/>
+    <inertia ixx="0.0000615" ixy="0.000000596" ixz="0.00000038" iyy="3.17e-5" iyz="-6.53e-6" izz="7.2e-5"/>
+  </inertial>
+</link>
+
+<joint name="lidar_mount" type="fixed">
+  <parent link="base_link"/>
+  <child link="lidar_link"/>
+  <origin xyz="0 -0.045 0.1" rpy="0 0 0"/>
+</joint>
+
+<link name="stereo_camera_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(find rhex_description)/meshes/stereo_camera.stl" scale="1 1 1"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+  <inertial>
+    <mass value="0"/>
+    <origin xyz="0 0 0"/>
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+  </inertial>
+</link>
+
+<joint name="stereo_camera_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="stereo_camera_link"/>
+  <origin xyz="0 -0.17589 0.05365" rpy="0 0 0"/>
+</joint>
+
+<link name="thermal_camera_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(find rhex_description)/meshes/thermal_camera.stl" scale="1 1 1"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+  <inertial>
+    <mass value="0"/>
+    <origin xyz="0 0 0"/>
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+  </inertial>
+</link>
+
+<joint name="thermal_camera_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="thermal_camera_link"/>
+  <origin xyz="-0.00728 -0.18088 0.077" rpy="0 0 0"/>
+</joint>
+
+<link name="imu_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.01 0.01 0.002"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+  <inertial>
+    <mass value="0"/>
+    <origin xyz="0 0 0"/>
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+  </inertial>
+</link>
+
+<joint name="imu_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="imu_link"/>
+  <origin xyz="0 0 0.05" rpy="0 0 0"/>
+</joint>
+
+
+  <gazebo reference="base_link">
+    <self_collide>true</self_collide>
+  </gazebo>
+
+<surface>
+  <friction>
+    <ode>
+      <mu>2.5</mu>
+      <mu2>2.5</mu2>
+    </ode>
+  </friction>
+  <contact>
+    <ode>
+      <kp>100000.0</kp>
+      <kd>10.0</kd>
+    </ode>
+  </contact>
+</surface>
+
+
+
+  <!-- Legs -->
+  <xacro:leg_link name="front_left_leg" mesh="left_leg.stl" xyz="0.020502 0.028241 -0.039028"/>
+  <xacro:leg_link name="centre_left_leg" mesh="left_leg.stl" xyz="0.020502 0.028241 -0.039028"/>
+  <xacro:leg_link name="back_left_leg" mesh="left_leg.stl" xyz="0.020502 0.028241 -0.039028"/>
+  <xacro:leg_link name="front_right_leg" mesh="right_leg.stl" xyz="-0.020502 0.028241 -0.039028"/>
+  <xacro:leg_link name="centre_right_leg" mesh="right_leg.stl" xyz="-0.020502 0.028241 -0.039028"/>
+  <xacro:leg_link name="back_right_leg" mesh="right_leg.stl" xyz="-0.020502 0.028241 -0.039028"/>
+
+  <!-- Leg joints -->
+  <xacro:leg_joint name="front_left_leg_joint" parent="base_link" child="front_left_leg" xyz="0.11035 -0.135 0.04"/>
+  <xacro:leg_joint name="centre_left_leg_joint" parent="base_link" child="centre_left_leg" xyz="0.1495 0 0.04"/>
+  <xacro:leg_joint name="back_left_leg_joint" parent="base_link" child="back_left_leg" xyz="0.11035 0.135 0.04"/>
+  <xacro:leg_joint name="front_right_leg_joint" parent="base_link" child="front_right_leg" xyz="-0.11035 -0.135 0.04"/>
+  <xacro:leg_joint name="centre_right_leg_joint" parent="base_link" child="centre_right_leg" xyz="-0.1495 0 0.04"/>
+  <xacro:leg_joint name="back_right_leg_joint" parent="base_link" child="back_right_leg" xyz="-0.11035 0.135 0.04"/>
+
+
+  <xacro:rhex_control/>
+</robot>

@@ -1,0 +1,10 @@
+<library path="libgiga_hw_interface">
+  <class
+    name="giga_hw_interface/GigaHardwareInterface"
+    type="GigaHardwareInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface for Giga robot motors over serial.
+    </description>
+  </class>
+</library>

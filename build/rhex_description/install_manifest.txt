@@ -1,0 +1,13 @@
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.control.xacro
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.trans
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.gazebo
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/materials.xacro
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.xacro
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/macros.xacro
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/joints_interfaces.xacro
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/Chassis.stl
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/thermal_camera.stl
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/left_leg.stl
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/lidar.stl
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/stereo_camera.stl
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/right_leg.stl

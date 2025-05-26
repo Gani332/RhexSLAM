@@ -1,0 +1,4 @@
+source;share/giga_hw_interface/local_setup.bash
+source;share/giga_hw_interface/local_setup.dsv
+source;share/giga_hw_interface/local_setup.sh
+source;share/giga_hw_interface/local_setup.zsh

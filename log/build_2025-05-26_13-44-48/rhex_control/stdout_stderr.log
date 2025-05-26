@@ -1,0 +1,40 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclpy: 7.1.4 (/opt/ros/jazzy/share/rclpy/cmake)
+-- Configuring done (1.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/innovation/dev_ws/build/rhex_control
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/lib/rhex_control/rhex_gait.py
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/lib/rhex_control/cmd_vel_publisher.py
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/config/rhex_controllers.yaml
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/launch/controller.launch.py
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/package_run_dependencies/rhex_control
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/parent_prefix_path/rhex_control
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/ament_prefix_path.sh
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/ament_prefix_path.dsv
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/path.sh
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/path.dsv
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.bash
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.sh
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.zsh
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.dsv
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.dsv
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/packages/rhex_control
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/cmake/rhex_controlConfig.cmake
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/cmake/rhex_controlConfig-version.cmake
+-- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.xml

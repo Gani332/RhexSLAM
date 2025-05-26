@@ -1,0 +1,44 @@
+-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found hardware_interface: 4.29.0 (/opt/ros/jazzy/share/hardware_interface/cmake)
+-- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/innovation/dev_ws/build/giga_hw_interface
+[ 50%] [32mBuilding CXX object CMakeFiles/giga_hw_interface.dir/src/giga_hardware_interface.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libgiga_hw_interface.so[0m
+[100%] Built target giga_hw_interface
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface//giga_hardware_plugins.xml
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/giga_hardware_plugins.xml
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface//giga.launch.py
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/package_run_dependencies/giga_hw_interface
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/parent_prefix_path/giga_hw_interface
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/path.sh
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/path.dsv
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.bash
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.sh
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.zsh
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.dsv
+-- Symlinking: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.dsv
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/packages/giga_hw_interface
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/giga_hw_interface
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/cmake/giga_hw_interfaceConfig.cmake
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/cmake/giga_hw_interfaceConfig-version.cmake
+-- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.xml
+-- Installing: /home/innovation/dev_ws/install/giga_hw_interface/lib/libgiga_hw_interface.so
+-- Set non-toolchain portion of runtime path of "/home/innovation/dev_ws/install/giga_hw_interface/lib/libgiga_hw_interface.so" to ""

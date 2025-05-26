@@ -1,0 +1,48 @@
+[0.051s] Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[0.941s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.942s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.942s] -- Found hardware_interface: 4.29.0 (/opt/ros/jazzy/share/hardware_interface/cmake)
+[0.942s] -- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[0.942s] -- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[0.942s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.942s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.979s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[1.056s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.059s] -- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.096s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[1.131s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[1.167s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[1.192s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[1.237s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.796s] -- Configuring done (1.7s)
+[1.869s] -- Generating done (0.0s)
+[1.890s] -- Build files have been written to: /home/innovation/dev_ws/build/giga_hw_interface
+[2.015s] [ 50%] [32mBuilding CXX object CMakeFiles/giga_hw_interface.dir/src/giga_hardware_interface.cpp.o[0m
+[10.655s] [100%] [32m[1mLinking CXX shared library libgiga_hw_interface.so[0m
+[11.158s] [100%] Built target giga_hw_interface
+[11.513s] Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[11.516s] Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface
+[11.534s] -- Install configuration: ""
+[11.534s] -- Execute custom install script
+[11.535s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface//giga_hardware_plugins.xml
+[11.535s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/giga_hardware_plugins.xml
+[11.535s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface//giga.launch.py
+[11.536s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/package_run_dependencies/giga_hw_interface
+[11.536s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/parent_prefix_path/giga_hw_interface
+[11.536s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/ament_prefix_path.sh
+[11.536s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/ament_prefix_path.dsv
+[11.537s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/path.sh
+[11.537s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/environment/path.dsv
+[11.537s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.bash
+[11.537s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.sh
+[11.537s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.zsh
+[11.538s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/local_setup.dsv
+[11.538s] -- Symlinking: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.dsv
+[11.557s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/packages/giga_hw_interface
+[11.557s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/giga_hw_interface
+[11.558s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/cmake/giga_hw_interfaceConfig.cmake
+[11.558s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/cmake/giga_hw_interfaceConfig-version.cmake
+[11.558s] -- Up-to-date symlink: /home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.xml
+[11.558s] -- Installing: /home/innovation/dev_ws/install/giga_hw_interface/lib/libgiga_hw_interface.so
+[11.565s] -- Set non-toolchain portion of runtime path of "/home/innovation/dev_ws/install/giga_hw_interface/lib/libgiga_hw_interface.so" to ""
+[11.570s] Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface

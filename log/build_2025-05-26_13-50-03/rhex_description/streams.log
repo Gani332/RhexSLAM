@@ -1,0 +1,36 @@
+[0.035s] Invoking command in '/home/innovation/dev_ws/build/rhex_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_description -- -j4 -l4
+[0.255s] Invoked command in '/home/innovation/dev_ws/build/rhex_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_description -- -j4 -l4
+[0.256s] Invoking command in '/home/innovation/dev_ws/build/rhex_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_description
+[0.283s] -- Install configuration: ""
+[0.285s] -- Execute custom install script
+[0.285s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/package_run_dependencies/rhex_description
+[0.289s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/parent_prefix_path/rhex_description
+[0.290s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/ament_prefix_path.sh
+[0.290s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/ament_prefix_path.dsv
+[0.290s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/path.sh
+[0.296s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/path.dsv
+[0.296s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.bash
+[0.296s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.sh
+[0.296s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.zsh
+[0.296s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.dsv
+[0.296s] -- Symlinking: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.dsv
+[0.322s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/packages/rhex_description
+[0.324s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/cmake/rhex_descriptionConfig.cmake
+[0.324s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/cmake/rhex_descriptionConfig-version.cmake
+[0.329s] -- Up-to-date symlink: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.xml
+[0.330s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf
+[0.331s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.control.xacro
+[0.331s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.trans
+[0.334s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.gazebo
+[0.334s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/materials.xacro
+[0.335s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/rhex.xacro
+[0.335s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/macros.xacro
+[0.335s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/urdf/joints_interfaces.xacro
+[0.336s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes
+[0.336s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/Chassis.stl
+[0.339s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/thermal_camera.stl
+[0.339s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/left_leg.stl
+[0.339s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/lidar.stl
+[0.339s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/stereo_camera.stl
+[0.340s] -- Up-to-date: /home/innovation/dev_ws/install/rhex_description/share/rhex_description/meshes/right_leg.stl
+[0.340s] Invoked command in '/home/innovation/dev_ws/build/rhex_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_description

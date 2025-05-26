@@ -1,0 +1,28 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <joint name="front_left_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="centre_left_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="back_left_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="front_right_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="centre_right_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="back_right_leg_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+</robot>

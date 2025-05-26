@@ -1,0 +1,15 @@
+/home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/package_run_dependencies/rhex_description
+/home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/parent_prefix_path/rhex_description
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/ament_prefix_path.sh
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/ament_prefix_path.dsv
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/path.sh
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/environment/path.dsv
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.bash
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.sh
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.zsh
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/local_setup.dsv
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.dsv
+/home/innovation/dev_ws/install/rhex_description/share/ament_index/resource_index/packages/rhex_description
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/cmake/rhex_descriptionConfig.cmake
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/cmake/rhex_descriptionConfig-version.cmake
+/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.xml

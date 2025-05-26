@@ -1,0 +1,46 @@
+[0.020s] Invoking command in '/home/innovation/dev_ws/build/rhex_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/rhex_ws/rhex_control -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/rhex_control
+[0.158s] -- The C compiler identification is GNU 13.3.0
+[0.298s] -- The CXX compiler identification is GNU 13.3.0
+[0.345s] -- Detecting C compiler ABI info
+[0.593s] -- Detecting C compiler ABI info - done
+[0.607s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.607s] -- Detecting C compile features
+[0.608s] -- Detecting C compile features - done
+[0.625s] -- Detecting CXX compiler ABI info
+[0.868s] -- Detecting CXX compiler ABI info - done
+[0.892s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.892s] -- Detecting CXX compile features
+[0.892s] -- Detecting CXX compile features - done
+[0.902s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.245s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.421s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.518s] -- Found rclpy: 7.1.4 (/opt/ros/jazzy/share/rclpy/cmake)
+[1.838s] -- Configuring done (1.8s)
+[1.849s] -- Generating done (0.0s)
+[1.851s] -- Build files have been written to: /home/innovation/dev_ws/build/rhex_control
+[1.868s] Invoked command in '/home/innovation/dev_ws/build/rhex_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/innovation/dev_ws/src/rhex_ws/rhex_control -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/innovation/dev_ws/install/rhex_control
+[1.868s] Invoking command in '/home/innovation/dev_ws/build/rhex_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_control -- -j4 -l4
+[1.980s] Invoked command in '/home/innovation/dev_ws/build/rhex_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_control -- -j4 -l4
+[1.983s] Invoking command in '/home/innovation/dev_ws/build/rhex_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_control
+[2.007s] -- Install configuration: ""
+[2.009s] -- Execute custom install script
+[2.010s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/lib/rhex_control/rhex_gait.py
+[2.031s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/lib/rhex_control/cmd_vel_publisher.py
+[2.054s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/config/rhex_controllers.yaml
+[2.075s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/launch/controller.launch.py
+[2.104s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/package_run_dependencies/rhex_control
+[2.128s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/parent_prefix_path/rhex_control
+[2.154s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/ament_prefix_path.sh
+[2.178s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/ament_prefix_path.dsv
+[2.215s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/path.sh
+[2.242s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/environment/path.dsv
+[2.264s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.bash
+[2.286s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.sh
+[2.325s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.zsh
+[2.350s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/local_setup.dsv
+[2.373s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.dsv
+[2.399s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/ament_index/resource_index/packages/rhex_control
+[2.424s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/cmake/rhex_controlConfig.cmake
+[2.446s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/cmake/rhex_controlConfig-version.cmake
+[2.470s] -- Symlinking: /home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.xml
+[2.502s] Invoked command in '/home/innovation/dev_ws/build/rhex_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_control

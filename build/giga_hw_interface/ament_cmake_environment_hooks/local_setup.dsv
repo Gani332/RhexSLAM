@@ -1,0 +1,2 @@
+source;share/giga_hw_interface/environment/ament_prefix_path.sh
+source;share/giga_hw_interface/environment/path.sh

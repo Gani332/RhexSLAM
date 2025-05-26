@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>rhex_description</name>
+  <version>0.1.0</version>
+  <description>Robot description package for RHex, including URDF, xacro, and meshes.</description>
+
+  <maintainer email="riyaadh.gani2@gmail.com">Riyaadh Gani</maintainer>
+  <license>MIT</license>
+
+  <!-- Build tools -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>xacro</exec_depend>
+
+  <!-- Testing (optional) -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

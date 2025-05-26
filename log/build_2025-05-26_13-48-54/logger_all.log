@@ -1,0 +1,478 @@
+[0.138s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.138s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0xffff8bff45f0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffff8c345ee0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffff8c345ee0>>)
+[0.194s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.195s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.195s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.195s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.195s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.195s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.195s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/innovation/dev_ws'
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.195s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.233s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extensions ['ignore', 'ignore_ament_install']
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extension 'ignore'
+[0.234s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extension 'ignore_ament_install'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extensions ['colcon_pkg']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extension 'colcon_pkg'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extensions ['colcon_meta']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extension 'colcon_meta'
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extensions ['ros']
+[0.235s] Level 1:colcon.colcon_core.package_identification:_identify(src/leg_odometry) by extension 'ros'
+[0.238s] DEBUG:colcon.colcon_core.package_identification:Package 'src/leg_odometry' with type 'ros.ament_python' and name 'leg_odometry'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extension 'ignore'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extension 'ignore_ament_install'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extensions ['colcon_pkg']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extension 'colcon_pkg'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extensions ['colcon_meta']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extension 'colcon_meta'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extensions ['ros']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/mlx90640_thermal) by extension 'ros'
+[0.240s] DEBUG:colcon.colcon_core.package_identification:Package 'src/mlx90640_thermal' with type 'ros.ament_python' and name 'mlx90640_thermal'
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extensions ['ignore', 'ignore_ament_install']
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extension 'ignore'
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extension 'ignore_ament_install'
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extensions ['colcon_pkg']
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extension 'colcon_pkg'
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extensions ['colcon_meta']
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extension 'colcon_meta'
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extensions ['ros']
+[0.240s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_bot) by extension 'ros'
+[0.241s] DEBUG:colcon.colcon_core.package_identification:Package 'src/my_bot' with type 'ros.ament_cmake' and name 'my_bot'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['ignore', 'ignore_ament_install']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'ignore'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'ignore_ament_install'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['colcon_pkg']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'colcon_pkg'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['colcon_meta']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'colcon_meta'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['ros']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'ros'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['cmake', 'python']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'cmake'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'python'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extensions ['python_setup_py']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws) by extension 'python_setup_py'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extension 'ignore'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extension 'ignore_ament_install'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extensions ['colcon_pkg']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extension 'colcon_pkg'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extensions ['colcon_meta']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extension 'colcon_meta'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extensions ['ros']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/giga_hw_interface) by extension 'ros'
+[0.245s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rhex_ws/giga_hw_interface' with type 'ros.ament_cmake' and name 'giga_hw_interface'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extensions ['ignore', 'ignore_ament_install']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extension 'ignore'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extension 'ignore_ament_install'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extensions ['colcon_pkg']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extension 'colcon_pkg'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extensions ['colcon_meta']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extension 'colcon_meta'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extensions ['ros']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_control) by extension 'ros'
+[0.246s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rhex_ws/rhex_control' with type 'ros.ament_cmake' and name 'rhex_control'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extension 'ignore_ament_install'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extensions ['colcon_pkg']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extension 'colcon_pkg'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extensions ['colcon_meta']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extension 'colcon_meta'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extensions ['ros']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/rhex_ws/rhex_description) by extension 'ros'
+[0.247s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rhex_ws/rhex_description' with type 'ros.ament_cmake' and name 'rhex_description'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extensions ['ignore', 'ignore_ament_install']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extension 'ignore'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extension 'ignore_ament_install'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extensions ['colcon_pkg']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extension 'colcon_pkg'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extensions ['colcon_meta']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extension 'colcon_meta'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extensions ['ros']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_mpu6050) by extension 'ros'
+[0.248s] DEBUG:colcon.colcon_core.package_identification:Package 'src/ros2_mpu6050' with type 'ros.ament_cmake' and name 'ros2_mpu6050'
+[0.248s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.248s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.249s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.249s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.249s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_args' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_target' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_clean_cache' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_clean_first' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'cmake_force_configure' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'ament_cmake_args' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'catkin_cmake_args' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'giga_hw_interface' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.273s] DEBUG:colcon.colcon_core.verb:Building package 'giga_hw_interface' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/giga_hw_interface', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/giga_hw_interface', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/rhex_ws/giga_hw_interface', 'symlink_install': True, 'test_result_base': None}
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_args' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_target' from command line to 'None'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_clean_cache' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_clean_first' from command line to 'False'
+[0.273s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'cmake_force_configure' from command line to 'False'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'ament_cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'catkin_cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'leg_odometry' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.274s] DEBUG:colcon.colcon_core.verb:Building package 'leg_odometry' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/leg_odometry', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/leg_odometry', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/leg_odometry', 'symlink_install': True, 'test_result_base': None}
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_target' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_clean_cache' from command line to 'False'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_clean_first' from command line to 'False'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'cmake_force_configure' from command line to 'False'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'ament_cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'catkin_cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'mlx90640_thermal' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.274s] DEBUG:colcon.colcon_core.verb:Building package 'mlx90640_thermal' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/mlx90640_thermal', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/mlx90640_thermal', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/mlx90640_thermal', 'symlink_install': True, 'test_result_base': None}
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_args' from command line to 'None'
+[0.274s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_target' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_clean_cache' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_clean_first' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'cmake_force_configure' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'ament_cmake_args' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'catkin_cmake_args' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'my_bot' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.275s] DEBUG:colcon.colcon_core.verb:Building package 'my_bot' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/my_bot', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/my_bot', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/my_bot', 'symlink_install': True, 'test_result_base': None}
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_args' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_target' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.275s] DEBUG:colcon.colcon_core.verb:Building package 'rhex_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/rhex_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/rhex_control', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/rhex_ws/rhex_control', 'symlink_install': True, 'test_result_base': None}
+[0.275s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_target' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'rhex_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.276s] DEBUG:colcon.colcon_core.verb:Building package 'rhex_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/rhex_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/rhex_description', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/rhex_ws/rhex_description', 'symlink_install': True, 'test_result_base': None}
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_target' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_clean_cache' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_clean_first' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'cmake_force_configure' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'ament_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'catkin_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'ros2_mpu6050' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.276s] DEBUG:colcon.colcon_core.verb:Building package 'ros2_mpu6050' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/innovation/dev_ws/build/ros2_mpu6050', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/innovation/dev_ws/install/ros2_mpu6050', 'merge_install': False, 'path': '/home/innovation/dev_ws/src/ros2_mpu6050', 'symlink_install': True, 'test_result_base': None}
+[0.276s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.278s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.279s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/innovation/dev_ws/src/rhex_ws/giga_hw_interface' with build type 'ament_cmake'
+[0.280s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/innovation/dev_ws/src/rhex_ws/giga_hw_interface'
+[0.284s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.285s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.295s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/innovation/dev_ws/src/leg_odometry' with build type 'ament_python'
+[0.295s] Level 1:colcon.colcon_core.shell:create_environment_hook('leg_odometry', 'ament_prefix_path')
+[0.295s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/hook/ament_prefix_path.dsv'
+[0.296s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/hook/ament_prefix_path.sh'
+[0.298s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.302s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/innovation/dev_ws/src/mlx90640_thermal' with build type 'ament_python'
+[0.302s] Level 1:colcon.colcon_core.shell:create_environment_hook('mlx90640_thermal', 'ament_prefix_path')
+[0.303s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/hook/ament_prefix_path.dsv'
+[0.304s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/hook/ament_prefix_path.sh'
+[0.305s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.311s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/innovation/dev_ws/src/my_bot' with build type 'ament_cmake'
+[0.311s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/innovation/dev_ws/src/my_bot'
+[0.312s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.327s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[0.717s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/innovation/dev_ws/src/leg_odometry'
+[0.718s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.245s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/innovation/dev_ws/src/mlx90640_thermal'
+[1.246s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.261s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/my_bot -- -j4 -l4
+[1.368s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/my_bot -- -j4 -l4
+[1.403s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/my_bot
+[1.479s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_bot)
+[1.482s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/my_bot
+[1.483s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot' for CMake module files
+[1.484s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot' for CMake config files
+[1.486s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_bot', 'cmake_prefix_path')
+[1.486s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/my_bot/share/my_bot/hook/cmake_prefix_path.dsv'
+[1.487s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/my_bot/share/my_bot/hook/cmake_prefix_path.sh'
+[1.489s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib'
+[1.489s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/bin'
+[1.489s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib/pkgconfig/my_bot.pc'
+[1.490s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib/python3.12/site-packages'
+[1.490s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/bin'
+[1.491s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.dsv'
+[1.496s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.sh'
+[1.501s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.bash'
+[1.503s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.zsh'
+[1.510s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/my_bot/share/colcon-core/packages/my_bot)
+[1.513s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_bot)
+[1.514s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot' for CMake module files
+[1.515s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot' for CMake config files
+[1.517s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_bot', 'cmake_prefix_path')
+[1.517s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/my_bot/share/my_bot/hook/cmake_prefix_path.dsv'
+[1.518s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/my_bot/share/my_bot/hook/cmake_prefix_path.sh'
+[1.525s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib'
+[1.525s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/bin'
+[1.525s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib/pkgconfig/my_bot.pc'
+[1.526s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/lib/python3.12/site-packages'
+[1.526s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/my_bot/bin'
+[1.527s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.dsv'
+[1.528s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.sh'
+[1.529s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.bash'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/my_bot/share/my_bot/package.zsh'
+[1.532s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/my_bot/share/colcon-core/packages/my_bot)
+[1.534s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/innovation/dev_ws/src/rhex_ws/rhex_control' with build type 'ament_cmake'
+[1.535s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/innovation/dev_ws/src/rhex_ws/rhex_control'
+[1.535s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.568s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/rhex_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_control -- -j4 -l4
+[1.674s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/rhex_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_control -- -j4 -l4
+[1.680s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/rhex_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_control
+[1.755s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rhex_control)
+[1.757s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control' for CMake module files
+[1.758s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control' for CMake config files
+[1.758s] Level 1:colcon.colcon_core.shell:create_environment_hook('rhex_control', 'cmake_prefix_path')
+[1.759s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/hook/cmake_prefix_path.dsv'
+[1.756s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/rhex_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_control
+[1.760s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/hook/cmake_prefix_path.sh'
+[1.762s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib'
+[1.762s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/bin'
+[1.762s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib/pkgconfig/rhex_control.pc'
+[1.762s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib/python3.12/site-packages'
+[1.763s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/bin'
+[1.763s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.dsv'
+[1.765s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.sh'
+[1.766s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.bash'
+[1.767s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.zsh'
+[1.768s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/rhex_control/share/colcon-core/packages/rhex_control)
+[1.770s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rhex_control)
+[1.771s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control' for CMake module files
+[1.772s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control' for CMake config files
+[1.773s] Level 1:colcon.colcon_core.shell:create_environment_hook('rhex_control', 'cmake_prefix_path')
+[1.774s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/hook/cmake_prefix_path.dsv'
+[1.775s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/hook/cmake_prefix_path.sh'
+[1.777s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib'
+[1.778s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/bin'
+[1.778s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib/pkgconfig/rhex_control.pc'
+[1.779s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/lib/python3.12/site-packages'
+[1.779s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_control/bin'
+[1.779s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.dsv'
+[1.781s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.sh'
+[1.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.bash'
+[1.787s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_control/share/rhex_control/package.zsh'
+[1.789s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/rhex_control/share/colcon-core/packages/rhex_control)
+[1.793s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/innovation/dev_ws/src/rhex_ws/rhex_description' with build type 'ament_cmake'
+[1.794s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/innovation/dev_ws/src/rhex_ws/rhex_description'
+[1.794s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.817s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/rhex_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_description -- -j4 -l4
+[1.943s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/rhex_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/rhex_description -- -j4 -l4
+[1.944s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/rhex_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_description
+[2.039s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rhex_description)
+[2.039s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description' for CMake module files
+[2.040s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description' for CMake config files
+[2.041s] Level 1:colcon.colcon_core.shell:create_environment_hook('rhex_description', 'cmake_prefix_path')
+[2.043s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/rhex_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/rhex_description
+[2.044s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/hook/cmake_prefix_path.dsv'
+[2.096s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/hook/cmake_prefix_path.sh'
+[2.100s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/bin'
+[2.101s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/lib/pkgconfig/rhex_description.pc'
+[2.104s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/lib/python3.12/site-packages'
+[2.105s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/bin'
+[2.105s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.dsv'
+[2.106s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.sh'
+[2.107s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.bash'
+[2.111s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.zsh'
+[2.112s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/rhex_description/share/colcon-core/packages/rhex_description)
+[2.112s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rhex_description)
+[2.113s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description' for CMake module files
+[2.113s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description' for CMake config files
+[2.116s] Level 1:colcon.colcon_core.shell:create_environment_hook('rhex_description', 'cmake_prefix_path')
+[2.116s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/hook/cmake_prefix_path.dsv'
+[2.117s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/hook/cmake_prefix_path.sh'
+[2.118s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/bin'
+[2.118s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/lib/pkgconfig/rhex_description.pc'
+[2.118s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/lib/python3.12/site-packages'
+[2.118s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/rhex_description/bin'
+[2.119s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.dsv'
+[2.121s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.sh'
+[2.121s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.bash'
+[2.122s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/rhex_description/share/rhex_description/package.zsh'
+[2.152s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/rhex_description/share/colcon-core/packages/rhex_description)
+[2.153s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/innovation/dev_ws/src/ros2_mpu6050' with build type 'ament_cmake'
+[2.154s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/innovation/dev_ws/src/ros2_mpu6050'
+[2.154s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.184s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[2.323s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/giga_hw_interface -- -j4 -l4
+[2.327s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/giga_hw_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface
+[2.418s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/innovation/dev_ws/build/ros2_mpu6050 -- -j4 -l4
+[2.419s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050
+[2.522s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros2_mpu6050)
+[2.524s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050' for CMake module files
+[2.523s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/ros2_mpu6050' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/ros2_mpu6050
+[2.527s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050' for CMake config files
+[2.529s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros2_mpu6050', 'cmake_prefix_path')
+[2.534s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/hook/cmake_prefix_path.dsv'
+[2.536s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/hook/cmake_prefix_path.sh'
+[2.543s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib'
+[2.546s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/bin'
+[2.547s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib/pkgconfig/ros2_mpu6050.pc'
+[2.548s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib/python3.12/site-packages'
+[2.549s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/bin'
+[2.549s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.dsv'
+[2.555s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.sh'
+[2.557s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.bash'
+[2.561s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.zsh'
+[2.565s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/ros2_mpu6050/share/colcon-core/packages/ros2_mpu6050)
+[2.567s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros2_mpu6050)
+[2.568s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050' for CMake module files
+[2.569s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050' for CMake config files
+[2.570s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros2_mpu6050', 'cmake_prefix_path')
+[2.571s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/hook/cmake_prefix_path.dsv'
+[2.572s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/hook/cmake_prefix_path.sh'
+[2.578s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib'
+[2.579s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/bin'
+[2.579s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib/pkgconfig/ros2_mpu6050.pc'
+[2.580s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/lib/python3.12/site-packages'
+[2.581s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/ros2_mpu6050/bin'
+[2.582s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.dsv'
+[2.585s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.sh'
+[2.587s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.bash'
+[2.589s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/ros2_mpu6050/share/ros2_mpu6050/package.zsh'
+[2.592s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/ros2_mpu6050/share/colcon-core/packages/ros2_mpu6050)
+[2.627s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/leg_odometry': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/leg_odometry/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/leg_odometry/build --no-deps symlink_data
+[2.687s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/innovation/dev_ws/build/mlx90640_thermal': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/mlx90640_thermal/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/mlx90640_thermal/build --no-deps symlink_data
+[2.856s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(giga_hw_interface)
+[2.857s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface' for CMake module files
+[2.858s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface' for CMake config files
+[2.859s] Level 1:colcon.colcon_core.shell:create_environment_hook('giga_hw_interface', 'cmake_prefix_path')
+[2.859s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/cmake_prefix_path.dsv'
+[2.860s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/cmake_prefix_path.sh'
+[2.857s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/giga_hw_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/innovation/dev_ws/build/giga_hw_interface
+[2.861s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib'
+[2.861s] Level 1:colcon.colcon_core.shell:create_environment_hook('giga_hw_interface', 'ld_library_path_lib')
+[2.861s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/ld_library_path_lib.dsv'
+[2.862s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/ld_library_path_lib.sh'
+[2.862s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/bin'
+[2.863s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib/pkgconfig/giga_hw_interface.pc'
+[2.863s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib/python3.12/site-packages'
+[2.863s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/bin'
+[2.864s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.dsv'
+[2.864s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.sh'
+[2.865s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.bash'
+[2.866s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.zsh'
+[2.867s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/giga_hw_interface/share/colcon-core/packages/giga_hw_interface)
+[2.868s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(giga_hw_interface)
+[2.869s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface' for CMake module files
+[2.869s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface' for CMake config files
+[2.870s] Level 1:colcon.colcon_core.shell:create_environment_hook('giga_hw_interface', 'cmake_prefix_path')
+[2.870s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/cmake_prefix_path.dsv'
+[2.871s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/cmake_prefix_path.sh'
+[2.872s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib'
+[2.872s] Level 1:colcon.colcon_core.shell:create_environment_hook('giga_hw_interface', 'ld_library_path_lib')
+[2.872s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/ld_library_path_lib.dsv'
+[2.873s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/hook/ld_library_path_lib.sh'
+[2.874s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/bin'
+[2.874s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib/pkgconfig/giga_hw_interface.pc'
+[2.874s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/lib/python3.12/site-packages'
+[2.875s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/giga_hw_interface/bin'
+[2.875s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.dsv'
+[2.876s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.sh'
+[2.877s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.bash'
+[2.877s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/giga_hw_interface/share/giga_hw_interface/package.zsh'
+[2.879s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/giga_hw_interface/share/colcon-core/packages/giga_hw_interface)
+[3.699s] Level 1:colcon.colcon_core.shell:create_environment_hook('leg_odometry', 'pythonpath_develop')
+[3.700s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/build/leg_odometry/share/leg_odometry/hook/pythonpath_develop.dsv'
+[3.701s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/leg_odometry' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/leg_odometry/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/leg_odometry/build --no-deps symlink_data
+[3.701s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/build/leg_odometry/share/leg_odometry/hook/pythonpath_develop.sh'
+[3.703s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry' for CMake module files
+[3.703s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry' for CMake config files
+[3.704s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry/lib'
+[3.704s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry/bin'
+[3.705s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry/lib/pkgconfig/leg_odometry.pc'
+[3.706s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry/lib/python3.12/site-packages'
+[3.707s] Level 1:colcon.colcon_core.shell:create_environment_hook('leg_odometry', 'pythonpath')
+[3.708s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/hook/pythonpath.dsv'
+[3.709s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/hook/pythonpath.sh'
+[3.712s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/leg_odometry/bin'
+[3.713s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(leg_odometry)
+[3.714s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/package.dsv'
+[3.715s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/package.sh'
+[3.716s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/package.bash'
+[3.717s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/leg_odometry/share/leg_odometry/package.zsh'
+[3.717s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/leg_odometry/share/colcon-core/packages/leg_odometry)
+[3.748s] Level 1:colcon.colcon_core.shell:create_environment_hook('mlx90640_thermal', 'pythonpath_develop')
+[3.749s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/build/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath_develop.dsv'
+[3.750s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/innovation/dev_ws/build/mlx90640_thermal' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/innovation/dev_ws/build/mlx90640_thermal/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/innovation/dev_ws/build/mlx90640_thermal/build --no-deps symlink_data
+[3.750s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/build/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath_develop.sh'
+[3.751s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal' for CMake module files
+[3.752s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal' for CMake config files
+[3.753s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal/lib'
+[3.753s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal/bin'
+[3.753s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal/lib/pkgconfig/mlx90640_thermal.pc'
+[3.753s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal/lib/python3.12/site-packages'
+[3.753s] Level 1:colcon.colcon_core.shell:create_environment_hook('mlx90640_thermal', 'pythonpath')
+[3.754s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath.dsv'
+[3.754s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/hook/pythonpath.sh'
+[3.755s] Level 1:colcon.colcon_core.environment:checking '/home/innovation/dev_ws/install/mlx90640_thermal/bin'
+[3.755s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(mlx90640_thermal)
+[3.755s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/package.dsv'
+[3.756s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/package.sh'
+[3.757s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/package.bash'
+[3.757s] INFO:colcon.colcon_core.shell:Creating package script '/home/innovation/dev_ws/install/mlx90640_thermal/share/mlx90640_thermal/package.zsh'
+[3.758s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/innovation/dev_ws/install/mlx90640_thermal/share/colcon-core/packages/mlx90640_thermal)
+[3.758s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[3.758s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[3.759s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[3.759s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[3.772s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[3.772s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[3.772s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[3.797s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[3.798s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/innovation/dev_ws/install/local_setup.sh'
+[3.799s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/innovation/dev_ws/install/_local_setup_util_sh.py'
+[3.801s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/innovation/dev_ws/install/setup.sh'
+[3.803s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/innovation/dev_ws/install/local_setup.bash'
+[3.804s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/innovation/dev_ws/install/setup.bash'
+[3.805s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/innovation/dev_ws/install/local_setup.zsh'
+[3.806s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/innovation/dev_ws/install/setup.zsh'
