@@ -5,6 +5,7 @@ from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 import os
+from launch.substitutions import EnvironmentVariable
 
 
 def generate_launch_description():
@@ -17,10 +18,13 @@ def generate_launch_description():
     robot_description_content = Command([
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ",
+        "--inorder ",
         xacro_file,
         " ",
         "use_sim:=false"
-    ])
+    ], additional_env={
+        "ROS_PACKAGE_PATH": EnvironmentVariable("AMENT_PREFIX_PATH")
+    })
     robot_description = {"robot_description": robot_description_content}
 
     # Controller config
