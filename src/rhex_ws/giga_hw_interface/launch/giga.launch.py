@@ -1,35 +1,35 @@
 from launch import LaunchDescription
-from launch.actions import TimerAction, RegisterEventHandler
+from launch.actions import TimerAction, RegisterEventHandler, SetEnvironmentVariable
 from launch.event_handlers import OnProcessStart
 from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
+from launch.substitutions import EnvironmentVariable
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-import os
-from launch.actions import SetEnvironmentVariable
-from launch.substitutions import EnvironmentVariable
 
 
 def generate_launch_description():
-
+    # Set ROS_PACKAGE_PATH so xacro can resolve package:// URIs
     set_ros_package_path = SetEnvironmentVariable(
-    name="ROS_PACKAGE_PATH",
-    value=EnvironmentVariable("AMENT_PREFIX_PATH")
+        name="ROS_PACKAGE_PATH",
+        value=EnvironmentVariable("AMENT_PREFIX_PATH")
     )
 
-
-    # URDF from xacro
+    # URDF from xacro (use source space!)
     xacro_file = PathJoinSubstitution([
         FindPackageShare("rhex_description"),
         "urdf",
         "rhex.xacro"
     ])
+
     robot_description_content = Command([
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ",
+        "--inorder ",  # optional but recommended
         xacro_file,
         " ",
         "use_sim:=false"
     ])
+
     robot_description = {"robot_description": robot_description_content}
 
     # Controller config
@@ -39,7 +39,7 @@ def generate_launch_description():
         "rhex_controllers.yaml"
     ])
 
-    # Robot state publisher
+    # robot_state_publisher node
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -47,7 +47,7 @@ def generate_launch_description():
         output="screen"
     )
 
-    # ros2_control_node (delayed)
+    # ros2_control_node (controller manager)
     controller_manager = Node(
         package='controller_manager',
         executable='ros2_control_node',
@@ -55,15 +55,21 @@ def generate_launch_description():
         remappings=[("/controller_manager/robot_description", "/robot_description")],
         output="screen"
     )
-    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
-    # Spawner nodes
+    # Delay starting controller manager to allow URDF to publish
+    delayed_controller_manager = TimerAction(
+        period=3.0,
+        actions=[controller_manager]
+    )
+
+    # Spawner nodes for controllers
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"],
         output="screen"
     )
+
     velocity_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -71,13 +77,14 @@ def generate_launch_description():
         output="screen"
     )
 
-    # Chain spawners after controller manager
+    # Start spawners in sequence
     delayed_jsb = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=controller_manager,
             on_start=[joint_state_broadcaster_spawner]
         )
     )
+
     delayed_velocity = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=joint_state_broadcaster_spawner,
@@ -86,10 +93,9 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        set_ros_package_path,  # <-- this was missing!
+        set_ros_package_path,
         robot_state_publisher,
         delayed_controller_manager,
         delayed_jsb,
         delayed_velocity,
     ])
-
