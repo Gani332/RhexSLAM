@@ -18,10 +18,12 @@ def generate_launch_description():
         os.path.expanduser("~"),
         "dev_ws",
         "src",
+        "rhex_ws",
         "rhex_description",
         "urdf",
         "rhex.xacro"
     )
+
 
     robot_description_content = Command([
         FindExecutable(name="xacro"),
