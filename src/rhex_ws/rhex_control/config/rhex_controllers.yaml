@@ -12,8 +12,8 @@ velocity_controller:
   ros__parameters:
       joints:
         - front_left_leg_joint
-        - centre_right_leg_joint
+        - centre_left_leg_joint
         - back_left_leg_joint
         - front_right_leg_joint
-        - centre_left_leg_joint
+        - centre_right_leg_joint
         - back_right_leg_joint

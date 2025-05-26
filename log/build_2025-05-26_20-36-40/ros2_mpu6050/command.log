@@ -1,0 +1,1 @@
+Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/ros2_mpu6050': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/riyaadh/dev_ws/RhexSLAM/src/ros2_mpu6050 -DCMAKE_INSTALL_PREFIX=/home/riyaadh/dev_ws/RhexSLAM/install/ros2_mpu6050
