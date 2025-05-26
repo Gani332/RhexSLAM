@@ -32,7 +32,7 @@ public:
     joint_commands_.resize(info.joints.size(), 0.0);
 
     // Open serial port
-    serial_fd_ = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);
+    serial_fd_ = open("/dev/serial/by-id/usb-Arduino_Giga_002E00473033510136383737-if00", O_RDWR | O_NOCTTY | O_SYNC);
     if (serial_fd_ < 0) {
     RCLCPP_ERROR(rclcpp::get_logger("GigaHW"), "Failed to open serial port: %s", strerror(errno));
     return CallbackReturn::ERROR;
