@@ -46,7 +46,7 @@ def generate_launch_description():
         remappings=[("/controller_manager/robot_description", "/robot_description")],
         output="screen"
     )
-    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
+    delayed_controller_manager = TimerAction(period=5.0, actions=[controller_manager])
 
     # Spawner nodes
     joint_state_broadcaster_spawner = Node(
