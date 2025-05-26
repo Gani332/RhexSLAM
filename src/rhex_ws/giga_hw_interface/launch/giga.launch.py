@@ -1,30 +1,31 @@
+import os
 from launch import LaunchDescription
 from launch.actions import TimerAction, RegisterEventHandler, SetEnvironmentVariable
 from launch.event_handlers import OnProcessStart
-from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
-from launch.substitutions import EnvironmentVariable
+from launch.substitutions import Command, FindExecutable
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     # Set ROS_PACKAGE_PATH so xacro can resolve package:// URIs
     set_ros_package_path = SetEnvironmentVariable(
         name="ROS_PACKAGE_PATH",
-        value=EnvironmentVariable("AMENT_PREFIX_PATH")
+        value=os.environ.get("AMENT_PREFIX_PATH", "")
     )
 
-    # URDF from xacro (use source space!)
-    xacro_file = PathJoinSubstitution([
-        FindPackageShare("rhex_description"),
+    # Use absolute path to source URDF (avoid install path resolution)
+    xacro_file = os.path.join(
+        os.path.expanduser("~"),
+        "dev_ws",
+        "src",
+        "rhex_description",
         "urdf",
         "rhex.xacro"
-    ])
+    )
 
     robot_description_content = Command([
-        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        FindExecutable(name="xacro"),
         " ",
-        "--inorder ",  # optional but recommended
         xacro_file,
         " ",
         "use_sim:=false"
@@ -32,12 +33,15 @@ def generate_launch_description():
 
     robot_description = {"robot_description": robot_description_content}
 
-    # Controller config
-    controller_config = PathJoinSubstitution([
-        FindPackageShare("rhex_control"),
+    # Controller config path
+    controller_config = os.path.join(
+        os.path.expanduser("~"),
+        "dev_ws",
+        "src",
+        "rhex_control",
         "config",
         "rhex_controllers.yaml"
-    ])
+    )
 
     # robot_state_publisher node
     robot_state_publisher = Node(
@@ -56,13 +60,12 @@ def generate_launch_description():
         output="screen"
     )
 
-    # Delay starting controller manager to allow URDF to publish
     delayed_controller_manager = TimerAction(
         period=3.0,
         actions=[controller_manager]
     )
 
-    # Spawner nodes for controllers
+    # Spawner nodes
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -77,7 +80,6 @@ def generate_launch_description():
         output="screen"
     )
 
-    # Start spawners in sequence
     delayed_jsb = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=controller_manager,
