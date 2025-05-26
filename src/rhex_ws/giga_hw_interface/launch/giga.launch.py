@@ -86,8 +86,10 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        set_ros_package_path,  # <-- this was missing!
         robot_state_publisher,
         delayed_controller_manager,
         delayed_jsb,
         delayed_velocity,
     ])
+
