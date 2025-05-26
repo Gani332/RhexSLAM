@@ -14,19 +14,6 @@ def generate_launch_description():
         "urdf",
         "rhex.xacro"
     ])
-    
-    urdf_path = os.path.join(
-        os.path.expanduser("~"),
-        "dev_ws",
-        "src",
-        "rhex_ws",
-        "rhex_description",
-        "urdf",
-        "rhex.xacro"
-    )
-
-
-
     robot_description_content = Command([
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ",
@@ -47,7 +34,7 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        parameters=[{"robot_description": Command(["xacro ", urdf_path])}],
+        parameters=[robot_description],
         output="screen"
     )
 
