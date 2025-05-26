@@ -14,12 +14,17 @@ def generate_launch_description():
         "urdf",
         "rhex.xacro"
     ])
-
-    urdf_path = PathJoinSubstitution([
-        FindPackageShare("rhex_description"),
+    
+    urdf_path = os.path.join(
+        os.path.expanduser("~"),
+        "dev_ws",
+        "src",
+        "rhex_ws",
+        "rhex_description",
         "urdf",
         "rhex.xacro"
-    ])
+    )
+
 
 
     robot_description_content = Command([
