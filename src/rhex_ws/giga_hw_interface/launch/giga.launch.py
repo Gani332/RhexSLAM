@@ -54,7 +54,6 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"],
-        namespace="robot1",
         output="screen"
     )
 
@@ -62,7 +61,6 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["velocity_controller"],
-        namespace="robot1",
         output="screen"
     )
 
