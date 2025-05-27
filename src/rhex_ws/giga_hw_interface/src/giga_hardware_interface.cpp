@@ -95,7 +95,7 @@ return_type read(const rclcpp::Time &, const rclcpp::Duration &) override
 
   std::string line = serial_buffer_.substr(0, newline_pos);
   serial_buffer_.erase(0, newline_pos + 1);  // remove the line we just read
-  RCLCPP_INFO(rclcpp::get_logger("GigaHW"), "Raw line: %s", line.c_str());
+ // RCLCPP_INFO(rclcpp::get_logger("GigaHW"), "Raw line: %s", line.c_str());
 
   std::stringstream ss(line);
   std::string token;
