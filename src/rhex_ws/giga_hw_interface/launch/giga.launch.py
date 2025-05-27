@@ -29,6 +29,8 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
+        namespace="robot1",
+        name="rsp1",
         parameters=[robot_description],
         output="screen"
     )
@@ -37,6 +39,7 @@ def generate_launch_description():
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
+        namespace="robot1",
         parameters=[robot_description, controller_config],
         remappings=[("/controller_manager/robot_description", "/robot_description")],
         output="screen"
