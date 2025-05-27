@@ -29,7 +29,7 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        namespace="robot1",
+        namespace="/robot1",
         parameters=[robot_description],
         output="screen"
     )
@@ -38,10 +38,8 @@ def generate_launch_description():
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[controller_config],
-        remappings=[
-            ("robot_description", "/robot1/robot_description")
-        ],
+        parameters=[robot_description,controller_config],
+        namespace="/robot1",
         output="screen"
     )
 
@@ -54,6 +52,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"],
+        namespace="robot1",
         output="screen"
     )
 
@@ -61,6 +60,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["velocity_controller"],
+        namespace="robot1",
         output="screen"
     )
 
