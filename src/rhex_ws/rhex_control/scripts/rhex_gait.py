@@ -1,120 +1,100 @@
 #!/usr/bin/env python3
-from sensor_msgs.msg import JointState
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64MultiArray
+from sensor_msgs.msg import JointState
 from geometry_msgs.msg import Twist
+from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
-MAX_SPEED = 10000000000.0
-SCALE_LINEAR = 80000000000.0
-SCALE_ANGULAR = 1.0
-STEP_THRESHOLD = 6.28  # radians per step (≈1 rotation)
+STEP_SIZE = 1.5  # radians, each step target
+STEP_TIME = 0.5  # minimum phase time in seconds
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 
-class RHexCmdVelTripodController(Node):
+class PIDController:
+    def __init__(self, kp, kd):
+        self.kp = kp
+        self.kd = kd
+
+    def compute(self, error, velocity):
+        return self.kp * error - self.kd * velocity
+
+class RHexTripodPIDController(Node):
     def __init__(self):
-        super().__init__('rhex_cmdvel_tripod_controller')
+        super().__init__('rhex_tripod_pid_controller')
 
         self.publisher = self.create_publisher(Float64MultiArray, '/robot1/velocity_controller/commands', 10)
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
-        self.joint_order = ALL_JOINTS
-        self.current_tripod = TRIPOD_A
-        self.waiting_tripod = TRIPOD_B
-
+        # Motion state
         self.linear_x = 0.0
         self.angular_z = 0.0
 
-        self.joint_angles = {joint: 0.0 for joint in self.joint_order}
-        self.last_joint_angles = self.joint_angles.copy()
-        self.joint_velocities = {joint: 0.0 for joint in self.joint_order}
-        self.tripod_start_angles = {joint: 0.0 for joint in self.current_tripod}
+        # Timing for tripod switch
+        self.phase_start_time = self.get_clock().now().nanoseconds / 1e9
 
-        self.last_vel_log_time = 0.0
-        self.last_joint_log_time = 0.0
+        # Tripod state
+        self.current_tripod = TRIPOD_A
+        self.waiting_tripod = TRIPOD_B
 
-        self.get_logger().info("RHex cmd_vel tripod gait controller (predictive stepping) started.")
+        # Joint tracking
+        self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
+        self.target_angles = {j: 0.0 for j in ALL_JOINTS}
+
+        # PID per joint
+        self.pid = {j: PIDController(kp=4.0, kd=0.2) for j in ALL_JOINTS}
+
+        self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
         self.linear_x = msg.linear.x
         self.angular_z = msg.angular.z
 
     def joint_state_callback(self, msg: JointState):
-        if len(msg.name) != len(msg.position):
-            self.get_logger().warn("JointState message has mismatched name and position lengths.")
-            return
-
         now = self.get_clock().now().nanoseconds / 1e9
-        updated = {}
-
-        for name, position in zip(msg.name, msg.position):
+        dt = 1.0 / FREQUENCY
+        for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
-                last_pos = self.joint_angles[name]
-                self.last_joint_angles[name] = last_pos
-                self.joint_angles[name] = position
-                self.joint_velocities[name] = (position - last_pos) * FREQUENCY
-                updated[name] = position
-
-        if now - self.last_joint_log_time >= 1.0:
-            #self.get_logger().info(f"Updated Joint Angles: {updated}")
-            self.last_joint_log_time = now
+                vel = (pos - self.joint_angles[name]) / dt
+                self.joint_velocities[name] = vel
+                self.joint_angles[name] = pos
 
     def update(self):
-        velocities = []
+        now = self.get_clock().now().nanoseconds / 1e9
+        elapsed = now - self.phase_start_time
 
-        if self.linear_x == 0.0 and self.angular_z == 0.0:
-            velocities = [0.0 for _ in self.joint_order]
-        else:
-            stepped = False
-            for joint in self.current_tripod:
-                current = self.joint_angles[joint]
-                velocity = self.joint_velocities[joint]
-                predicted = current + velocity / FREQUENCY
-                diff = abs(predicted - self.tripod_start_angles[joint])
-                if diff >= STEP_THRESHOLD:
-                    stepped = True
-                    break
+        # Step phase switch logic
+        if elapsed >= STEP_TIME and (self.linear_x != 0.0 or self.angular_z != 0.0):
+            self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+            for j in self.current_tripod:
+                self.target_angles[j] = self.joint_angles[j] + step_direction
+            self.phase_start_time = now
+            self.get_logger().info(f"Switched tripod: {self.current_tripod}")
 
-            if stepped:
-                self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-                for j in self.current_tripod:
-                    self.tripod_start_angles[j] = self.joint_angles[j]
-                self.get_logger().info(f"Switched tripod: now moving {self.current_tripod}")
-
-            left_speed = (self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            right_speed = (self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
-            right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
-
-            for joint in self.joint_order:
-                if joint in self.current_tripod:
-                    if 'left' in joint:
-                        velocities.append(left_speed)
-                    elif 'right' in joint:
-                        velocities.append(right_speed)
-                    else:
-                        velocities.append(self.linear_x)
-                else:
-                    velocities.append(0.0)
+        # Compute PID commands
+        commands = []
+        for j in ALL_JOINTS:
+            if j in self.current_tripod:
+                error = self.target_angles[j] - self.joint_angles[j]
+                velocity = self.joint_velocities[j]
+                cmd = self.pid[j].compute(error, velocity)
+                commands.append(cmd)
+            else:
+                commands.append(0.0)
 
         msg = Float64MultiArray()
-        msg.data = velocities
+        msg.data = commands
         self.publisher.publish(msg)
-
-        now = self.get_clock().now().nanoseconds / 1e9
-        if now - self.last_vel_log_time >= 1.0:
-            #self.get_logger().info(f"Publishing velocities: {velocities}")
-            self.last_vel_log_time = now
 
 def main(args=None):
     rclpy.init(args=args)
-    node = RHexCmdVelTripodController()
+    node = RHexTripodPIDController()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
