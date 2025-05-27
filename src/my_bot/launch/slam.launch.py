@@ -5,6 +5,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
 import os
 from ament_index_python.packages import get_package_share_directory
 
@@ -13,20 +14,29 @@ def generate_launch_description():
     thermal_path = get_package_share_directory('mlx90640_thermal')
     imu_params_path = os.path.join(get_package_share_directory('ros2_mpu6050'), 'config', 'params.yaml')
 
-    urdf_path = PathJoinSubstitution([
-        FindPackageShare("my_bot"),
-        "description",
-        "xacro",
-        "rhex.urdf.xacro"
+    # robot_description using rhex_description instead of my_bot
+    xacro_file = PathJoinSubstitution([
+        FindPackageShare("rhex_description"),
+        "urdf",
+        "rhex.xacro"
     ])
 
+    robot_description_content = Command([
+        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        " ", xacro_file, " use_sim:=false"
+    ])
+    robot_description = {"robot_description": robot_description_content}
+
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[robot_description],
+        output="screen"
+    )
+
     return LaunchDescription([
-        # Robot State Publisher
-        Node(
-            package="robot_state_publisher",
-            executable="robot_state_publisher",
-            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
-        ),
+        robot_state_publisher,
+
 
         # Node(
         #     package='joint_state_publisher_gui',
