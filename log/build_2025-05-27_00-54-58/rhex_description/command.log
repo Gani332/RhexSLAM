@@ -1,0 +1,1 @@
+Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/rhex_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/riyaadh/dev_ws/RhexSLAM/build/rhex_description -- -j16 -l16
