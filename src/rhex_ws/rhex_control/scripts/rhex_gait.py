@@ -100,8 +100,8 @@ class RHexCmdVelTripodController(Node):
                         velocities.append(right_speed)
                     else:
                         velocities.append(self.linear_x)
-                else:
-                    velocities.append(0.0)
+               # else:
+                 #   velocities.append(0.0)
 
         msg = Float64MultiArray()
         msg.data = velocities
