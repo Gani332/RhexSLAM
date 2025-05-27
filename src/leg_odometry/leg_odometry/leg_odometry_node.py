@@ -49,7 +49,7 @@ class LegOdometryNode(Node):
         self.odom_pub = self.create_publisher(Odometry, '/odom/leg', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
 
-    def joint_state_callback(self, msg):
+    def joint_state_callback(self, msg: JointState):
         now = self.get_clock().now().nanoseconds / 1e9
         dt = now - self.prev_time
         if dt <= 0:
