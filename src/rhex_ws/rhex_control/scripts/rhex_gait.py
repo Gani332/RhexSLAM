@@ -87,10 +87,10 @@ class RHexCmdVelTripodController(Node):
                     self.tripod_start_angles[j] = self.joint_angles[j]
                 self.get_logger().info(f"Switched tripod: now moving {self.current_tripod}")
 
-            left_speed = (self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            right_speed = (self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
-            right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
+            left_speed = 800#(self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
+            right_speed = 800#(self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
+            #left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
+            #right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
 
             for joint in self.joint_order:
                 if joint in self.current_tripod:
