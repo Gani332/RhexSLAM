@@ -4,13 +4,13 @@
     <link name="${name}">
       <visual>
         <geometry>
-          <mesh filename="package:/rhex_ws/rhex_description/meshes/${mesh}" scale="${scale}"/>
+          <mesh filename="$(find rhex_description)/meshes/${mesh}" scale="${scale}"/>
         </geometry>
         <material name="white"/>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package:/rhex_ws/rhex_description/meshes/${mesh}" scale="${scale}"/>
+          <mesh filename="$(find rhex_description)/meshes/${mesh}" scale="${scale}"/>
         </geometry>
       </collision>
       <inertial>

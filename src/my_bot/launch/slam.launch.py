@@ -3,9 +3,9 @@ from launch_ros.substitutions import FindPackageShare
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
+
 import os
 from ament_index_python.packages import get_package_share_directory
 
@@ -14,7 +14,16 @@ def generate_launch_description():
     thermal_path = get_package_share_directory('mlx90640_thermal')
     imu_params_path = os.path.join(get_package_share_directory('ros2_mpu6050'), 'config', 'params.yaml')
 
-    # robot_description using rhex_description instead of my_bot
+    robot1_ns = "robot1"
+    robot2_ns = "robot2"
+
+    urdf_path = PathJoinSubstitution([
+        FindPackageShare("my_bot"),
+        "description",
+        "xacro",
+        "rhex.urdf.xacro"
+    ])
+
     xacro_file = PathJoinSubstitution([
         FindPackageShare("rhex_description"),
         "urdf",
@@ -27,15 +36,26 @@ def generate_launch_description():
     ])
     robot_description = {"robot_description": robot_description_content}
 
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        parameters=[robot_description],
-        output="screen"
-    )
-
     return LaunchDescription([
-        robot_state_publisher,
+        # Robot State Publisher
+        Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
+        ),
+
+        Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            namespace="robot1",
+            name="rsp1",
+            parameters=[{"robot_description": robot_description_content}],
+            remappings=[
+                ("/tf", "tf"),
+                ("/tf_static", "tf_static")
+            ]
+        ),
+
 
 
         Node(
@@ -172,11 +192,11 @@ def generate_launch_description():
 
 
         # RViz
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-            arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
-        ),
+         Node(
+             package='rviz2',
+             executable='rviz2',
+             name='rviz2',
+             output='screen',
+             arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
+         ),
     ])
