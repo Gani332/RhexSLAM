@@ -36,7 +36,9 @@ class RHexCmdVelTripodController(Node):
         self.joint_velocities = {joint: 0.0 for joint in self.joint_order}
         self.tripod_start_angles = {joint: 0.0 for joint in self.current_tripod}
 
-        self.last_debug_log = 0
+        self.last_vel_log_time = 0.0
+        self.last_joint_log_time = 0.0
+
         self.get_logger().info("RHex cmd_vel tripod gait controller (predictive stepping) started.")
 
     def cmd_vel_callback(self, msg: Twist):
@@ -48,7 +50,7 @@ class RHexCmdVelTripodController(Node):
             self.get_logger().warn("JointState message has mismatched name and position lengths.")
             return
 
-        now = self.get_clock().now().seconds_nanoseconds()[0]
+        now = self.get_clock().now().nanoseconds / 1e9
         updated = {}
 
         for name, position in zip(msg.name, msg.position):
@@ -59,9 +61,9 @@ class RHexCmdVelTripodController(Node):
                 self.joint_velocities[name] = (position - last_pos) * FREQUENCY
                 updated[name] = position
 
-        if now - self.last_debug_log >= 1:
+        if now - self.last_joint_log_time >= 1.0:
             self.get_logger().info(f"Updated Joint Angles: {updated}")
-            self.last_debug_log = now
+            self.last_joint_log_time = now
 
     def update(self):
         velocities = []
@@ -105,10 +107,10 @@ class RHexCmdVelTripodController(Node):
         msg.data = velocities
         self.publisher.publish(msg)
 
-        now = self.get_clock().now().seconds_nanoseconds()[0]
-        if now - self.last_debug_log >= 1:
+        now = self.get_clock().now().nanoseconds / 1e9
+        if now - self.last_vel_log_time >= 1.0:
             self.get_logger().info(f"Publishing velocities: {velocities}")
-            self.last_debug_log = now
+            self.last_vel_log_time = now
 
 def main(args=None):
     rclpy.init(args=args)

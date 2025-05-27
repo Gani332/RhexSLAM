@@ -118,7 +118,7 @@ def generate_launch_description():
             package='mlx90640_thermal',
             executable='inference_node',
             name='thermal_inference_node',
-            output='screen'
+            #output='screen'
         ),
 
         # Thermal Marker Node
