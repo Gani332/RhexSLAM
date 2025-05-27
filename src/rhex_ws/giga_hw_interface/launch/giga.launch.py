@@ -78,8 +78,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        controller_manager,
         robot_state_publisher,
+        delayed_controller_manager,   # Correct: use delayed version!
         delayed_jsb,
         delayed_velocity,
     ])
