@@ -22,11 +22,11 @@ def generate_launch_description():
 
     return LaunchDescription([
         # Robot State Publisher
-        # Node(
-        #     package="robot_state_publisher",
-        #     executable="robot_state_publisher",
-        #     parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
-        # ),
+        Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
+        ),
 
         # Node(
         #     package='joint_state_publisher_gui',

@@ -1,0 +1,2 @@
+Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/riyaadh/dev_ws/RhexSLAM/src/my_bot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/riyaadh/dev_ws/RhexSLAM/install/my_bot
+Invoked command in '/home/riyaadh/dev_ws/RhexSLAM/build/my_bot' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/riyaadh/dev_ws/RhexSLAM/src/my_bot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/riyaadh/dev_ws/RhexSLAM/install/my_bot
