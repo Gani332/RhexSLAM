@@ -28,12 +28,12 @@ def generate_launch_description():
             parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
         ),
 
-        Node(
-            package='joint_state_publisher_gui',
-            executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui',
-            output='screen'
-        ),
+        # Node(
+        #     package='joint_state_publisher_gui',
+        #     executable='joint_state_publisher_gui',
+        #     name='joint_state_publisher_gui',
+        #     output='screen'
+        # ),
 
 
         
@@ -162,11 +162,11 @@ def generate_launch_description():
 
 
         # RViz
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-            arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
-        ),
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     name='rviz2',
+        #     output='screen',
+        #     arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
+        # ),
     ])
