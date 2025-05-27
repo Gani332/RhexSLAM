@@ -24,29 +24,23 @@ def generate_launch_description():
         "rhex.urdf.xacro"
     ])
 
+
     return LaunchDescription([
         # Robot State Publisher
         Node(
             package="robot_state_publisher",
             executable="robot_state_publisher",
-            namespace="robot1", 
-            parameters=[{"robot_description": Command(["xacro ", urdf_path])}],
-            remappings=[
-                ("/joint_states", "joint_states"),  # needed for namespacing
-                ("/tf", "tf"),
-                ("/tf_static", "tf_static")
-            ]
+            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
         ),
 
 
 
-
-        # Node(
-        #     package='joint_state_publisher_gui',
-        #     executable='joint_state_publisher_gui',
-        #     name='joint_state_publisher_gui',
-        #     output='screen'
-        # ),
+        Node(
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui',
+            name='joint_state_publisher_gui',
+            output='screen'
+        ),
 
 
         

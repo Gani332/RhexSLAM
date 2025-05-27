@@ -41,7 +41,7 @@ class LegOdometryNode(Node):
 
         self.subscription = self.create_subscription(
             JointState,
-            '/robot1/joint_states',
+            '/joint_states',
             self.joint_state_callback,
             10
         )
