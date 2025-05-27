@@ -5,10 +5,10 @@ from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
 from geometry_msgs.msg import Twist
 
-FREQUENCY = 10.0
+FREQUENCY = 100.0
 MAX_SPEED = 100000.0
 SCALE_LINEAR = 800.0
-SCALE_ANGULAR = 2.0
+SCALE_ANGULAR = 1.0
 STEP_THRESHOLD = 6.28  # radians per step (≈1 rotation)
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
@@ -87,8 +87,8 @@ class RHexCmdVelTripodController(Node):
                     self.tripod_start_angles[j] = self.joint_angles[j]
                 self.get_logger().info(f"Switched tripod: now moving {self.current_tripod}")
 
-            left_speed = (self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            right_speed = (self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
+            left_speed = 800#(self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
+            right_speed = 800 #(self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
             left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
             right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
 
