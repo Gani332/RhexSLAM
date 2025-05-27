@@ -89,8 +89,8 @@ class RHexCmdVelTripodController(Node):
 
             left_speed = 800#(self.linear_x - self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
             right_speed = 800 #(self.linear_x + self.angular_z * SCALE_ANGULAR) * SCALE_LINEAR
-            left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
-            right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
+           # left_speed = max(min(left_speed, MAX_SPEED), -MAX_SPEED)
+           # right_speed = max(min(right_speed, MAX_SPEED), -MAX_SPEED)
 
             for joint in self.joint_order:
                 if joint in self.current_tripod:
