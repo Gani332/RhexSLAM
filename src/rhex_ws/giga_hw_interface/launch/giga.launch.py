@@ -41,9 +41,12 @@ def generate_launch_description():
         executable="ros2_control_node",
         namespace="robot1",
         parameters=[robot_description, controller_config],
-        remappings=[("/controller_manager/robot_description", "/robot_description")],
+        remappings=[
+            ("robot_description", "robot1/robot_description")
+        ],
         output="screen"
     )
+
 
     # Delayed startup to ensure /robot_description is published
     delayed_controller_manager = TimerAction(period=5.0, actions=[controller_manager])
