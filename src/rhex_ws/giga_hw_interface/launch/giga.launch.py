@@ -16,7 +16,7 @@ def generate_launch_description():
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ", xacro_file, " use_sim:=false"
     ])
-    robot_description = {"robot_description": robot_description_content}
+    robot_description = {"rsp1/robot_description": robot_description_content}
 
     # Controller config file
     controller_config = PathJoinSubstitution([
@@ -26,12 +26,12 @@ def generate_launch_description():
     ])
 
     # State publisher
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        parameters=[robot_description],
-        output="screen"
-    )
+    # robot_state_publisher = Node(
+    #     package="robot_state_publisher",
+    #     executable="robot_state_publisher",
+    #     parameters=[robot_description],
+    #     output="screen"
+    # )
 
     # Controller manager node (ROS 2 control node)
     controller_manager = Node(
