@@ -19,7 +19,7 @@ class RHexCmdVelTripodController(Node):
     def __init__(self):
         super().__init__('rhex_cmdvel_tripod_controller')
 
-        self.publisher = self.create_publisher(Float64MultiArray, '/velocity_controller/commands', 10)
+        self.publisher = self.create_publisher(Float64MultiArray, '/robot1/velocity_controller/commands', 10)
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
