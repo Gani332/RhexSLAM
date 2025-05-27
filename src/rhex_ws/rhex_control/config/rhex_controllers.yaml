@@ -1,4 +1,4 @@
-controller_manager:
+robot1/controller_manager:
   ros__parameters:
     update_rate: 100
 
@@ -7,6 +7,9 @@ controller_manager:
 
     velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
+
+velocity_controller:
+  ros__parameters:
       joints:
         - front_left_leg_joint
         - centre_left_leg_joint
@@ -14,4 +17,3 @@ controller_manager:
         - front_right_leg_joint
         - centre_right_leg_joint
         - back_right_leg_joint
-      interface_name: velocity  # Optional but recommended
