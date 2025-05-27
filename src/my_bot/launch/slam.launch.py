@@ -14,25 +14,36 @@ def generate_launch_description():
     thermal_path = get_package_share_directory('mlx90640_thermal')
     imu_params_path = os.path.join(get_package_share_directory('ros2_mpu6050'), 'config', 'params.yaml')
 
+    # robot_description using rhex_description instead of my_bot
+    xacro_file = PathJoinSubstitution([
+        FindPackageShare("rhex_description"),
+        "urdf",
+        "rhex.xacro"
+    ])
+
+    robot_description_content = Command([
+        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        " ", xacro_file, " use_sim:=false"
+    ])
+    robot_description = {"robot_description": robot_description_content}
+
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[robot_description],
+        output="screen"
+    )
+
     return LaunchDescription([
+        robot_state_publisher,
 
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                PathJoinSubstitution([
-                    FindPackageShare('giga_hw_interface'),
-                    'launch',
-                    'giga.launch.py'
-                ])
-            )
+
+        Node(
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui',
+            name='joint_state_publisher_gui',
+            output='screen'
         ),
-
-
-        # Node(
-        #     package='joint_state_publisher_gui',
-        #     executable='joint_state_publisher_gui',
-        #     name='joint_state_publisher_gui',
-        #     output='screen'
-        # ),
 
 
         
@@ -95,7 +106,7 @@ def generate_launch_description():
             package='mlx90640_thermal',
             executable='inference_node',
             name='thermal_inference_node',
-            #output='screen'
+            output='screen'
         ),
 
         # Thermal Marker Node
@@ -161,11 +172,11 @@ def generate_launch_description():
 
 
         # RViz
-        # Node(
-        #     package='rviz2',
-        #     executable='rviz2',
-        #     name='rviz2',
-        #     output='screen',
-        #     arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
-        # ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
+        ),
     ])
