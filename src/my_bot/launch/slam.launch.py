@@ -3,9 +3,8 @@ from launch_ros.substitutions import FindPackageShare
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
-from launch.substitutions import Command, PathJoinSubstitution, FindExecutable
-
 import os
 from ament_index_python.packages import get_package_share_directory
 
@@ -14,9 +13,6 @@ def generate_launch_description():
     thermal_path = get_package_share_directory('mlx90640_thermal')
     imu_params_path = os.path.join(get_package_share_directory('ros2_mpu6050'), 'config', 'params.yaml')
 
-    robot1_ns = "robot1"
-    robot2_ns = "robot2"
-
     urdf_path = PathJoinSubstitution([
         FindPackageShare("my_bot"),
         "description",
@@ -24,16 +20,14 @@ def generate_launch_description():
         "rhex.urdf.xacro"
     ])
 
-
     return LaunchDescription([
         # Robot State Publisher
         Node(
             package="robot_state_publisher",
             executable="robot_state_publisher",
-            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
+            parameters=[{"robot_description": Command(["xacro ", urdf_path])}],
+            output='screen'
         ),
-
-
 
         Node(
             package='joint_state_publisher_gui',
@@ -42,8 +36,6 @@ def generate_launch_description():
             output='screen'
         ),
 
-
-        
         Node(
             package='leg_odometry',
             executable='leg_odometry_node',
@@ -137,7 +129,7 @@ def generate_launch_description():
             ),
             launch_arguments={
                 'use_sim_time': 'false',
-                'slam_params_file': '/home/innovation/dev_ws/src/my_bot/config/my_slam_params.yaml'
+                'slam_params_file': os.path.join(my_bot_path, 'config', 'my_slam_params.yaml')
             }.items()
 
         ),
@@ -169,11 +161,11 @@ def generate_launch_description():
 
 
         # RViz
-         Node(
-             package='rviz2',
-             executable='rviz2',
-             name='rviz2',
-             output='screen',
-             arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
-         ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            arguments=['-d', os.path.join(my_bot_path, 'config', 'view_bot.rviz')]
+        )
     ])
