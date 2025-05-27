@@ -24,18 +24,6 @@ def generate_launch_description():
         "rhex.urdf.xacro"
     ])
 
-    xacro_file = PathJoinSubstitution([
-        FindPackageShare("rhex_description"),
-        "urdf",
-        "rhex.xacro"
-    ])
-
-    robot_description_content = Command([
-        PathJoinSubstitution([FindExecutable(name="xacro")]),
-        " ", xacro_file, " use_sim:=false"
-    ])
-    robot_description = {"robot_description": robot_description_content}
-
     return LaunchDescription([
         # Robot State Publisher
         Node(
@@ -46,12 +34,12 @@ def generate_launch_description():
 
 
 
-        # Node(
-        #     package='joint_state_publisher_gui',
-        #     executable='joint_state_publisher_gui',
-        #     name='joint_state_publisher_gui',
-        #     output='screen'
-        # ),
+        Node(
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui',
+            name='joint_state_publisher_gui',
+            output='screen'
+        ),
 
 
         
