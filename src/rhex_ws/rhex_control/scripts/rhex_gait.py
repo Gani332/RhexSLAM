@@ -5,7 +5,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
 from geometry_msgs.msg import Twist
 
-FREQUENCY = 100.0
+FREQUENCY = 10.0
 MAX_SPEED = 100000.0
 SCALE_LINEAR = 800.0
 SCALE_ANGULAR = 2.0
