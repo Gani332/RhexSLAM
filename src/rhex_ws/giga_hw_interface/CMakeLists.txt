@@ -46,10 +46,10 @@ install(FILES
   DESTINATION share/${PROJECT_NAME}
 )
 
- # Install headers if any
-install(DIRECTORY include/
-   DESTINATION include
-)
+# # Install headers if any
+# install(DIRECTORY include/
+#   DESTINATION include
+# )
 
 # Install launch files
 install(DIRECTORY launch/
