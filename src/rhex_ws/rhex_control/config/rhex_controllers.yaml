@@ -1,12 +1,14 @@
-/robot1/controller_manager:
+controller_manager:
   ros__parameters:
     update_rate: 100
+
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+
     velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
 
-/robot1/velocity_controller:
+velocity_controller:
   ros__parameters:
     joints:
       - front_left_leg_joint
