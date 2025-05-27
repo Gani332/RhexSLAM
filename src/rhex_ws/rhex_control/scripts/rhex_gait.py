@@ -62,7 +62,7 @@ class RHexCmdVelTripodController(Node):
                 updated[name] = position
 
         if now - self.last_joint_log_time >= 1.0:
-            self.get_logger().info(f"Updated Joint Angles: {updated}")
+            #self.get_logger().info(f"Updated Joint Angles: {updated}")
             self.last_joint_log_time = now
 
     def update(self):
@@ -109,7 +109,7 @@ class RHexCmdVelTripodController(Node):
 
         now = self.get_clock().now().nanoseconds / 1e9
         if now - self.last_vel_log_time >= 1.0:
-            self.get_logger().info(f"Publishing velocities: {velocities}")
+            #self.get_logger().info(f"Publishing velocities: {velocities}")
             self.last_vel_log_time = now
 
 def main(args=None):
