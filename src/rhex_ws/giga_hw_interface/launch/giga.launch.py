@@ -7,14 +7,14 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     # Get robot description from xacro
-    xacro_file = PathJoinSubstitution([
+    urdf_path = PathJoinSubstitution([
         FindPackageShare("rhex_description"),
         "urdf",
         "rhex.xacro"
     ])
     robot_description_content = Command([
-        PathJoinSubstitution([FindExecutable(name="xacro")]),
-        " ", xacro_file, " use_sim:=false"
+        "xacro ",
+        urdf_path
     ])
     robot_description = {"robot_description": robot_description_content}
 
