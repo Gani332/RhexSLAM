@@ -7,14 +7,14 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     # Get robot description from xacro
-    urdf_path = PathJoinSubstitution([
+    xacro_file = PathJoinSubstitution([
         FindPackageShare("rhex_description"),
         "urdf",
         "rhex.xacro"
     ])
     robot_description_content = Command([
-        "xacro ",
-        urdf_path
+        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        " ", xacro_file, " use_sim:=false"
     ])
     robot_description = {"robot_description": robot_description_content}
 
@@ -29,6 +29,7 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
+        namespace="/robot1",
         parameters=[robot_description],
         output="screen"
     )
@@ -37,6 +38,7 @@ def generate_launch_description():
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
+        namespace="/robot1",
         parameters=[robot_description,controller_config],
         output="screen"
     )
@@ -49,6 +51,7 @@ def generate_launch_description():
     jsb_spawner = Node(
         package="controller_manager",
         executable="spawner",
+        namespace="robot1",
         arguments=["joint_state_broadcaster"],
         output="screen"
     )
@@ -56,6 +59,7 @@ def generate_launch_description():
     velocity_spawner = Node(
         package="controller_manager",
         executable="spawner",
+        namespace="robot1",
         arguments=["velocity_controller"],
         output="screen"
     )
@@ -78,8 +82,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        controller_manager,
         robot_state_publisher,
-        delayed_controller_manager,   # Correct: use delayed version!
         delayed_jsb,
         delayed_velocity,
     ])
