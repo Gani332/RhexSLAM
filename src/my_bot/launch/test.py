@@ -4,7 +4,7 @@ import time
 # --- CONFIG ---
 PORT = '/dev/ttyACM0'
 BAUD = 115200
-MOTOR_SPEEDS = [0, 0, 0, 0, 0, 0]  # example speeds
+MOTOR_SPEEDS = [800, 800, 800, 800, 800, 800]  # example speeds
 
 # --- SETUP ---
 ser = serial.Serial(PORT, BAUD)
