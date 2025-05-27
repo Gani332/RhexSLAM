@@ -18,13 +18,13 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="$(find rhex_description)/meshes/Chassis.stl" scale="${scale}"/>
+        <mesh filename="package:/rhex_ws/rhex_description/meshes/Chassis.stl" scale="${scale}"/>
       </geometry>
       <material name="ibm_blue"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="$(find rhex_description)/meshes/Chassis.stl" scale="${scale}"/>
+        <mesh filename="package:/rhex_ws/rhex_description/Chassis.stl" scale="${scale}"/>
       </geometry>
     </collision>
     <inertial>
@@ -38,7 +38,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="$(find rhex_description)/meshes/lidar.stl" scale="1 1 1"/>
+      <mesh filename="package:/rhex_ws/rhex_description/meshes/lidar.stl" scale="1 1 1"/>
     </geometry>
     <material name="gray"/>
   </visual>
@@ -59,7 +59,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="$(find rhex_description)/meshes/stereo_camera.stl" scale="1 1 1"/>
+      <mesh filename="package:/rhex_ws/rhex_description/meshes/stereo_camera.stl" scale="1 1 1"/>
     </geometry>
     <material name="gray"/>
   </visual>
@@ -80,7 +80,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="$(find rhex_description)/meshes/thermal_camera.stl" scale="1 1 1"/>
+      <mesh filename="package:/rhex_ws/rhex_description/meshes/thermal_camera.stl" scale="1 1 1"/>
     </geometry>
     <material name="gray"/>
   </visual>
