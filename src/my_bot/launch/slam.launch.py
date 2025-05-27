@@ -14,26 +14,6 @@ def generate_launch_description():
     thermal_path = get_package_share_directory('mlx90640_thermal')
     imu_params_path = os.path.join(get_package_share_directory('ros2_mpu6050'), 'config', 'params.yaml')
 
-    # # robot_description using rhex_description instead of my_bot
-    # xacro_file = PathJoinSubstitution([
-    #     FindPackageShare("rhex_description"),
-    #     "urdf",
-    #     "rhex.xacro"
-    # ])
-
-    # robot_description_content = Command([
-    #     PathJoinSubstitution([FindExecutable(name="xacro")]),
-    #     " ", xacro_file, " use_sim:=false"
-    # ])
-    # robot_description = {"robot_description": robot_description_content}
-
-    # robot_state_publisher = Node(
-    #     package="robot_state_publisher",
-    #     executable="robot_state_publisher",
-    #     parameters=[robot_description],
-    #     output="screen"
-    # )
-
     return LaunchDescription([
 
         IncludeLaunchDescription(
@@ -45,9 +25,6 @@ def generate_launch_description():
                 ])
             )
         ),
-
-
-        # robot_state_publisher,
 
 
         # Node(
