@@ -5,8 +5,8 @@
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    velocity_controller:
-      type: velocity_controllers/JointGroupVelocityController
+#    velocity_controller:
+#      type: velocity_controllers/JointGroupVelocityController
 
 /robot1/velocity_controller:
   ros__parameters:
