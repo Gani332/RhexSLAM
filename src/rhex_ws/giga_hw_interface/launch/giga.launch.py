@@ -26,12 +26,12 @@ def generate_launch_description():
     ])
 
     # State publisher
-    # robot_state_publisher = Node(
-    #     package="robot_state_publisher",
-    #     executable="robot_state_publisher",
-    #     parameters=[robot_description],
-    #     output="screen"
-    # )
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[robot_description],
+        output="screen"
+    )
 
     # Controller manager node (ROS 2 control node)
     controller_manager = Node(
