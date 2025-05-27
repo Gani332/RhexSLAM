@@ -6,8 +6,8 @@ from std_msgs.msg import Float64MultiArray
 from geometry_msgs.msg import Twist
 
 FREQUENCY = 100.0
-MAX_SPEED = 5.0
-SCALE_LINEAR = 1.0
+MAX_SPEED = 10.0
+SCALE_LINEAR = 2.0
 SCALE_ANGULAR = 2.0
 STEP_THRESHOLD = 6.28  # radians per step (≈1 rotation)
 

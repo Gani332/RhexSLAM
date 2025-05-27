@@ -1,0 +1,5 @@
+[0.398s] Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/rhex_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/riyaadh/dev_ws/RhexSLAM/install/mlx90640_thermal:/home/riyaadh/dev_ws/RhexSLAM/install/leg_odometry:/home/riyaadh/dev_ws/install/rhex_launch:/home/riyaadh/dev_ws/install/mlx90640_thermal:/home/riyaadh/dev_ws/install/leg_odometry:/opt/ros/humble /usr/bin/cmake --build /home/riyaadh/dev_ws/RhexSLAM/build/rhex_description -- -j16 -l16
+[0.404s] [0mCMake Error: The current CMakeCache.txt directory /home/riyaadh/dev_ws/RhexSLAM/build/rhex_description/CMakeCache.txt is different than the directory /home/innovation/dev_ws/build/rhex_description where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt[0m
+[0.415s] [0mCMake Error: The source directory "/home/innovation/dev_ws/src/rhex_ws/rhex_description" does not exist.
+[0.415s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.417s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1

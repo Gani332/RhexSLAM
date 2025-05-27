@@ -1,0 +1,5 @@
+[0.399s] Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/ros2_mpu6050': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/riyaadh/dev_ws/RhexSLAM/install/mlx90640_thermal:/home/riyaadh/dev_ws/RhexSLAM/install/leg_odometry:/home/riyaadh/dev_ws/install/rhex_launch:/home/riyaadh/dev_ws/install/mlx90640_thermal:/home/riyaadh/dev_ws/install/leg_odometry:/opt/ros/humble /usr/bin/cmake --build /home/riyaadh/dev_ws/RhexSLAM/build/ros2_mpu6050 -- -j16 -l16
+[0.428s] [0mCMake Error: The current CMakeCache.txt directory /home/riyaadh/dev_ws/RhexSLAM/build/ros2_mpu6050/CMakeCache.txt is different than the directory /home/innovation/dev_ws/build/ros2_mpu6050 where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt[0m
+[0.428s] [0mCMake Error: The source directory "/home/innovation/dev_ws/src/ros2_mpu6050" does not exist.
+[0.429s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.429s] gmake: *** [Makefile:368: cmake_check_build_system] Error 1
