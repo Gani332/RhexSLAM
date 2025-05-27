@@ -38,8 +38,8 @@ def generate_launch_description():
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description,controller_config],
         namespace="/robot1",
+        parameters=[robot_description,controller_config],
         output="screen"
     )
 
@@ -51,16 +51,16 @@ def generate_launch_description():
     jsb_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster"],
         namespace="robot1",
+        arguments=["joint_state_broadcaster"],
         output="screen"
     )
 
     velocity_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["velocity_controller"],
         namespace="robot1",
+        arguments=["velocity_controller",controller_config],
         output="screen"
     )
 
@@ -82,8 +82,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        controller_manager,
         robot_state_publisher,
-        delayed_controller_manager,
         delayed_jsb,
         delayed_velocity,
     ])
