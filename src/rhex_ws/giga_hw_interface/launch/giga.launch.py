@@ -48,30 +48,21 @@ def generate_launch_description():
     delayed_controller_manager = TimerAction(period=5.0, actions=[controller_manager])
 
     # Spawner: joint_state_broadcaster FIRST
-    velocity_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "velocity_controller",
-            "--param-file",
-            str(controller_config)  # make sure it's PathJoinSubstitution -> str
-        ],
-        namespace="robot1",
-        output="screen"
-    )
-
     jsb_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[
-            "joint_state_broadcaster",
-            "--param-file",
-            str(controller_config)
-        ],
         namespace="robot1",
+        arguments=["joint_state_broadcaster"],
         output="screen"
     )
 
+    velocity_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        namespace="robot1",
+        arguments=["velocity_controller",controller_config],
+        output="screen"
+    )
 
 
     # Chain: joint_state_broadcaster starts after controller_manager

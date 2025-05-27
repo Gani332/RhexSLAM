@@ -1,0 +1,1 @@
+Invoking command in '/home/riyaadh/dev_ws/RhexSLAM/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/riyaadh/dev_ws/install/rhex_launch:/home/riyaadh/dev_ws/install/mlx90640_thermal:/home/riyaadh/dev_ws/install/leg_odometry:/opt/ros/humble /usr/bin/cmake /home/riyaadh/dev_ws/RhexSLAM/src/my_bot -DCMAKE_INSTALL_PREFIX=/home/riyaadh/dev_ws/RhexSLAM/install/my_bot

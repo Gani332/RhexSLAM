@@ -1,1 +1,1 @@
-hardware_interface:pluginlib:rclcpp
+controller_manager:elocity_controller:hardware_interface:joint_state_broadcaster:pluginlib:rclcpp
