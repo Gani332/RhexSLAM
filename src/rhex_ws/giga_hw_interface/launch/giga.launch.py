@@ -60,7 +60,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         namespace="robot1",
-        arguments=["velocity_controller",controller_config],
+        arguments=["velocity_controller"],
         output="screen"
     )
 
