@@ -11,7 +11,7 @@ class CmdVelPublisher(Node):
 
     def publish_cmd(self):
         msg = Twist()
-        msg.linear.x = 0.0  # Forward speed
+        msg.linear.x = 0.5  # Forward speed
         msg.angular.z = 0.0  # No turning
         self.publisher.publish(msg)
         self.get_logger().info('Publishing forward cmd_vel...')
