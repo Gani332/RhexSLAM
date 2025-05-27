@@ -16,7 +16,7 @@ def generate_launch_description():
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ", xacro_file, " use_sim:=false"
     ])
-    robot_description = {"robot_description": robot_description_content}
+    robot_description = {"robot1/robot_description": robot_description_content}
 
     # Controller config file
     controller_config = PathJoinSubstitution([
@@ -53,16 +53,18 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"],
+        namespace="robot1",
         output="screen"
     )
 
-    # Spawner: velocity_controller AFTER joint_state_broadcaster
     velocity_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["velocity_controller"],
+        namespace="robot1",
         output="screen"
     )
+
 
     # Chain: joint_state_broadcaster starts after controller_manager
     delayed_jsb = RegisterEventHandler(
