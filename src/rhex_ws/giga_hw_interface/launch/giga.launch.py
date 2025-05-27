@@ -16,7 +16,7 @@ def generate_launch_description():
         PathJoinSubstitution([FindExecutable(name="xacro")]),
         " ", xacro_file, " use_sim:=false"
     ])
-    robot_description = {"rsp1/robot_description": robot_description_content}
+    robot_description = {"robot_description": robot_description_content}
 
     # Controller config file
     controller_config = PathJoinSubstitution([
