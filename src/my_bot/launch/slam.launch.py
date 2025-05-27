@@ -38,23 +38,11 @@ def generate_launch_description():
 
     return LaunchDescription([
         # Robot State Publisher
-        # Node(
-        #     package="robot_state_publisher",
-        #     executable="robot_state_publisher",
-        #     parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
-        # ),
-
-        # Node(
-        #     package="robot_state_publisher",
-        #     executable="robot_state_publisher",
-        #     namespace="robot1",
-        #     name="rsp1",
-        #     parameters=[{"robot_description": robot_description_content}],
-        #     remappings=[
-        #         ("/tf", "tf"),
-        #         ("/tf_static", "tf_static")
-        #     ]
-        # ),
+        Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            parameters=[{"robot_description": Command(["xacro ", urdf_path])}]
+        ),
 
 
 
