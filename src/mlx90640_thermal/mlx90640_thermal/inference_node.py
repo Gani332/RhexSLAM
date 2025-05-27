@@ -43,7 +43,7 @@ class ThermalInference(Node):
             # Count pixels in human range
             human_mask = np.logical_and(temps >= TEMP_MIN, temps <= TEMP_MAX)
             human_pixel_count = np.sum(human_mask)
-            self.get_logger().info(f"Pixels in human temp range: {human_pixel_count}")
+            #self.get_logger().info(f"Pixels in human temp range: {human_pixel_count}")
 
             # Resize and threshold for optional contour check
             norm_temps = np.clip((temps - TEMP_MIN) / (TEMP_MAX - TEMP_MIN), 0, 1)

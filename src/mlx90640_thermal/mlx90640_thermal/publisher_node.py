@@ -32,7 +32,7 @@ class ThermalPublisher(Node):
         self.publisher_.publish(ros_image)
 
         # Add this log line
-        self.get_logger().info("Published thermal frame")
+        #self.get_logger().info("Published thermal frame")
 
 
 def main(args=None):
