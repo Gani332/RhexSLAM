@@ -8,7 +8,7 @@ from std_msgs.msg import Float64MultiArray
 FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
-STEP_THRESHOLD = 1.6
+STEP_THRESHOLD = 6.28
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -30,6 +30,8 @@ class RHexTripodPIDController(Node):
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
+
+        self.joint_state_sub *=-1
 
         # Motion state
         self.linear_x = 0.0
