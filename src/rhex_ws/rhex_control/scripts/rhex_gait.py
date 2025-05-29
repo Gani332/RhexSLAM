@@ -78,7 +78,7 @@ class RHexTripodPIDController(Node):
         # Check for switch
         if (
             all(
-                abs(self.joint_angles[j] - self.target_angles[j]) < 0.1
+                abs(self.joint_angles[j] - self.target_angles[j]) < 1
                 for j in self.current_tripod
                 if "centre" in j
             )
