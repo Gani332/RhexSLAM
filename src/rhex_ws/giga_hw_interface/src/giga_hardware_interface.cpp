@@ -148,9 +148,9 @@ return_type write(const rclcpp::Time &, const rclcpp::Duration &) override
     double velocity = joint_commands_[i];
 
       std::string joint_name = info_.joints[i].name;
-    // if (joint_name == "centre_left_leg_joint" || joint_name == "centre_right_leg_joint") {
-    //   velocity = -velocity;
-    // }
+    if (joint_name == "centre_left_leg_joint" || joint_name == "centre_right_leg_joint") {
+      velocity = -velocity;
+    }
 
     int speed = static_cast<int>(velocity * 800.0);  // scale to motor units
     speed = std::clamp(speed, -800, 800);
