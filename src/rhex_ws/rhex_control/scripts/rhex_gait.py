@@ -69,6 +69,11 @@ class RHexTripodPIDController(Node):
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
 
+        if not hasattr(self, 'initialized') and any(self.joint_angles.values()):
+            self.hold_position = {j: self.joint_angles[j] for j in ALL_JOINTS}
+            self.initialized = True
+            self.get_logger().info("Initial hold positions set.")
+
         # Exit pause if time has passed
         if self.in_grounded_pause:
             if now - self.pause_start_time >= self.pause_duration:
