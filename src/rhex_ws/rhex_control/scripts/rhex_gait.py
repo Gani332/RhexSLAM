@@ -31,7 +31,7 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
-        self.joint_state_sub *=-1
+        self.joint_state_sub = self.joint_state_sub * -1
 
         # Motion state
         self.linear_x = 0.0
