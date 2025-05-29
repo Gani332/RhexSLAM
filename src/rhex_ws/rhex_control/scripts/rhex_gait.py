@@ -30,6 +30,10 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
+        self.in_grounded_pause = False
+        self.pause_start_time = 0.0
+        self.pause_duration = 0.4  # seconds (adjustable)
+
         # Motion command state
         self.linear_x = 0.0
         self.angular_z = 0.0
@@ -63,6 +67,24 @@ class RHexTripodPIDController(Node):
                 self.joint_angles[name] = pos
 
     def update(self):
+        now = self.get_clock().now().nanoseconds / 1e9
+
+        # Exit pause if time has passed
+        if self.in_grounded_pause:
+            if now - self.pause_start_time >= self.pause_duration:
+                self.in_grounded_pause = False
+                step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+                for j in self.current_tripod:
+                    self.target_angles[j] = self.joint_angles[j] + step_direction
+                    self.step_start_position[j] = self.joint_angles[j]
+                for j in self.waiting_tripod:
+                    self.hold_position[j] = self.joint_angles[j]
+                self.get_logger().info(f"Exited grounded pause. Starting: {self.current_tripod}")
+            else:
+                # Still pausing — apply damping to all joints below
+                pass
+
+        # First step trigger
         if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
@@ -72,42 +94,38 @@ class RHexTripodPIDController(Node):
                 self.hold_position[j] = self.joint_angles[j]
             self.get_logger().info("Initialized first step.")
 
-        # Phase switch condition: center leg of current tripod has moved enough
-        if (
+        # Check for phase switch if not pausing
+        if not self.in_grounded_pause and (
             all(
                 abs(self.joint_angles[j] - self.step_start_position.get(j, 0.0)) >= STEP_THRESHOLD
                 for j in self.current_tripod
                 if "centre" in j
             ) and (self.linear_x != 0.0 or self.angular_z != 0.0)
         ):
+            # Swap tripods and enter pause
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
-            for j in self.current_tripod:
-                self.target_angles[j] = self.joint_angles[j] + step_direction
-                self.step_start_position[j] = self.joint_angles[j]
-            for j in self.waiting_tripod:
-                self.hold_position[j] = self.joint_angles[j]
-            self.get_logger().info(f"Switched tripod: {self.current_tripod}")
+            self.pause_start_time = now
+            self.in_grounded_pause = True
+            self.get_logger().info("Entered grounded pause.")
 
         # Compute PID commands
         commands = []
         for j in ALL_JOINTS:
-            if j in self.current_tripod:
-                # Normal PID tracking
-                error = self.target_angles[j] - self.joint_angles[j]
+            if self.in_grounded_pause or j in self.waiting_tripod:
+                # Passive damping for stability
                 velocity = self.joint_velocities[j]
-                cmd = self.pid[j].compute(error, velocity)
-                commands.append(cmd)
-            else:
-                # Apply passive damping to resist slipping
-                velocity = self.joint_velocities[j]
-                damping_gain = 1.5  # adjust to tune the "grip"
-                stiffness_gain = 0.1  # optional, holds the position slightly
+                damping_gain = 1.5
+                stiffness_gain = 0.1
                 hold_pos = self.hold_position.get(j, self.joint_angles[j])
                 error = hold_pos - self.joint_angles[j]
                 cmd = stiffness_gain * error - damping_gain * velocity
                 commands.append(cmd)
-
+            else:
+                # Active step with PID
+                error = self.target_angles[j] - self.joint_angles[j]
+                velocity = self.joint_velocities[j]
+                cmd = self.pid[j].compute(error, velocity)
+                commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
