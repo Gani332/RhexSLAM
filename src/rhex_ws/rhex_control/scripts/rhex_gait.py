@@ -24,6 +24,7 @@ class PIDController:
 class RHexTripodPIDController(Node):
     def __init__(self):
         super().__init__('rhex_tripod_pid_controller')
+        self.hold_position = {j: 0.0 for j in ALL_JOINTS}
 
         self.publisher = self.create_publisher(Float64MultiArray, '/robot1/velocity_controller/commands', 10)
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
@@ -78,19 +79,23 @@ class RHexTripodPIDController(Node):
                 step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + step_direction
+                # Set hold position for waiting tripod
+                self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
                 self.phase_start_time = now
                 self.get_logger().info(f"Switched tripod: {self.current_tripod}")
 
         # Compute PID commands
         commands = []
         for j in ALL_JOINTS:
+            velocity = self.joint_velocities[j]
             if j in self.current_tripod:
                 error = self.target_angles[j] - self.joint_angles[j]
-                velocity = self.joint_velocities[j]
                 cmd = self.pid[j].compute(error, velocity)
-                commands.append(cmd)
             else:
-                commands.append(0.0)
+                # Soft hold
+                hold_error = self.hold_position[j] - self.joint_angles[j]
+                cmd = self.pid[j].compute(hold_error, velocity)
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
