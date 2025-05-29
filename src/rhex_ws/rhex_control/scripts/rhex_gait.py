@@ -29,21 +29,16 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
-        # Motion state
         self.linear_x = 0.0
         self.angular_z = 0.0
-
-        # Tripod control state
         self.phase_start_time = self.get_clock().now().nanoseconds / 1e9
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
 
-        # Joint tracking
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
 
-        # Separate PID controllers
         self.motion_pid = PIDController(kp=1.0, kd=0.0)
         self.hold_pid = PIDController(kp=1.0, kd=0.2)
 
@@ -64,7 +59,7 @@ class RHexTripodPIDController(Node):
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
 
-        # Tripod phase switch logic
+        # Switch logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             all_reached = all(
                 abs(self.target_angles[j] - self.joint_angles[j]) < 3.14
@@ -79,7 +74,7 @@ class RHexTripodPIDController(Node):
                 self.phase_start_time = now
                 self.get_logger().info(f"Switched tripod: {self.current_tripod}")
 
-        # Compute commands
+        # PID commands
         commands = []
         for j in ALL_JOINTS:
             velocity = self.joint_velocities[j]
@@ -91,9 +86,17 @@ class RHexTripodPIDController(Node):
                 cmd = self.hold_pid.compute(hold_error, velocity)
             commands.append(cmd)
 
+        # Publish
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
+
+        # Debug print
+        self.print_joint_angles()
+
+    def print_joint_angles(self):
+        angle_str = ', '.join(f"{j}: {a:.3f}" for j, a in self.joint_angles.items())
+        self.get_logger().info(f"Joint Angles → {angle_str}")
 
 def main(args=None):
     rclpy.init(args=args)
