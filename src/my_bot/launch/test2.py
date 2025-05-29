@@ -17,28 +17,29 @@ def send_command(ser, cmd):
 def main():
     try:
         ser = serial.Serial(PORT, BAUD, timeout=1)
-        time.sleep(2)  # Allow time for Arduino to reset
+        time.sleep(2)  # Allow Arduino to reset
 
-        # 1. Set motor speeds
-        send_command(ser, "SET_SPEEDS 100,200,300,-100,-200,-300")
+        print("Waiting for encoder startup...")
+        while True:
+            line = ser.readline().decode().strip()
+            if line.startswith("L"):
+                print(f"<<< {line}")
+                break
 
-        # 2. Set braking (1 = brake, 0 = coast)
-        send_command(ser, "SET_BRAKE 1,1,1,0,0,0")
-
-        # 3. Set acceleration (units/s^2)
+        # Configure Motoron
+        send_command(ser, "SET_BRAKE 0,0,0,0,0,0")
         send_command(ser, "SET_ACCEL 2000")
-
-        # 4. Set deceleration (units/s^2)
         send_command(ser, "SET_DECEL 2000")
-
-        # 5. Set current limit (milliamps)
-#        send_command(ser, "SET_CURRENT_LIMIT 3000")
-
-        # 6. Get current limits
+        send_command(ser, "SET_CURRENT_LIMIT 3000")
         send_command(ser, "GET_CURRENT_LIMIT")
 
-        # 7. Wait and print a few encoder lines
-        print("\n--- Reading encoder outputs for 2 seconds ---")
+        print("\n--- Driving motors for 3 seconds ---")
+        start = time.time()
+        while time.time() - start < 3:
+            send_command(ser, "SET_SPEEDS 100,200,300,-100,-200,-300")
+            time.sleep(0.1)
+
+        print("\n--- Done. Watching encoder output for 2 more seconds ---")
         start = time.time()
         while time.time() - start < 2:
             line = ser.readline().decode().strip()
@@ -50,6 +51,7 @@ def main():
     finally:
         if 'ser' in locals() and ser.is_open:
             ser.close()
+
 
 if __name__ == "__main__":
     main()
