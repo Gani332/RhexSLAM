@@ -49,6 +49,7 @@ class RHexTripodPIDController(Node):
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
         self.hold_position = {j: 0.0 for j in ALL_JOINTS}
+        self.phase_start_position = {j: 0.0 for j in ALL_JOINTS}
 
         # PID controllers
         self.motion_pid = PIDController(kp=1.0, kd=0.0)
@@ -74,10 +75,10 @@ class RHexTripodPIDController(Node):
         # Tripod switching logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             done = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 3.14
+                abs(self.joint_angles[j] - self.phase_start_position[j]) >= STEP_SIZE
                 for j in self.current_tripod
             )
-            if done:
+            if done and now - self.phase_start_time > STEP_TIME:
                 # Switch tripods
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
 
@@ -86,8 +87,15 @@ class RHexTripodPIDController(Node):
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + step_direction
 
+                # Store start positions for next phase
+                self.phase_start_position = {
+                    j: self.joint_angles[j] for j in self.current_tripod
+                }
+
                 # Lock hold positions for passive tripod
-                self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
+                self.hold_position = {
+                    j: self.joint_angles[j] for j in self.waiting_tripod
+                }
 
                 self.phase_start_time = now
                 self.get_logger().info(f"Switched tripod: {self.current_tripod}")
