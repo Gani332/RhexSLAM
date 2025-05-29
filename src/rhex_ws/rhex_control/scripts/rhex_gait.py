@@ -48,7 +48,7 @@ class RHexTripodPIDController(Node):
 
         self.in_grounded_pause = False
         self.pause_start_time = 0.0
-        self.pause_duration = 0.4
+        self.pause_duration = 1.0
 
         self.startup_hold = True
         self.startup_hold_start_time = self.get_clock().now().nanoseconds / 1e9
@@ -117,6 +117,7 @@ class RHexTripodPIDController(Node):
             if abs(self.joint_angles[self.current_center_leg] - self.step_start_position[self.current_center_leg]) >= STEP_THRESHOLD:
                 self.step_completed = True
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+                self.current_center_leg = next(j for j in self.current_tripod if "centre" in j)
                 self.pause_start_time = now
                 self.in_grounded_pause = True
                 self.get_logger().info("Entered grounded pause.")
