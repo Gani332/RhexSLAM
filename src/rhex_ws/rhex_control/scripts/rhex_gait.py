@@ -62,7 +62,7 @@ class RHexTripodPIDController(Node):
         # Switch logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             all_reached = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 0.05
+                abs(self.target_angles[j] - self.joint_angles[j]) < 1
                 for j in self.current_tripod
             )
             if all_reached:
@@ -90,13 +90,6 @@ class RHexTripodPIDController(Node):
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
-
-        # Debug print
-        self.print_joint_angles()
-
-    def print_joint_angles(self):
-        angle_str = ', '.join(f"{j}: {a:.3f}" for j, a in self.joint_angles.items())
-        self.get_logger().info(f"Joint Angles → {angle_str}")
 
 def main(args=None):
     rclpy.init(args=args)
