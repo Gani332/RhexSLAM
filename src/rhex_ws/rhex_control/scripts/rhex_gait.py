@@ -91,13 +91,21 @@ class RHexTripodPIDController(Node):
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_grounded_pause = False
                 step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+
+                # Reset target angles of waiting tripod to current to stop previous motion
+                for j in self.waiting_tripod:
+                    self.target_angles[j] = self.joint_angles[j]
+
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + step_direction
+
                 for j in self.waiting_tripod:
                     self.hold_position[j] = self.joint_angles[j]
+
                 self.current_center_leg = next(j for j in self.current_tripod if "centre" in j)
                 self.step_start_position[self.current_center_leg] = self.joint_angles[self.current_center_leg]
                 self.step_completed = False
+
                 self.get_logger().info(f"Exited grounded pause. Starting: {self.current_tripod}")
             else:
                 self.apply_passive_damping()
@@ -109,6 +117,7 @@ class RHexTripodPIDController(Node):
                 self.target_angles[j] = self.joint_angles[j] + step_direction
             for j in self.waiting_tripod:
                 self.hold_position[j] = self.joint_angles[j]
+
             self.step_start_position[self.current_center_leg] = self.joint_angles[self.current_center_leg]
             self.first_step_done = True
             self.get_logger().info("Initialized first step.")
@@ -130,13 +139,12 @@ class RHexTripodPIDController(Node):
                 error = self.target_angles[j] - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = self.pid[j].compute(error, velocity)
-                commands.append(cmd)
             else:
                 velocity = self.joint_velocities[j]
                 hold_pos = self.hold_position.get(j, self.joint_angles[j])
                 error = hold_pos - self.joint_angles[j]
                 cmd = 0.1 * error - 1.0 * velocity
-                commands.append(cmd)
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
