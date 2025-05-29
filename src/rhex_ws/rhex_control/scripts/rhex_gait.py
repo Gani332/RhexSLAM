@@ -67,10 +67,10 @@ class RHexTripodPIDController(Node):
         # Tripod phase switch logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             all_reached = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 0.1
+                abs(self.target_angles[j] - self.joint_angles[j]) < 1
                 for j in self.current_tripod
             )
-            if all_reached and now - self.phase_start_time > 1.0:
+            if all_reached:
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
                 direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
                 for j in self.current_tripod:
