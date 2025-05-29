@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
-STEP_TIME = 4.5  # minimum phase time in seconds
+STEP_TIME = 0.5  # minimum phase time in seconds
 STEP_THRESHOLD = 6.28
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
@@ -72,7 +72,7 @@ class RHexTripodPIDController(Node):
         elapsed = now - self.phase_start_time
 
         if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
-            step_direction = -STEP_SIZE if self.linear_x >= 0 else STEP_SIZE
+            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
                 self.target_angles[j] = self.joint_angles[j] + step_direction
             self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
