@@ -6,8 +6,7 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
-STEP_SIZE = 1.5      # radians to move each step
-STEP_THRESHOLD = 6.28  # radians to travel before switching tripod
+STEP_THRESHOLD = 6.28  # radians per full stride
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -30,24 +29,21 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
-        # Motion command state
         self.linear_x = 0.0
         self.angular_z = 0.0
 
-        # Tripod state
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
 
-        # Encoder/joint state tracking
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
-        self.hold_position = {j: 0.0 for j in ALL_JOINTS}
-        self.step_start_position = {j: 0.0 for j in ALL_JOINTS}
+        self.initial_angles = {}
+        self.phase_step_count = 0  # counts how many switches occurred
 
-        # PID controller per joint
         self.pid = {j: PIDController(kp=4.0, kd=1.0) for j in ALL_JOINTS}
 
+        self.step_initialized = False
         self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
@@ -63,33 +59,36 @@ class RHexTripodPIDController(Node):
                 self.joint_angles[name] = pos
 
     def update(self):
-        if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
-            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
-            for j in self.current_tripod:
-                self.target_angles[j] = self.joint_angles[j] + step_direction
-                self.step_start_position[j] = self.joint_angles[j]
-            for j in self.waiting_tripod:
-                self.hold_position[j] = self.joint_angles[j]
+        # Initialize reference angles on first update
+        if not self.initial_angles and any(self.joint_angles.values()):
+            self.initial_angles = {j: self.joint_angles[j] for j in ALL_JOINTS}
+            self.get_logger().info("Initial joint angles recorded.")
+
+        if not self.initial_angles:
+            return  # wait until we have valid joint states
+
+        # Start first step when command is given
+        if self.linear_x != 0.0 and not self.step_initialized:
+            direction = 1 if self.linear_x >= 0 else -1
+            self.set_target_for_tripod(self.current_tripod, direction * STEP_THRESHOLD)
+            self.step_initialized = True
             self.get_logger().info("Initialized first step.")
 
-        # Phase switch condition: center leg of current tripod has moved enough
+        # Phase switch condition
         if (
             all(
-                abs(self.joint_angles[j] - self.step_start_position.get(j, 0.0)) >= STEP_THRESHOLD
+                abs(self.joint_angles[j] - self.target_angles[j]) < 0.1
                 for j in self.current_tripod
                 if "centre" in j
             ) and (self.linear_x != 0.0 or self.angular_z != 0.0)
         ):
+            self.phase_step_count += 1
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
-            for j in self.current_tripod:
-                self.target_angles[j] = self.joint_angles[j] + step_direction
-                self.step_start_position[j] = self.joint_angles[j]
-            for j in self.waiting_tripod:
-                self.hold_position[j] = self.joint_angles[j]
+            direction = 1 if self.linear_x >= 0 else -1
+            self.set_target_for_tripod(self.current_tripod, direction * STEP_THRESHOLD)
             self.get_logger().info(f"Switched tripod: {self.current_tripod}")
 
-        # Compute PID commands
+        # Apply PID control
         commands = []
         for j in ALL_JOINTS:
             if j in self.current_tripod:
@@ -103,6 +102,11 @@ class RHexTripodPIDController(Node):
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
+
+    def set_target_for_tripod(self, tripod, offset):
+        for j in tripod:
+            base = self.initial_angles.get(j, 0.0)
+            self.target_angles[j] = base + self.phase_step_count * offset
 
 def main(args=None):
     rclpy.init(args=args)
