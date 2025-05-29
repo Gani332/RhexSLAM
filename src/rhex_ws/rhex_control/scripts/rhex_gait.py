@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
-STEP_SIZE = 1.0  # radians, each step target
+STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
 STEP_THRESHOLD = 6.28
 
