@@ -50,7 +50,7 @@ class RHexTripodPIDController(Node):
 
 
         # PID per joint
-        self.pid = {j: PIDController(kp=5.0, kd=10.0) for j in ALL_JOINTS}
+        self.pid = {j: PIDController(kp=4.0, kd=1.0) for j in ALL_JOINTS}
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
@@ -81,9 +81,12 @@ class RHexTripodPIDController(Node):
 
         # Step phase switch logic
         if (
-            elapsed > STEP_TIME and
-            all(abs(self.joint_angles[j] - self.hold_position.get(j, 0.0)) >= STEP_THRESHOLD for j in self.current_tripod) and
-            (self.linear_x != 0.0 or self.angular_z != 0.0)
+            all(
+                abs(self.joint_angles[j] - self.hold_position.get(j, 0.0)) >= STEP_THRESHOLD
+                for j in self.current_tripod
+                if "centre" in j
+            )
+            and (self.linear_x != 0.0 or self.angular_z != 0.0)
         ):
 
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
