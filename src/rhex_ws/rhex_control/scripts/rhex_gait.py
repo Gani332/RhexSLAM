@@ -30,6 +30,9 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
+        self.first_step_done = False
+
+
         self.linear_x = 0.0
         self.angular_z = 0.0
 
@@ -99,14 +102,16 @@ class RHexTripodPIDController(Node):
                 return
 
         # Trigger first step
-        if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
+        if self.linear_x != 0.0 and not self.first_step_done:
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
                 self.target_angles[j] = self.joint_angles[j] + step_direction
                 self.step_start_position[j] = self.joint_angles[j]
             for j in self.waiting_tripod:
                 self.hold_position[j] = self.joint_angles[j]
+            self.first_step_done = True
             self.get_logger().info("Initialized first step.")
+
 
         # Check for phase switch
         if not self.in_grounded_pause and (
