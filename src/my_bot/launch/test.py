@@ -11,7 +11,7 @@ ser = serial.Serial(PORT, BAUD)
 time.sleep(2)  # Allow time for Arduino to reset
 
 # --- SEND SPEED COMMAND ---
-command = ','.join(str(int(s)) for s in MOTOR_SPEEDS) + '\n'
+command = 'SET_SPEEDS ' + ','.join(str(int(s)) for s in MOTOR_SPEEDS) + '\n'
 ser.write(command.encode())
 print(f"Command sent: {command.strip()}")
 
