@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
 STEP_SIZE = 1.5
-STEP_THRESHOLD = 5.50
+STEP_THRESHOLD = 5.80
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
