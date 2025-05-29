@@ -48,7 +48,9 @@ class RHexTripodPIDController(Node):
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
 
         # PID per joint
-        self.pid = {j: PIDController(kp=1.0, kd=0) for j in ALL_JOINTS}
+        self.motion_pid = PIDController(kp=1.0, kd=0.0)
+        self.hold_pid = PIDController(kp=5.0, kd=0.2)
+        
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
@@ -90,11 +92,11 @@ class RHexTripodPIDController(Node):
             velocity = self.joint_velocities[j]
             if j in self.current_tripod:
                 error = self.target_angles[j] - self.joint_angles[j]
-                cmd = self.pid[j].compute(error, velocity)
+                cmd = self.motion_pid.compute(error, velocity)
             else:
                 # Soft hold
                 hold_error = self.hold_position[j] - self.joint_angles[j]
-                cmd = self.pid[j].compute(hold_error, velocity)
+                cmd = self.hold_pid.compute(hold_error, velocity)
             commands.append(cmd)
 
         msg = Float64MultiArray()
