@@ -73,10 +73,10 @@ class RHexTripodPIDController(Node):
         # Check if we should switch tripods
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             done = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 0.05
+                abs(self.target_angles[j] - self.joint_angles[j]) < 0.2
                 for j in self.current_tripod
             )
-            if done and now - self.phase_start_time > 1.0:  # wait 1s after reaching goal
+            if done and now - self.phase_start_time > 3.0:  # wait 1s after reaching goal
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
                 step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
                 for j in self.current_tripod:
