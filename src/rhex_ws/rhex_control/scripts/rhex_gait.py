@@ -31,8 +31,6 @@ class RHexTripodPIDController(Node):
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
         self.first_step_done = False
-
-
         self.linear_x = 0.0
         self.angular_z = 0.0
 
@@ -49,13 +47,15 @@ class RHexTripodPIDController(Node):
 
         self.in_grounded_pause = False
         self.pause_start_time = 0.0
-        self.pause_duration = 0.4  # Stabilize after each step
+        self.pause_duration = 0.4
 
         self.startup_hold = True
         self.startup_hold_start_time = self.get_clock().now().nanoseconds / 1e9
-        self.startup_hold_duration = 2.0  # Initial stand-still before walking
+        self.startup_hold_duration = 2.0
 
         self.initialized = False
+        self.step_completed = {j: False for j in ALL_JOINTS if "centre" in j}
+
         self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
@@ -73,7 +73,6 @@ class RHexTripodPIDController(Node):
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
 
-        # Initialize hold positions from first joint state
         if not self.initialized and any(self.joint_angles.values()):
             self.hold_position = {j: self.joint_angles[j] for j in ALL_JOINTS}
             self.initialized = True
@@ -96,12 +95,15 @@ class RHexTripodPIDController(Node):
                     self.step_start_position[j] = self.joint_angles[j]
                 for j in self.waiting_tripod:
                     self.hold_position[j] = self.joint_angles[j]
+                # Reset step flag for the current center leg
+                for j in self.current_tripod:
+                    if "centre" in j:
+                        self.step_completed[j] = False
                 self.get_logger().info(f"Exited grounded pause. Starting: {self.current_tripod}")
             else:
                 self.apply_passive_damping()
                 return
 
-        # Trigger first step
         if self.linear_x != 0.0 and not self.first_step_done:
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
@@ -112,23 +114,19 @@ class RHexTripodPIDController(Node):
             self.first_step_done = True
             self.get_logger().info("Initialized first step.")
 
+        # Phase switch only if center leg of current tripod completes its stride and hasn't already triggered
+        for j in self.current_tripod:
+            if "centre" in j and not self.step_completed[j]:
+                if abs(self.joint_angles[j] - self.step_start_position[j]) >= STEP_THRESHOLD:
+                    self.step_completed[j] = True
+                    self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+                    self.pause_start_time = now
+                    self.in_grounded_pause = True
+                    self.get_logger().info("Entered grounded pause.")
+                    self.apply_passive_damping()
+                    return
 
-        # Check for phase switch
-        if not self.in_grounded_pause and (
-            all(
-                abs(self.joint_angles[j] - self.step_start_position.get(j, 0.0)) >= STEP_THRESHOLD
-                for j in self.current_tripod
-                if "centre" in j
-            ) and (self.linear_x != 0.0 or self.angular_z != 0.0)
-        ):
-            self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-            self.pause_start_time = now
-            self.in_grounded_pause = True
-            self.get_logger().info("Entered grounded pause.")
-            self.apply_passive_damping()
-            return
-
-        # Apply control commands
+        # Apply control
         commands = []
         for j in ALL_JOINTS:
             if j in self.current_tripod:
