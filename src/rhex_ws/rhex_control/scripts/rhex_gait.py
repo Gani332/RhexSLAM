@@ -9,8 +9,8 @@ FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
 
-TRIPOD_A = ['front_left_leg_joint', 'centre_left_leg_joint', 'back_left_leg_joint']
-TRIPOD_B = ['front_right_leg_joint', 'centre_right_leg_joint', 'back_right_leg_joint']
+TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
+TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 
 class PIDController:
@@ -47,7 +47,9 @@ class RHexTripodPIDController(Node):
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
 
         # PID per joint
-        self.pid = {j: PIDController(kp=1.0, kd=0) for j in ALL_JOINTS}
+        self.motion_pid = PIDController(kp=1.0, kd=0.0)
+        self.hold_pid = PIDController(kp=5.0, kd=0.2)
+
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
@@ -66,31 +68,46 @@ class RHexTripodPIDController(Node):
 
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
-        elapsed = now - self.phase_start_time
 
-        # Step phase switch logic
-        if elapsed >= STEP_TIME and (self.linear_x != 0.0 or self.angular_z != 0.0):
-            self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
-            for j in self.current_tripod:
-                self.target_angles[j] = self.joint_angles[j] + step_direction
-            self.phase_start_time = now
-            self.get_logger().info(f"Switched tripod: {self.current_tripod}")
+        # Check if we should switch tripods
+        if self.linear_x != 0.0 or self.angular_z != 0.0:
+            done = all(
+                abs(self.target_angles[j] - self.joint_angles[j]) < 0.05
+                for j in self.current_tripod
+            )
+            if done and now - self.phase_start_time > 1.0:  # wait 1s after reaching goal
+                # Swap tripods
+                self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+
+                # New target for motion tripod
+                step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+                for j in self.current_tripod:
+                    self.target_angles[j] = self.joint_angles[j] + step_direction
+
+                # Freeze hold position
+                self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
+
+                self.phase_start_time = now
+                self.get_logger().info(f"Switched tripod: {self.current_tripod}")
 
         # Compute PID commands
         commands = []
         for j in ALL_JOINTS:
+            velocity = self.joint_velocities[j]
             if j in self.current_tripod:
+                # Motion tripod
                 error = self.target_angles[j] - self.joint_angles[j]
-                velocity = self.joint_velocities[j]
-                cmd = self.pid[j].compute(error, velocity)
-                commands.append(cmd)
+                cmd = self.motion_pid.compute(error, velocity)
             else:
-                commands.append(0.0)
+                # Holding tripod
+                hold_error = self.hold_position[j] - self.joint_angles[j]
+                cmd = self.hold_pid.compute(hold_error, velocity)
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
-        self.publisher.publish(msg)
+        self.publisher.publish(msg) 
+
 
 def main(args=None):
     rclpy.init(args=args)
