@@ -33,7 +33,6 @@ public:
 
     // Open serial port
     serial_fd_ = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);
-    sleep(2);
     if (serial_fd_ < 0) {
     RCLCPP_ERROR(rclcpp::get_logger("GigaHW"), "Failed to open serial port: %s", strerror(errno));
     return CallbackReturn::ERROR;
@@ -144,11 +143,10 @@ return_type read(const rclcpp::Time &, const rclcpp::Duration &) override
 return_type write(const rclcpp::Time &, const rclcpp::Duration &) override
 {
   std::ostringstream ss;
-  ss << "SET_SPEEDS ";
 
   for (size_t i = 0; i < joint_commands_.size(); ++i) {
     double velocity = joint_commands_[i];
-    int speed = static_cast<int>(velocity * 800.0);  // scale to Motoron units
+    int speed = static_cast<int>(velocity * 800.0);  // scale to motor units
     speed = std::clamp(speed, -800, 800);
     ss << speed;
     if (i != joint_commands_.size() - 1) ss << ",";
