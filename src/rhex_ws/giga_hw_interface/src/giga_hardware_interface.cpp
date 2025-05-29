@@ -33,6 +33,7 @@ public:
 
     // Open serial port
     serial_fd_ = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);
+    sleep(2);
     if (serial_fd_ < 0) {
     RCLCPP_ERROR(rclcpp::get_logger("GigaHW"), "Failed to open serial port: %s", strerror(errno));
     return CallbackReturn::ERROR;
