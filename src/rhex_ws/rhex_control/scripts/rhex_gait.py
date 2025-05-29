@@ -84,10 +84,7 @@ class RHexTripodPIDController(Node):
                 error = self.target_angles[j] - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = self.pid[j].compute(error, velocity)
-                if j in TRIPOD_A:  # Left-side tripod
-                    msg.data.append(-cmd)
-                else:
-                    msg.data.append(cmd)
+                commands.append(cmd)
             else:
                 commands.append(0.0)
 
