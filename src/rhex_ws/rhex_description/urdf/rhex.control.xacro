@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="rhex_control" params="use_sim:=true">
+  <xacro:macro name="rhex_control" params="use_sim:=false">
 
     <xacro:if value="${use_sim}">
       <ros2_control name="RHexHardware" type="system">
