@@ -47,7 +47,7 @@ class RHexTripodPIDController(Node):
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
 
         # PID per joint
-        self.pid = {j: PIDController(kp=3.0, kd=0.2) for j in ALL_JOINTS}
+        self.pid = {j: PIDController(kp=1.0, kd=0) for j in ALL_JOINTS}
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
