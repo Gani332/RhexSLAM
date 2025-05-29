@@ -117,10 +117,11 @@ class RHexTripodPIDController(Node):
                 self.target_angles[j] = self.joint_angles[j] + step_direction
             for j in self.waiting_tripod:
                 self.hold_position[j] = self.joint_angles[j]
-
+                self.target_angles[j] = self.joint_angles[j]  # <--- important fix!
             self.step_start_position[self.current_center_leg] = self.joint_angles[self.current_center_leg]
             self.first_step_done = True
             self.get_logger().info("Initialized first step.")
+
 
         if not self.in_grounded_pause and not self.step_completed:
             if abs(self.joint_angles[self.current_center_leg] - self.step_start_position[self.current_center_leg]) >= STEP_THRESHOLD:
