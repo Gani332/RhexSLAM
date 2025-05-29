@@ -71,6 +71,14 @@ class RHexTripodPIDController(Node):
         now = self.get_clock().now().nanoseconds / 1e9
         elapsed = now - self.phase_start_time
 
+        if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
+            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+            for j in self.current_tripod:
+                self.target_angles[j] = self.joint_angles[j] + step_direction
+            self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
+            self.get_logger().info("Initialized first step.")
+
+
         # Step phase switch logic
         if (
             elapsed > STEP_TIME and
