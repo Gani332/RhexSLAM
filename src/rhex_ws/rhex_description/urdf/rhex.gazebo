@@ -37,7 +37,6 @@
   </gazebo>
 
 
-
   <gazebo>
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
       <robot_param>robot_description</robot_param>

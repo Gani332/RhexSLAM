@@ -22,7 +22,7 @@ def generate_launch_description():
     controller_config = PathJoinSubstitution([
         FindPackageShare("rhex_control"),
         "config",
-        "rhex_controllers.yaml"
+        "rhex_controllers_robot1.yaml"
     ])
 
     # State publisher

@@ -10,6 +10,7 @@ install(
   PROGRAMS
     scripts/rhex_gait.py
     scripts/cmd_vel_publisher.py
+    scripts/rhex_gait_gazebo.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

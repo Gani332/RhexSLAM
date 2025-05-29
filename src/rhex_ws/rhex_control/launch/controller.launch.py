@@ -15,7 +15,7 @@ def generate_launch_description():
     # Process xacro file
     robot_description_content = Command([
         "xacro ",
-        urdf_path
+        urdf_path,
     ])
     robot_description = {"robot_description": robot_description_content}
 
@@ -26,16 +26,36 @@ def generate_launch_description():
         "rhex_controllers.yaml"
     ])
 
-    return LaunchDescription([
-        Node(
+
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[robot_description],
+        output="screen"
+    )
+
+    controller_manager= Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[robot_description,controller_config],
+        output="screen"  
+    )
+
+    jsb_spawner = Node(
             package="controller_manager",
             executable="spawner",
             arguments=["joint_state_broadcaster"],
-        ),
-        Node(
+    )
+
+    velocity_spawner = Node(
             package="controller_manager",
             executable="spawner",
             arguments=["velocity_controller"],
-        ),
+    )    
 
+    return LaunchDescription([
+        controller_manager,
+        robot_state_publisher,
+        jsb_spawner,
+        velocity_spawner,
     ])

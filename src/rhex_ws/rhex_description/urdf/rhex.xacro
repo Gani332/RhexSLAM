@@ -9,6 +9,7 @@
   <xacro:include filename="rhex.control.xacro"/>
 
 
+
   <!-- Constants -->
   <xacro:property name="scale" value="1 1 1"/>
   <xacro:property name="imu_mass" value="0.01"/>
@@ -28,7 +29,7 @@
       </geometry>
     </collision>
     <inertial>
-      <mass value="1.5"/>
+      <mass value="4"/>
       <origin xyz="0 0 0.05"/>
       <inertia ixx="2.222e-2" ixy="4.654e-6" ixz="1.02836e-5" iyy="1.129e-2" iyz="4.82214e-5" izz="2.96e-2"/>
     </inertial>
