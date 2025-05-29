@@ -46,6 +46,8 @@ class RHexTripodPIDController(Node):
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.hold_position = {j: 0.0 for j in ALL_JOINTS}
+
 
         # PID per joint
         self.pid = {j: PIDController(kp=1.0, kd=0.2) for j in ALL_JOINTS}
@@ -70,13 +72,15 @@ class RHexTripodPIDController(Node):
         elapsed = now - self.phase_start_time
 
         # Step phase switch logic
-        if all(abs(self.joint_angles[j] - self.hold_position.get(j, 0.0)) >= 6.28 for j in self.current_tripod) and (self.linear_x != 0.0 or self.angular_z != 0.0):
+        if all(...) and (self.linear_x != 0.0 or self.angular_z != 0.0):
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
                 self.target_angles[j] = self.joint_angles[j] + step_direction
+            self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
             self.phase_start_time = now
             self.get_logger().info(f"Switched tripod: {self.current_tripod}")
+
 
         # Compute PID commands
         commands = []
