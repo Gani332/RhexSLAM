@@ -6,8 +6,8 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
-STEP_SIZE = 1.5      # radians to move each step
-STEP_THRESHOLD = 5.50  # radians to travel before switching tripod
+STEP_SIZE = 1.5
+STEP_THRESHOLD = 5.50
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -30,34 +30,30 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
-        self.in_grounded_pause = False
-        self.pause_start_time = 0.0
-        self.pause_duration = 0.4  # seconds (adjustable)
-
-        # Motion command state
         self.linear_x = 0.0
         self.angular_z = 0.0
 
-        # Tripod state
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
 
-        # Encoder/joint state tracking
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
         self.hold_position = {j: 0.0 for j in ALL_JOINTS}
         self.step_start_position = {j: 0.0 for j in ALL_JOINTS}
 
-        # PID controller per joint
         self.pid = {j: PIDController(kp=4.0, kd=1.0) for j in ALL_JOINTS}
 
-        self.get_logger().info("RHex tripod PID gait controller started.")
+        self.in_grounded_pause = False
+        self.pause_start_time = 0.0
+        self.pause_duration = 0.4  # Stabilize after each step
 
         self.startup_hold = True
         self.startup_hold_start_time = self.get_clock().now().nanoseconds / 1e9
-        self.startup_hold_duration = 2.0  # seconds to stand still before walking
+        self.startup_hold_duration = 2.0  # Initial stand-still before walking
 
+        self.initialized = False
+        self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
         self.linear_x = msg.linear.x
@@ -74,36 +70,20 @@ class RHexTripodPIDController(Node):
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
 
+        # Initialize hold positions from first joint state
+        if not self.initialized and any(self.joint_angles.values()):
+            self.hold_position = {j: self.joint_angles[j] for j in ALL_JOINTS}
+            self.initialized = True
+            self.get_logger().info("Initial hold positions set.")
 
-        # Hold all legs passively for the first few seconds
         if self.startup_hold:
             if now - self.startup_hold_start_time >= self.startup_hold_duration:
                 self.startup_hold = False
                 self.get_logger().info("Startup hold complete. Beginning gait.")
             else:
-                # Apply passive damping to all legs during startup
-                commands = []
-                for j in ALL_JOINTS:
-                    velocity = self.joint_velocities[j]
-                    damping_gain = 1.5
-                    stiffness_gain = 0.1
-                    hold_pos = self.hold_position.get(j, self.joint_angles[j])
-                    error = hold_pos - self.joint_angles[j]
-                    cmd = stiffness_gain * error - damping_gain * velocity
-                    commands.append(cmd)
+                self.apply_passive_damping()
+                return
 
-                msg = Float64MultiArray()
-                msg.data = commands
-                self.publisher.publish(msg)
-                return  # Skip stepping until hold is over
-
-
-        if not hasattr(self, 'initialized') and any(self.joint_angles.values()):
-            self.hold_position = {j: self.joint_angles[j] for j in ALL_JOINTS}
-            self.initialized = True
-            self.get_logger().info("Initial hold positions set.")
-
-        # Exit pause if time has passed
         if self.in_grounded_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_grounded_pause = False
@@ -115,10 +95,10 @@ class RHexTripodPIDController(Node):
                     self.hold_position[j] = self.joint_angles[j]
                 self.get_logger().info(f"Exited grounded pause. Starting: {self.current_tripod}")
             else:
-                # Still pausing — apply damping to all joints below
-                pass
+                self.apply_passive_damping()
+                return
 
-        # First step trigger
+        # Trigger first step
         if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
@@ -128,7 +108,7 @@ class RHexTripodPIDController(Node):
                 self.hold_position[j] = self.joint_angles[j]
             self.get_logger().info("Initialized first step.")
 
-        # Check for phase switch if not pausing
+        # Check for phase switch
         if not self.in_grounded_pause and (
             all(
                 abs(self.joint_angles[j] - self.step_start_position.get(j, 0.0)) >= STEP_THRESHOLD
@@ -136,30 +116,40 @@ class RHexTripodPIDController(Node):
                 if "centre" in j
             ) and (self.linear_x != 0.0 or self.angular_z != 0.0)
         ):
-            # Swap tripods and enter pause
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
             self.pause_start_time = now
             self.in_grounded_pause = True
             self.get_logger().info("Entered grounded pause.")
+            self.apply_passive_damping()
+            return
 
-        # Compute PID commands
+        # Apply control commands
         commands = []
         for j in ALL_JOINTS:
-            if self.in_grounded_pause or j in self.waiting_tripod:
-                # Passive damping for stability
-                velocity = self.joint_velocities[j]
-                damping_gain = 1.5
-                stiffness_gain = 0.1
-                hold_pos = self.hold_position.get(j, self.joint_angles[j])
-                error = hold_pos - self.joint_angles[j]
-                cmd = stiffness_gain * error - damping_gain * velocity
-                commands.append(cmd)
-            else:
-                # Active step with PID
+            if j in self.current_tripod:
                 error = self.target_angles[j] - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = self.pid[j].compute(error, velocity)
                 commands.append(cmd)
+            else:
+                velocity = self.joint_velocities[j]
+                hold_pos = self.hold_position.get(j, self.joint_angles[j])
+                error = hold_pos - self.joint_angles[j]
+                cmd = 0.1 * error - 1.5 * velocity
+                commands.append(cmd)
+
+        msg = Float64MultiArray()
+        msg.data = commands
+        self.publisher.publish(msg)
+
+    def apply_passive_damping(self):
+        commands = []
+        for j in ALL_JOINTS:
+            velocity = self.joint_velocities[j]
+            hold_pos = self.hold_position.get(j, self.joint_angles[j])
+            error = hold_pos - self.joint_angles[j]
+            cmd = 0.1 * error - 1.5 * velocity
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
