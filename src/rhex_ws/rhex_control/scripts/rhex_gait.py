@@ -8,7 +8,7 @@ from std_msgs.msg import Float64MultiArray
 FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
-STEP_THRESHOLD = 6.6
+STEP_THRESHOLD = 6.28
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -50,7 +50,7 @@ class RHexTripodPIDController(Node):
 
 
         # PID per joint
-        self.pid = {j: PIDController(kp=5.0, kd=10.0) for j in ALL_JOINTS}
+        self.pid = {j: PIDController(kp=6.0, kd=11.0) for j in ALL_JOINTS}
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
