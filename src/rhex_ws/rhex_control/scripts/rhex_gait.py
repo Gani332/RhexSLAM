@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
 STEP_SIZE = 1.5      # radians to move each step
-STEP_THRESHOLD = 5.80  # radians to travel before switching tripod
+STEP_THRESHOLD = 5.50  # radians to travel before switching tripod
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -93,12 +93,21 @@ class RHexTripodPIDController(Node):
         commands = []
         for j in ALL_JOINTS:
             if j in self.current_tripod:
+                # Normal PID tracking
                 error = self.target_angles[j] - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = self.pid[j].compute(error, velocity)
                 commands.append(cmd)
             else:
-                commands.append(0.0)
+                # Apply passive damping to resist slipping
+                velocity = self.joint_velocities[j]
+                damping_gain = 1.5  # adjust to tune the "grip"
+                stiffness_gain = 0.1  # optional, holds the position slightly
+                hold_pos = self.hold_position.get(j, self.joint_angles[j])
+                error = hold_pos - self.joint_angles[j]
+                cmd = stiffness_gain * error - damping_gain * velocity
+                commands.append(cmd)
+
 
         msg = Float64MultiArray()
         msg.data = commands
