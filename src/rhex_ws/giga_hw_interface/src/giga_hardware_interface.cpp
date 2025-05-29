@@ -143,10 +143,11 @@ return_type read(const rclcpp::Time &, const rclcpp::Duration &) override
 return_type write(const rclcpp::Time &, const rclcpp::Duration &) override
 {
   std::ostringstream ss;
+  ss << "SET_SPEEDS ";
 
   for (size_t i = 0; i < joint_commands_.size(); ++i) {
     double velocity = joint_commands_[i];
-    int speed = static_cast<int>(velocity * 800.0);  // scale to motor units
+    int speed = static_cast<int>(velocity * 800.0);  // scale to Motoron units
     speed = std::clamp(speed, -800, 800);
     ss << speed;
     if (i != joint_commands_.size() - 1) ss << ",";
