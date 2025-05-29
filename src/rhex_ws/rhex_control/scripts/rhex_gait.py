@@ -36,6 +36,7 @@ class RHexTripodPIDController(Node):
 
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
+        self.current_center_leg = next(j for j in self.current_tripod if "centre" in j)
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
@@ -54,7 +55,7 @@ class RHexTripodPIDController(Node):
         self.startup_hold_duration = 2.0
 
         self.initialized = False
-        self.step_completed = {j: False for j in ALL_JOINTS if "centre" in j}
+        self.step_completed = False
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
@@ -92,13 +93,11 @@ class RHexTripodPIDController(Node):
                 step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + step_direction
-                    self.step_start_position[j] = self.joint_angles[j]
                 for j in self.waiting_tripod:
                     self.hold_position[j] = self.joint_angles[j]
-                # Reset step flag for the current center leg
-                for j in self.current_tripod:
-                    if "centre" in j:
-                        self.step_completed[j] = False
+                self.current_center_leg = next(j for j in self.current_tripod if "centre" in j)
+                self.step_start_position[self.current_center_leg] = self.joint_angles[self.current_center_leg]
+                self.step_completed = False
                 self.get_logger().info(f"Exited grounded pause. Starting: {self.current_tripod}")
             else:
                 self.apply_passive_damping()
@@ -108,25 +107,22 @@ class RHexTripodPIDController(Node):
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
                 self.target_angles[j] = self.joint_angles[j] + step_direction
-                self.step_start_position[j] = self.joint_angles[j]
             for j in self.waiting_tripod:
                 self.hold_position[j] = self.joint_angles[j]
+            self.step_start_position[self.current_center_leg] = self.joint_angles[self.current_center_leg]
             self.first_step_done = True
             self.get_logger().info("Initialized first step.")
 
-        # Phase switch only if center leg of current tripod completes its stride and hasn't already triggered
-        for j in self.current_tripod:
-            if "centre" in j and not self.step_completed[j]:
-                if abs(self.joint_angles[j] - self.step_start_position[j]) >= STEP_THRESHOLD:
-                    self.step_completed[j] = True
-                    self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
-                    self.pause_start_time = now
-                    self.in_grounded_pause = True
-                    self.get_logger().info("Entered grounded pause.")
-                    self.apply_passive_damping()
-                    return
+        if not self.in_grounded_pause and not self.step_completed:
+            if abs(self.joint_angles[self.current_center_leg] - self.step_start_position[self.current_center_leg]) >= STEP_THRESHOLD:
+                self.step_completed = True
+                self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+                self.pause_start_time = now
+                self.in_grounded_pause = True
+                self.get_logger().info("Entered grounded pause.")
+                self.apply_passive_damping()
+                return
 
-        # Apply control
         commands = []
         for j in ALL_JOINTS:
             if j in self.current_tripod:
