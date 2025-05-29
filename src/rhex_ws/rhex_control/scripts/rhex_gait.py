@@ -9,8 +9,8 @@ FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
 
-TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
-TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
+TRIPOD_A = ['front_left_leg_joint', 'centre_left_leg_joint', 'back_left_leg_joint']
+TRIPOD_B = ['front_right_leg_joint', 'centre_right_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 
 class PIDController:
