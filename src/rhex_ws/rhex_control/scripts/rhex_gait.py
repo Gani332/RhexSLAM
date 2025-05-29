@@ -8,7 +8,7 @@ from std_msgs.msg import Float64MultiArray
 FREQUENCY = 100.0
 STEP_SIZE = 1.5  # radians, each step target
 STEP_TIME = 10.5  # minimum phase time in seconds
-STEP_THRESHOLD = 1.4
+STEP_THRESHOLD = 6.28
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
