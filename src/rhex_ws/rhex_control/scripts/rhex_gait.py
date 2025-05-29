@@ -62,7 +62,7 @@ class RHexTripodPIDController(Node):
         # Switch logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             all_reached = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 3.14
+                abs(self.target_angles[j] - self.joint_angles[j]) < 0.05
                 for j in self.current_tripod
             )
             if all_reached:
