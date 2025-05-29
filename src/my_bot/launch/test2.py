@@ -32,7 +32,7 @@ def main():
         send_command(ser, "SET_DECEL 2000")
 
         # 5. Set current limit (milliamps)
-        send_command(ser, "SET_CURRENT_LIMIT 3000")
+#        send_command(ser, "SET_CURRENT_LIMIT 3000")
 
         # 6. Get current limits
         send_command(ser, "GET_CURRENT_LIMIT")
