@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
 STEP_SIZE = 1.5      # radians to move each step
-STEP_THRESHOLD = 6.28  # radians to travel before switching tripod
+STEP_THRESHOLD = 5.80  # radians to travel before switching tripod
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
