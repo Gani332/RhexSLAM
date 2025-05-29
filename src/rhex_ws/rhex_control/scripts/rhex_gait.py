@@ -10,6 +10,7 @@ STEP_SIZE = 1.5  # radians
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
+STEP_THRESHOLD = 6.28
 
 class PIDController:
     def __init__(self, kp, kd):
@@ -62,7 +63,7 @@ class RHexTripodPIDController(Node):
         # Switch logic
         if self.linear_x != 0.0 or self.angular_z != 0.0:
             all_reached = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < 1
+                abs(self.joint_angles[j] - self.hold_position.get(j, 0.0)) >= STEP_THRESHOLD
                 for j in self.current_tripod
             )
             if all_reached:
