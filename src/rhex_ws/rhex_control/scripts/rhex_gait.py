@@ -50,7 +50,7 @@ class RHexTripodPIDController(Node):
 
 
         # PID per joint
-        self.pid = {j: PIDController(kp=2.0, kd=15.0) for j in ALL_JOINTS}
+        self.pid = {j: PIDController(kp=5.0, kd=10.0) for j in ALL_JOINTS}
 
         self.get_logger().info("RHex tripod PID gait controller started.")
 
