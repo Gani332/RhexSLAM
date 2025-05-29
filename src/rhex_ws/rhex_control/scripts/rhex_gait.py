@@ -135,7 +135,7 @@ class RHexTripodPIDController(Node):
                 velocity = self.joint_velocities[j]
                 hold_pos = self.hold_position.get(j, self.joint_angles[j])
                 error = hold_pos - self.joint_angles[j]
-                cmd = 0.1 * error - 1.5 * velocity
+                cmd = 0.1 * error - 1.0 * velocity
                 commands.append(cmd)
 
         msg = Float64MultiArray()
