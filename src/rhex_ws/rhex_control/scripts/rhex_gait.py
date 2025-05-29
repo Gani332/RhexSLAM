@@ -4,12 +4,11 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
-import math
 
 FREQUENCY = 100.0
-STEP_SIZE = 4.5  # radians, each step target
+STEP_SIZE = 1.0  # radians, each step target
 STEP_TIME = 0.5  # minimum phase time in seconds
-STEP_THRESHOLD = 6.28  # full rotation, 2π
+STEP_THRESHOLD = 6.28
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
@@ -32,49 +31,46 @@ class RHexTripodPIDController(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
+        # Motion state
         self.linear_x = 0.0
         self.angular_z = 0.0
 
+        # Timing for tripod switch
         self.phase_start_time = self.get_clock().now().nanoseconds / 1e9
+
+        # Tripod state
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
 
-        # Unwrapped joint tracking
+        # Joint tracking
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
-        self.prev_raw_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
         self.hold_position = {j: 0.0 for j in ALL_JOINTS}
 
+
+        # PID per joint
         self.pid = {j: PIDController(kp=5.0, kd=10.0) for j in ALL_JOINTS}
-        self.get_logger().info("RHex tripod PID gait controller with unwrapping started.")
+
+        self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
         self.linear_x = msg.linear.x
         self.angular_z = msg.angular.z
 
     def joint_state_callback(self, msg: JointState):
+        now = self.get_clock().now().nanoseconds / 1e9
         dt = 1.0 / FREQUENCY
-        for name, raw_pos in zip(msg.name, msg.position):
+        for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
-                prev = self.prev_raw_angles[name]
-                delta = raw_pos - prev
-
-                # Unwrapping logic: handle jumps across ±π
-                if delta > math.pi:
-                    delta -= 2 * math.pi
-                elif delta < -math.pi:
-                    delta += 2 * math.pi
-
-                self.joint_angles[name] += delta
-                self.prev_raw_angles[name] = raw_pos
-                self.joint_velocities[name] = delta / dt
+                vel = (pos - self.joint_angles[name]) / dt
+                self.joint_velocities[name] = vel
+                self.joint_angles[name] = pos
 
     def update(self):
         now = self.get_clock().now().nanoseconds / 1e9
         elapsed = now - self.phase_start_time
 
-        # Initialize first step
         if self.linear_x != 0.0 and all(v == 0.0 for v in self.target_angles.values()):
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
@@ -82,12 +78,14 @@ class RHexTripodPIDController(Node):
             self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
             self.get_logger().info("Initialized first step.")
 
-        # Step phase switch
+
+        # Step phase switch logic
         if (
             elapsed > STEP_TIME and
             all(abs(self.joint_angles[j] - self.hold_position.get(j, 0.0)) >= STEP_THRESHOLD for j in self.current_tripod) and
             (self.linear_x != 0.0 or self.angular_z != 0.0)
         ):
+
             self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
             step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
             for j in self.current_tripod:
@@ -95,6 +93,7 @@ class RHexTripodPIDController(Node):
             self.hold_position = {j: self.joint_angles[j] for j in self.waiting_tripod}
             self.phase_start_time = now
             self.get_logger().info(f"Switched tripod: {self.current_tripod}")
+
 
         # Compute PID commands
         commands = []
