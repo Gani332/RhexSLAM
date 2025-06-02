@@ -49,6 +49,18 @@ class RHexSimpleStepper(Node):
     def update(self):
         now = time.time()
 
+        self.get_logger().info("------ Step Status ------")
+        for j in self.current_tripod:
+            pos = self.joint_angles[j]
+            vel = self.joint_velocities[j]
+            tgt = self.target_angles[j]
+            pos_err = tgt - pos
+            done = self.leg_done[j]
+            self.get_logger().info(
+                f"{j}: pos={pos:.2f}, tgt={tgt:.2f}, err={pos_err:.2f}, vel={vel:.2f}, done={done}"
+            )
+
+
         if not self.initialized:
             if any(self.joint_angles.values()):
                 # Set first targets
