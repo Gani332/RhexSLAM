@@ -28,7 +28,7 @@ class RHexSimpleStepper(Node):
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
         self.center_leg = self.get_center_leg(self.current_tripod)
-        self.step_start_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.phase_counts = {j: 0 for j in ALL_JOINTS}
         self.stepping = False
 
         self.initialized = False
@@ -56,7 +56,7 @@ class RHexSimpleStepper(Node):
         if not self.initialized:
             if any(self.joint_angles.values()):
                 for leg in self.current_tripod:
-                    self.step_start_angles[leg] = self.joint_angles[leg]
+                    self.phase_counts[leg] += 1
                 self.stepping = True
                 self.initialized = True
                 self.get_logger().info(f"Initialized stepping with {self.center_leg}")
@@ -95,7 +95,7 @@ class RHexSimpleStepper(Node):
         commands = []
         for j in ALL_JOINTS:
             if j in tripod:
-                target_angle = self.step_start_angles[j] + STEP_AMOUNT
+                target_angle = self.phase_counts[j] * STEP_AMOUNT
                 error = target_angle - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = KP * error - KD * velocity
