@@ -75,7 +75,6 @@ class RHexSimpleStepper(Node):
                 abs(self.joint_angles[leg] - (self.phase_counts[leg] + 1) * STEP_AMOUNT) < 0.1
                 for leg in self.current_tripod
             )
-            self.get_logger().info(f"WTFFFFFF {abs(self.joint_angles[leg] - (self.phase_counts[leg] + 1) * STEP_AMOUNT)}")
             if all_reached:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 self.get_logger().info(f"Step complete for {self.center_leg}, pausing.")
@@ -89,12 +88,12 @@ class RHexSimpleStepper(Node):
                 return
             else:
                 self.publish_pd_velocity(self.current_tripod)
-
+                
     def publish_pd_velocity(self, tripod):
         commands = []
         for j in ALL_JOINTS:
             if j in tripod:
-                target_angle = self.phase_counts[j] * STEP_AMOUNT
+                target_angle = (self.phase_counts[j] + 1) * STEP_AMOUNT  # match the check logic
                 error = target_angle - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = KP * error - KD * velocity
@@ -105,6 +104,7 @@ class RHexSimpleStepper(Node):
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
+
 
     def publish_velocity(self, velocity_list):
         msg = Float64MultiArray()
