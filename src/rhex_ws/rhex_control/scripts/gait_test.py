@@ -28,7 +28,7 @@ class RHexSimpleStepper(Node):
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
         self.center_leg = self.get_center_leg(self.current_tripod)
-        self.step_start_angle = 0.0
+        self.step_start_angles = {j: 0.0 for j in ALL_JOINTS}
         self.stepping = False
 
         self.initialized = False
@@ -55,7 +55,8 @@ class RHexSimpleStepper(Node):
 
         if not self.initialized:
             if any(self.joint_angles.values()):
-                self.step_start_angle = self.joint_angles[self.center_leg]
+                for leg in self.current_tripod:
+                    self.step_start_angles[leg] = self.joint_angles[leg]
                 self.stepping = True
                 self.initialized = True
                 self.get_logger().info(f"Initialized stepping with {self.center_leg}")
@@ -64,15 +65,19 @@ class RHexSimpleStepper(Node):
         if self.in_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_pause = False
-                self.step_start_angle = self.joint_angles[self.center_leg]
+                for leg in self.current_tripod:
+                    self.step_start_angles[leg] = self.joint_angles[leg]
                 self.get_logger().info(f"Resuming stepping for {self.center_leg}")
             else:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 return
 
         if self.stepping:
-            angle_moved = abs(self.joint_angles[self.center_leg] - self.step_start_angle)
-            if angle_moved >= STEP_AMOUNT:
+            all_reached = all(
+                abs(self.joint_angles[leg] - self.step_start_angles[leg]) >= STEP_AMOUNT
+                for leg in self.current_tripod
+            )
+            if all_reached:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 self.get_logger().info(f"Step complete for {self.center_leg}, pausing.")
 
@@ -90,6 +95,7 @@ class RHexSimpleStepper(Node):
         commands = []
         for j in ALL_JOINTS:
             if j in tripod:
+                target_angle = self.step_start_angles[j] + STEP_AMOUNT
                 error = target_angle - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
                 cmd = KP * error - KD * velocity
