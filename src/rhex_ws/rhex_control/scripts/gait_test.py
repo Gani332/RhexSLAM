@@ -72,7 +72,7 @@ class RHexSimpleStepper(Node):
 
         if self.stepping:
             all_reached = all(
-                abs(self.joint_angles[leg] - (self.phase_counts[leg] + 1) * STEP_AMOUNT) < 0.1
+                abs(self.joint_angles[leg] - (self.phase_counts[leg] + 1) * STEP_AMOUNT) < 1
                 for leg in self.current_tripod
             )
 
