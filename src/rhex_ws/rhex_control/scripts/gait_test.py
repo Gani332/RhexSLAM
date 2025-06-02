@@ -109,7 +109,7 @@ class RHexSimpleStepper(Node):
             if j in self.current_tripod:
                 error = self.target_angles[j] - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
-                cmd = KP * error - KD * velocity
+                cmd = -(KP * error - KD * velocity)
             else:
                 cmd = 0.0
             commands.append(cmd)
