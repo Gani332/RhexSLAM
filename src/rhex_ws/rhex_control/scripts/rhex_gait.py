@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
 
 FREQUENCY = 100.0
-STEP_SIZE = 1.5
+STEP_SIZE = 0.8
 STEP_THRESHOLD = 5.80
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
@@ -63,10 +63,14 @@ class RHexTripodPIDController(Node):
 
     def cmd_vel_callback(self, msg: Twist):
         if abs(msg.linear.x) > 0.1:
+            if not self.moving:
+                self.first_step_done = False  # Re-trigger gait on movement resume
             self.moving = True
             self.step_direction = STEP_SIZE if msg.linear.x > 0 else -STEP_SIZE
         else:
             self.moving = False
+            self.first_step_done = False  # Reset gait if fully stopped
+
 
 
     def joint_state_callback(self, msg: JointState):
