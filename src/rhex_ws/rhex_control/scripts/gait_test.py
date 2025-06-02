@@ -11,7 +11,8 @@ ALL_JOINTS = TRIPOD_A + TRIPOD_B
 STEP_AMOUNT = 5.80  # radians
 KP = 4.0
 KD = 1.0
-EPSILON = 0.05  # Threshold to consider joint at target
+EPSILON = 0.05  # Position threshold
+VEL_THRESHOLD = 0.1  # Velocity threshold
 
 class RHexSimpleStepper(Node):
     def __init__(self):
@@ -24,6 +25,7 @@ class RHexSimpleStepper(Node):
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.target_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.leg_done = {j: False for j in ALL_JOINTS}
 
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
@@ -52,6 +54,7 @@ class RHexSimpleStepper(Node):
                 # Set first targets
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
+                    self.leg_done[j] = False
                 self.stepping = True
                 self.initialized = True
                 self.get_logger().info("Initialized and starting first tripod step.")
@@ -63,19 +66,24 @@ class RHexSimpleStepper(Node):
                 # Set new targets for the next tripod
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
+                    self.leg_done[j] = False
                 self.stepping = True
-                self.get_logger().info(f"Resuming step for tripod with: {self.current_tripod}")
+                self.get_logger().info(f"Resuming step for tripod: {self.current_tripod}")
             else:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 return
 
         if self.stepping:
-            # Check if all current tripod joints reached their targets
-            done = all(
-                abs(self.target_angles[j] - self.joint_angles[j]) < EPSILON
-                for j in self.current_tripod
-            )
-            if done:
+            # Check per-leg completion
+            for j in self.current_tripod:
+                if not self.leg_done[j]:
+                    pos_err = abs(self.target_angles[j] - self.joint_angles[j])
+                    vel = abs(self.joint_velocities[j])
+                    if pos_err < EPSILON and vel < VEL_THRESHOLD:
+                        self.leg_done[j] = True
+                        self.get_logger().info(f"{j} reached target.")
+
+            if all(self.leg_done[j] for j in self.current_tripod):
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 self.get_logger().info(f"Step complete for tripod: {self.current_tripod}. Pausing...")
 
