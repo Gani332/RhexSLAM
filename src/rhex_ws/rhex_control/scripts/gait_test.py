@@ -8,7 +8,7 @@ import time
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
-STEP_AMOUNT = 5.80  # radians
+STEP_AMOUNT = 6.28  # radians
 KP = 4.0
 KD = 1.0
 EPSILON = 0.1  # Position threshold
