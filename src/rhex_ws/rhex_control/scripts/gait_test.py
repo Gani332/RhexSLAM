@@ -8,10 +8,10 @@ import time
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
-STEP_AMOUNT = 6.28  # 2π radians
+STEP_AMOUNT = 5.80  # 2π radians
 
-KP = 1.5
-KD = 0.3
+KP = 4
+KD = 1.0
 
 class RHexSimpleStepper(Node):
     def __init__(self):
@@ -34,7 +34,7 @@ class RHexSimpleStepper(Node):
         self.initialized = False
         self.pause_start_time = None
         self.in_pause = False
-        self.pause_duration = 5.0  # seconds
+        self.pause_duration = 2.0  # seconds
 
         self.get_logger().info("Simple RHex tripod stepper with PD and pause started.")
 
