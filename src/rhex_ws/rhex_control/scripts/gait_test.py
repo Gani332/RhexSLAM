@@ -65,8 +65,6 @@ class RHexSimpleStepper(Node):
         if self.in_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_pause = False
-                for leg in self.current_tripod:
-                    self.step_start_angles[leg] = self.joint_angles[leg]
                 self.get_logger().info(f"Resuming stepping for {self.center_leg}")
             else:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
@@ -74,9 +72,10 @@ class RHexSimpleStepper(Node):
 
         if self.stepping:
             all_reached = all(
-                abs(self.joint_angles[leg] - self.step_start_angles[leg]) >= STEP_AMOUNT
+                abs(self.joint_angles[leg] - (self.phase_counts[leg] + 1) * STEP_AMOUNT) < 0.1
                 for leg in self.current_tripod
             )
+
             if all_reached:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 self.get_logger().info(f"Step complete for {self.center_leg}, pausing.")
