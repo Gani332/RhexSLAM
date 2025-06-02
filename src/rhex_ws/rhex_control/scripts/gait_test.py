@@ -10,8 +10,8 @@ TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_jo
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 STEP_AMOUNT = 5.80  # 2π radians
 
-KP = 1.5
-KD = 0.3
+KP = 4.0
+KD = 1.0
 
 class RHexSimpleStepper(Node):
     def __init__(self):
