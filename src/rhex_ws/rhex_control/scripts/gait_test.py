@@ -104,9 +104,13 @@ class RHexSimpleStepper(Node):
                 self.pause_start_time = now
                 self.stepping = False
                 return
+        if pos_err < EPSILON and vel < VEL_THRESHOLD:
+            self.leg_done[j] = True
+            self.get_logger().info(f"✅ {j} reached target.")
 
-        # Apply PD control to current tripod
-        self.publish_pd_velocity()
+
+                # Apply PD control to current tripod
+            self.publish_pd_velocity()
 
     def publish_pd_velocity(self):
         commands = []
