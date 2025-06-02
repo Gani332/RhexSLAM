@@ -89,9 +89,9 @@ class RHexSimpleStepper(Node):
                 self.pause_start_time = now
                 return
             else:
-                self.publish_pd_velocity(self.current_tripod, self.step_start_angle + STEP_AMOUNT)
+                self.publish_pd_velocity(self.current_tripod)
 
-    def publish_pd_velocity(self, tripod, target_angle):
+    def publish_pd_velocity(self, tripod):
         commands = []
         for j in ALL_JOINTS:
             if j in tripod:
