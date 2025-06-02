@@ -8,11 +8,10 @@ import time
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
-STEP_AMOUNT = 6.28  # radians
+STEP_AMOUNT = 5.80  # 2π radians
+
 KP = 4.0
 KD = 1.0
-EPSILON = 0.1  # Position threshold
-VEL_THRESHOLD = 0.1  # Velocity threshold
 
 class RHexSimpleStepper(Node):
     def __init__(self):
@@ -24,92 +23,76 @@ class RHexSimpleStepper(Node):
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
-        self.target_angles = {j: 0.0 for j in ALL_JOINTS}
-        self.leg_done = {j: False for j in ALL_JOINTS}
+        self.last_joint_angles = {j: 0.0 for j in ALL_JOINTS}
 
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
-
-        self.initialized = False
-        self.in_pause = False
-        self.pause_start_time = None
-        self.pause_duration = 2.0  # seconds
+        self.center_leg = self.get_center_leg(self.current_tripod)
+        self.step_start_angle = 0.0
         self.stepping = False
 
-        self.get_logger().info("RHex per-joint stepper with PD and pause started.")
+        self.initialized = False
+        self.pause_start_time = None
+        self.in_pause = False
+        self.pause_duration = 2.0  # seconds
+
+        self.get_logger().info("Simple RHex tripod stepper with PD and pause started.")
+
+    def get_center_leg(self, tripod):
+        return next(j for j in tripod if 'centre' in j)
 
     def joint_state_callback(self, msg: JointState):
-        dt = 0.01
+        dt = 0.01  # Fixed timestep for now
         for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
                 prev_pos = self.joint_angles[name]
-                self.joint_velocities[name] = (pos - prev_pos) / dt
+                vel = (pos - prev_pos) / dt
                 self.joint_angles[name] = pos
+                self.joint_velocities[name] = vel
 
     def update(self):
         now = time.time()
 
-        self.get_logger().info("------ Step Status ------")
-        for j in self.current_tripod:
-            pos = self.joint_angles[j]
-            vel = self.joint_velocities[j]
-            tgt = self.target_angles[j]
-            pos_err = tgt - pos
-            done = self.leg_done[j]
-            self.get_logger().info(
-                f"{j}: pos={pos:.2f}, tgt={tgt:.2f}, err={pos_err:.2f}, vel={vel:.2f}, done={done}"
-            )
-
         if not self.initialized:
             if any(self.joint_angles.values()):
-                for j in self.current_tripod:
-                    self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
-                    self.leg_done[j] = False
+                self.step_start_angle = self.joint_angles[self.center_leg]
                 self.stepping = True
                 self.initialized = True
-                self.get_logger().info("Initialized and starting first tripod step.")
+                self.get_logger().info(f"Initialized stepping with {self.center_leg}")
             return
 
         if self.in_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_pause = False
-                for j in self.current_tripod:
-                    self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
-                    self.leg_done[j] = False
-                self.stepping = True
-                self.get_logger().info(f"Resuming step for tripod: {self.current_tripod}")
+                self.step_start_angle = self.joint_angles[self.center_leg]
+                self.get_logger().info(f"Resuming stepping for {self.center_leg}")
             else:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 return
 
         if self.stepping:
-            for j in self.current_tripod:
-                if not self.leg_done[j]:
-                    pos_err = abs(self.target_angles[j] - self.joint_angles[j])
-                    vel = abs(self.joint_velocities[j])
-                    if pos_err < EPSILON and vel < VEL_THRESHOLD:
-                        self.leg_done[j] = True
-                        self.get_logger().info(f"✅ {j} reached target.")
-
-            if all(self.leg_done[j] for j in self.current_tripod):
+            angle_moved = abs(self.joint_angles[self.center_leg] - self.step_start_angle)
+            if angle_moved >= STEP_AMOUNT:
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
-                self.get_logger().info(f"Step complete for tripod: {self.current_tripod}. Pausing...")
+                self.get_logger().info(f"Step complete for {self.center_leg}, pausing.")
+
+                # Switch tripod
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+                self.center_leg = self.get_center_leg(self.current_tripod)
+
                 self.in_pause = True
                 self.pause_start_time = now
-                self.stepping = False
                 return
+            else:
+                self.publish_pd_velocity(self.current_tripod, self.step_start_angle + STEP_AMOUNT)
 
-        self.publish_pd_velocity()
-
-
-    def publish_pd_velocity(self):
+    def publish_pd_velocity(self, tripod, target_angle):
         commands = []
         for j in ALL_JOINTS:
-            if j in self.current_tripod:
-                error = self.target_angles[j] - self.joint_angles[j]
+            if j in tripod:
+                error = target_angle - self.joint_angles[j]
                 velocity = self.joint_velocities[j]
-                cmd = -(KP * error - KD * velocity)
+                cmd = KP * error - KD * velocity
             else:
                 cmd = 0.0
             commands.append(cmd)
