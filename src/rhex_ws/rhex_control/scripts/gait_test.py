@@ -60,10 +60,8 @@ class RHexSimpleStepper(Node):
                 f"{j}: pos={pos:.2f}, tgt={tgt:.2f}, err={pos_err:.2f}, vel={vel:.2f}, done={done}"
             )
 
-
         if not self.initialized:
             if any(self.joint_angles.values()):
-                # Set first targets
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
                     self.leg_done[j] = False
@@ -75,7 +73,6 @@ class RHexSimpleStepper(Node):
         if self.in_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_pause = False
-                # Set new targets for the next tripod
                 for j in self.current_tripod:
                     self.target_angles[j] = self.joint_angles[j] + STEP_AMOUNT
                     self.leg_done[j] = False
@@ -86,31 +83,25 @@ class RHexSimpleStepper(Node):
                 return
 
         if self.stepping:
-            # Check per-leg completion
             for j in self.current_tripod:
                 if not self.leg_done[j]:
                     pos_err = abs(self.target_angles[j] - self.joint_angles[j])
                     vel = abs(self.joint_velocities[j])
                     if pos_err < EPSILON and vel < VEL_THRESHOLD:
                         self.leg_done[j] = True
-                        self.get_logger().info(f"{j} reached target.")
+                        self.get_logger().info(f"✅ {j} reached target.")
 
             if all(self.leg_done[j] for j in self.current_tripod):
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
                 self.get_logger().info(f"Step complete for tripod: {self.current_tripod}. Pausing...")
-
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
                 self.in_pause = True
                 self.pause_start_time = now
                 self.stepping = False
                 return
-        if pos_err < EPSILON and vel < VEL_THRESHOLD:
-            self.leg_done[j] = True
-            self.get_logger().info(f"✅ {j} reached target.")
 
+        self.publish_pd_velocity()
 
-                # Apply PD control to current tripod
-            self.publish_pd_velocity()
 
     def publish_pd_velocity(self):
         commands = []
