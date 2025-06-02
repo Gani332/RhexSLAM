@@ -3,11 +3,15 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
+import time
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 STEP_AMOUNT = 6.28  # 2π radians
+
+KP = 1.5
+KD = 0.3
 
 class RHexSimpleStepper(Node):
     def __init__(self):
@@ -18,6 +22,9 @@ class RHexSimpleStepper(Node):
         self.timer = self.create_timer(0.01, self.update)  # 100 Hz
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
+        self.last_joint_angles = {j: 0.0 for j in ALL_JOINTS}
+
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
         self.center_leg = self.get_center_leg(self.current_tripod)
@@ -25,18 +32,27 @@ class RHexSimpleStepper(Node):
         self.stepping = False
 
         self.initialized = False
+        self.pause_start_time = None
+        self.in_pause = False
+        self.pause_duration = 5.0  # seconds
 
-        self.get_logger().info("Simple RHex tripod stepper started.")
+        self.get_logger().info("Simple RHex tripod stepper with PD and pause started.")
 
     def get_center_leg(self, tripod):
         return next(j for j in tripod if 'centre' in j)
 
     def joint_state_callback(self, msg: JointState):
+        dt = 0.01  # Fixed timestep for now
         for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
+                prev_pos = self.joint_angles[name]
+                vel = (pos - prev_pos) / dt
                 self.joint_angles[name] = pos
+                self.joint_velocities[name] = vel
 
     def update(self):
+        now = time.time()
+
         if not self.initialized:
             if any(self.joint_angles.values()):
                 self.step_start_angle = self.joint_angles[self.center_leg]
@@ -45,25 +61,41 @@ class RHexSimpleStepper(Node):
                 self.get_logger().info(f"Initialized stepping with {self.center_leg}")
             return
 
-        # Check if the center leg has moved enough
+        if self.in_pause:
+            if now - self.pause_start_time >= self.pause_duration:
+                self.in_pause = False
+                self.step_start_angle = self.joint_angles[self.center_leg]
+                self.get_logger().info(f"Resuming stepping for {self.center_leg}")
+            else:
+                self.publish_velocity([0.0] * len(ALL_JOINTS))
+                return
+
         if self.stepping:
             angle_moved = abs(self.joint_angles[self.center_leg] - self.step_start_angle)
             if angle_moved >= STEP_AMOUNT:
-                # Stop stepping and switch tripods
                 self.publish_velocity([0.0] * len(ALL_JOINTS))
-                self.get_logger().info(f"Step complete for {self.center_leg}, switching tripods.")
+                self.get_logger().info(f"Step complete for {self.center_leg}, pausing.")
 
+                # Switch tripod
                 self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
                 self.center_leg = self.get_center_leg(self.current_tripod)
-                self.step_start_angle = self.joint_angles[self.center_leg]
-                self.stepping = True
-            else:
-                self.publish_tripod_velocity(self.current_tripod, 1.0)  # Constant velocity
 
-    def publish_tripod_velocity(self, tripod, speed):
+                self.in_pause = True
+                self.pause_start_time = now
+                return
+            else:
+                self.publish_pd_velocity(self.current_tripod, self.step_start_angle + STEP_AMOUNT)
+
+    def publish_pd_velocity(self, tripod, target_angle):
         commands = []
         for j in ALL_JOINTS:
-            commands.append(speed if j in tripod else 0.0)
+            if j in tripod:
+                error = target_angle - self.joint_angles[j]
+                velocity = self.joint_velocities[j]
+                cmd = KP * error - KD * velocity
+            else:
+                cmd = 0.0
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
