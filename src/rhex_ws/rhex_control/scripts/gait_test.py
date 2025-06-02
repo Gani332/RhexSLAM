@@ -11,7 +11,7 @@ ALL_JOINTS = TRIPOD_A + TRIPOD_B
 STEP_AMOUNT = 5.80  # radians
 KP = 4.0
 KD = 1.0
-EPSILON = 0.05  # Position threshold
+EPSILON = 0.1  # Position threshold
 VEL_THRESHOLD = 0.1  # Velocity threshold
 
 class RHexSimpleStepper(Node):
