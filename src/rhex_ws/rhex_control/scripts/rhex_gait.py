@@ -31,8 +31,10 @@ class RHexTripodPIDController(Node):
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
 
         self.first_step_done = False
-        self.linear_x = 0.0
+        self.moving = False
+        self.step_direction = STEP_SIZE
         self.angular_z = 0.0
+
 
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
@@ -60,8 +62,12 @@ class RHexTripodPIDController(Node):
         self.get_logger().info("RHex tripod PID gait controller started.")
 
     def cmd_vel_callback(self, msg: Twist):
-        self.linear_x = msg.linear.x
-        self.angular_z = msg.angular.z
+        if abs(msg.linear.x) > 0.1:
+            self.moving = True
+            self.step_direction = STEP_SIZE if msg.linear.x > 0 else -STEP_SIZE
+        else:
+            self.moving = False
+
 
     def joint_state_callback(self, msg: JointState):
         dt = 1.0 / FREQUENCY
@@ -90,7 +96,8 @@ class RHexTripodPIDController(Node):
         if self.in_grounded_pause:
             if now - self.pause_start_time >= self.pause_duration:
                 self.in_grounded_pause = False
-                step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+                step_direction = self.step_direction
+
 
                 for j in ALL_JOINTS:
                     if j not in self.current_tripod:
@@ -111,8 +118,8 @@ class RHexTripodPIDController(Node):
                 self.apply_passive_damping()
                 return
 
-        if self.linear_x != 0.0 and not self.first_step_done:
-            step_direction = STEP_SIZE if self.linear_x >= 0 else -STEP_SIZE
+        if self.moving and not self.first_step_done:
+            step_direction = self.step_direction
             for j in self.current_tripod:
                 self.target_angles[j] = self.joint_angles[j] + step_direction
             for j in self.waiting_tripod:
