@@ -3,7 +3,7 @@ import time
 
 PORT = '/dev/ttyACM0'
 BAUD = 115200
-MOTOR_SPEEDS = [800, 800, 800, 800, 800, 800]
+MOTOR_SPEEDS = [-800, -800, 800, 800, -800, 800]
 
 joint_names = [
     'front_left_leg_joint',
