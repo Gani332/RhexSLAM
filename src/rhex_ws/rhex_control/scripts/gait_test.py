@@ -5,6 +5,7 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
 import time
 from geometry_msgs.msg import Twist
+import math
 
 STEP_SIZE=6.28
 FREQUENCY=100
@@ -22,6 +23,10 @@ ALL_JOINTS = [
 
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
+
+def normalize_angle(angle):
+    """Normalize angle to be within [-π, π]"""
+    return math.atan2(math.sin(angle), math.cos(angle))
 
 
 class RHexSimpleStepper(Node):
@@ -79,7 +84,7 @@ class RHexSimpleStepper(Node):
         for j in ALL_JOINTS:
             if j in tripod:
                 target = self.step_index[j] * self.step_direction
-                error = target - self.joint_angles[j]
+                error = normalize_angle(target - self.joint_angles[j])
                 vel = self.joint_velocities[j]
                 cmd = KP * error - KD * vel
             else:
@@ -108,12 +113,12 @@ class RHexSimpleStepper(Node):
         for leg in self.current_tripod:
             target = self.step_index[leg] * self.step_direction
             actual = self.joint_angles[leg]
-            error = abs(abs(actual) - target)
+            error = normalize_angle(abs(abs(actual) - target))
             print(f"Leg {leg}: angle={actual:.2f}, target={target:.2f}, error={error:.2f}")
 
         # Check progress of the step
         done = all(
-            abs(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction) < 0.3
+            abs(normalize_angle(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction)) < 0.3
             for leg in self.current_tripod
         )
 
