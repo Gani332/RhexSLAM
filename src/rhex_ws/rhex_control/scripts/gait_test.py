@@ -122,7 +122,9 @@ class RHexSimpleStepper(Node):
             else:
                 cmd = 0.0
             commands.append(cmd)
-
+        temp=commands[1]
+        commands[1]=commands[4]
+        commands[4]=temp
         # DEBUG: Print motor commands
         self.get_logger().info("Motor Commands:")
         for j, cmd in zip(ALL_JOINTS, commands):
