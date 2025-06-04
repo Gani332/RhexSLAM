@@ -11,9 +11,9 @@ import math
 KP = 0.1
 KD = 1.0
 
-# Gait configuration
-GAIT_FREQUENCY = 1.5  # Hz
-STEP_AMPLITUDE = 1.0  # radians
+# Gait config
+GAIT_FREQUENCY = 1.5   # Hz
+STEP_AMPLITUDE = 1.0   # radians
 
 ALL_JOINTS = [
     'front_left_leg_joint',
@@ -27,8 +27,8 @@ ALL_JOINTS = [
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 
+
 def normalize_angle(angle):
-    """Normalize angle to [-π, π]"""
     return math.atan2(math.sin(angle), math.cos(angle))
 
 
@@ -57,7 +57,7 @@ class RHexCPGController(Node):
             self.publish_stop()
 
     def joint_state_callback(self, msg: JointState):
-        dt = 0.01  # 100Hz
+        dt = 0.01  # 100 Hz
         for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
                 vel = (pos - self.joint_angles[name]) / dt
@@ -75,16 +75,21 @@ class RHexCPGController(Node):
 
         t = time.time() - self.start_time
         freq = GAIT_FREQUENCY if self.forward else -GAIT_FREQUENCY
+        omega = 2 * math.pi * freq
         commands = []
 
         for joint in ALL_JOINTS:
-            phase_offset = 0.0 if joint in TRIPOD_A else math.pi
-            target_angle = STEP_AMPLITUDE * math.sin(2 * math.pi * freq * t + phase_offset)
+            if joint in TRIPOD_A:
+                phase = 0.0
+            else:
+                phase = math.pi  # out of phase by 180°
+
+            # Sinusoidal position trajectory for forward movement
+            target_angle = STEP_AMPLITUDE * math.cos(omega * t + phase)
 
             error = normalize_angle(target_angle - self.joint_angles[joint])
             vel = self.joint_velocities[joint]
             cmd = KP * error - KD * vel
-
             commands.append(cmd)
 
         msg = Float64MultiArray()
@@ -98,6 +103,7 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
