@@ -5,8 +5,8 @@ from std_msgs.msg import Float64MultiArray
 import time
 
 FREQUENCY = 100         # Hz
-GAIT_CYCLE = 1        # seconds for full tripod cycle
-SWING_SPEED = 2       # rad/s during swing phase
+GAIT_CYCLE = 0.9        # seconds for full tripod cycle
+SWING_SPEED = 4       # rad/s during swing phase
 SUPPORT_SPEED = 0.1     # no movement in support
 
 ALL_JOINTS = [
