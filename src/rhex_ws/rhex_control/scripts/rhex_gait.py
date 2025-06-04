@@ -8,7 +8,7 @@ import time
 import math
 
 # Control gains
-KP = 1.0
+KP = 0.2
 KD = 1.0
 
 # Gait parameters
