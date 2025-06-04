@@ -7,7 +7,7 @@ import time
 FREQUENCY = 100         # Hz
 GAIT_CYCLE = 1        # seconds for full tripod cycle
 SWING_SPEED = 2       # rad/s during swing phase
-SUPPORT_SPEED = 0.0     # no movement in support
+SUPPORT_SPEED = 0.1     # no movement in support
 
 ALL_JOINTS = [
     'front_left_leg_joint',    # 0
