@@ -9,6 +9,16 @@ from geometry_msgs.msg import Twist
 STEP_SIZE=5.40
 FREQUENCY=100
 
+ALL_JOINTS = [
+    'front_left_leg_joint',
+    'centre_left_leg_joint',
+    'back_left_leg_joint',
+    'front_right_leg_joint',
+    'centre_right_leg_joint',
+    'back_right_leg_joint'
+]
+
+
 class RHexSimpleStepper(Node):
     def __init__(self):
         super().__init__('rhex_simple_stepper')
@@ -17,6 +27,11 @@ class RHexSimpleStepper(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.timer = self.create_timer(0.01, self.update)  # 100 Hz
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
+
+        self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
+        self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
+
+
         self.moving=False
         self.step_direction=STEP_SIZE
 
