@@ -39,6 +39,9 @@ class RHexSimpleStepper(Node):
                 vel = (pos - self.joint_angles[name]) / dt
                 self.joint_velocities[name] = vel
                 self.joint_angles[name] = pos
+    
+    def update(self):
+        return 0
 
 
 
