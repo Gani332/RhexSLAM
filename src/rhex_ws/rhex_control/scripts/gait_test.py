@@ -5,8 +5,8 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
 import time
 
-TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
-TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
+TRIPOD_A = ['front_left_leg_joint', 'centre_left_leg_joint', 'back_left_leg_joint']
+TRIPOD_B = ['front_right_leg_joint', 'centre_right_leg_joint', 'back_right_leg_joint']
 ALL_JOINTS = TRIPOD_A + TRIPOD_B
 STEP_AMOUNT = 5.40  # 2π radians
 
