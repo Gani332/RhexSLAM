@@ -134,9 +134,9 @@ return_type read(const rclcpp::Time &, const rclcpp::Duration &) override
   set_if_found("L1", "front_left_leg_joint");
   set_if_found("L2", "centre_left_leg_joint");
   set_if_found("L3", "back_left_leg_joint");
-  set_if_found("R1", "front_right_leg_joint");
-  set_if_found("R2", "centre_right_leg_joint");
-  set_if_found("R3", "back_right_leg_joint");
+  set_if_found("L4", "front_right_leg_joint");
+  set_if_found("L5", "centre_right_leg_joint");
+  set_if_found("L6", "back_right_leg_joint");
   return return_type::OK;
 }
 
