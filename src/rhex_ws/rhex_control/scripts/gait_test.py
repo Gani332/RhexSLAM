@@ -7,7 +7,7 @@ import time
 from geometry_msgs.msg import Twist
 import math
 
-STEP_SIZE=6
+STEP_SIZE=5.8
 FREQUENCY=100
 KP = 0.1
 KD = 1.0
@@ -120,7 +120,7 @@ class RHexSimpleStepper(Node):
 
         # Check progress of the step
         done = all(
-            abs(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction) < 0.3
+            abs(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction) <0.5
             for leg in self.current_tripod
         )
 
