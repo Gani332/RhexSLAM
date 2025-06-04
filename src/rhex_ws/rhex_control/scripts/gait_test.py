@@ -84,7 +84,7 @@ class RHexSimpleStepper(Node):
         for j in ALL_JOINTS:
             if j in tripod:
                 target = self.step_index[j] * self.step_direction
-                error = normalize_angle(target - self.joint_angles[j])
+                error = target - self.joint_angles[j]
                 vel = self.joint_velocities[j]
                 cmd = KP * error - KD * vel
             else:
@@ -113,12 +113,12 @@ class RHexSimpleStepper(Node):
         for leg in self.current_tripod:
             target = self.step_index[leg] * self.step_direction
             actual = self.joint_angles[leg]
-            error = normalize_angle(abs(abs(actual) - target))
+            error = abs(abs(actual) - target)
             print(f"Leg {leg}: angle={actual:.2f}, target={target:.2f}, error={error:.2f}")
 
         # Check progress of the step
         done = all(
-            abs(normalize_angle(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction)) < 0.3
+            abs(abs(self.joint_angles[leg]) - self.step_index[leg] * self.step_direction) < 0.3
             for leg in self.current_tripod
         )
 
