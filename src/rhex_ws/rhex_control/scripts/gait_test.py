@@ -6,10 +6,10 @@ from std_msgs.msg import Float64MultiArray
 import time
 from geometry_msgs.msg import Twist
 
-STEP_SIZE=5.40
+STEP_SIZE=6.28
 FREQUENCY=100
-KP = 2.0
-KD = 1.0
+KP = 1.0
+KD = 2.0
 
 ALL_JOINTS = [
     'front_left_leg_joint',
