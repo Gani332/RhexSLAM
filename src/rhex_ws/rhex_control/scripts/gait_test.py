@@ -34,8 +34,8 @@ class RHexSimpleStepper(Node):
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
         self.last_joint_angles = {j: 0.0 for j in ALL_JOINTS}
 
-        self.current_tripod = TRIPOD_A
-        self.waiting_tripod = TRIPOD_B
+        self.current_tripod = TRIPOD_B
+        self.waiting_tripod = TRIPOD_A
         self.center_leg = self.get_center_leg(self.current_tripod)
         self.step_start_angles = {j: 0.0 for j in ALL_JOINTS}
         self.stepping = False
