@@ -12,9 +12,9 @@ KP = 1.0
 KD = 1.0
 
 # Gait parameters
-STEP_ANGLE = 0.6  # radians (~70 deg)
-FREQUENCY = 100  # Hz
-STEP_TOLERANCE = 0.2  # rad threshold to consider "arrived"
+STEP_ANGLE = 1.2  # radians (~70 degrees)
+FREQUENCY = 100   # Hz control loop
+STEP_TOLERANCE = 0.2  # radians
 
 # Joint definitions
 ALL_JOINTS = [
@@ -29,8 +29,8 @@ ALL_JOINTS = [
 TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 
-
 def normalize_angle(angle):
+    """Normalize angle to [-π, π]"""
     return math.atan2(math.sin(angle), math.cos(angle))
 
 
@@ -50,6 +50,7 @@ class RHexStepper(Node):
         self.waiting_tripod = TRIPOD_B
         self.leg_targets = {j: 0.0 for j in ALL_JOINTS}
         self.leg_done = {j: False for j in ALL_JOINTS}
+        self.step_index = {j: 0 for j in ALL_JOINTS}
 
         self.moving = False
         self.step_direction = 1.0  # forward
@@ -77,7 +78,8 @@ class RHexStepper(Node):
 
     def start_step(self):
         for leg in self.active_tripod:
-            self.leg_targets[leg] = self.joint_angles[leg] + self.step_direction * STEP_ANGLE
+            self.step_index[leg] += 1
+            self.leg_targets[leg] = self.step_index[leg] * self.step_direction * STEP_ANGLE
             self.leg_done[leg] = False
         self.get_logger().info(f"Stepping tripod: {self.active_tripod}")
 
@@ -85,9 +87,8 @@ class RHexStepper(Node):
         if not self.moving:
             return
 
-        # If no tripod is currently stepping, start one
+        # If all legs in the active tripod are done, switch tripods
         if all(self.leg_done[leg] for leg in self.active_tripod):
-            # Switch tripods
             self.active_tripod, self.waiting_tripod = self.waiting_tripod, self.active_tripod
             self.start_step()
 
@@ -116,7 +117,6 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
