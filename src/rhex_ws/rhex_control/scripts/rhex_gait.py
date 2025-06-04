@@ -7,16 +7,17 @@ from geometry_msgs.msg import Twist
 import time
 import math
 
-# Control gains
-KP = 0.2
+# Control parameters
+KP = 0.1
 KD = 1.0
+FREQUENCY = 100
 
 # Gait parameters
-STEP_ANGLE = 1.2  # radians (~70 degrees)
-FREQUENCY = 100   # Hz control loop
-STEP_TOLERANCE = 0.2  # radians
+GAIT_CYCLE_PERIOD = 1.0  # seconds
+SWING_START_ANGLE = -0.5
+SWING_END_ANGLE = 0.5
+SUPPORT_ANGLE = 0.0
 
-# Joint definitions
 ALL_JOINTS = [
     'front_left_leg_joint',
     'centre_left_leg_joint',
@@ -30,13 +31,43 @@ TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joi
 TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 
 def normalize_angle(angle):
-    """Normalize angle to [-π, π]"""
     return math.atan2(math.sin(angle), math.cos(angle))
 
+def swing_trajectory(phase):
+    """Smooth swing trajectory from back to front using cosine easing."""
+    return SWING_START_ANGLE + (SWING_END_ANGLE - SWING_START_ANGLE) * 0.5 * (1 - math.cos(math.pi * phase))
 
-class RHexStepper(Node):
+def get_desired_angles(time_elapsed):
+    """
+    Returns desired joint angles for each leg based on gait phase.
+    """
+    num_legs = len(ALL_JOINTS)
+    desired_angles = [SUPPORT_ANGLE] * num_legs
+    t = time_elapsed % GAIT_CYCLE_PERIOD
+    half_cycle = GAIT_CYCLE_PERIOD / 2
+
+    # Define swing/support based on current phase
+    if t < half_cycle:
+        phase = t / half_cycle  # 0 → 1
+        for i, j in enumerate(ALL_JOINTS):
+            if j in TRIPOD_A:
+                desired_angles[i] = swing_trajectory(phase)
+            else:
+                desired_angles[i] = SUPPORT_ANGLE
+    else:
+        phase = (t - half_cycle) / half_cycle  # 0 → 1
+        for i, j in enumerate(ALL_JOINTS):
+            if j in TRIPOD_B:
+                desired_angles[i] = swing_trajectory(phase)
+            else:
+                desired_angles[i] = SUPPORT_ANGLE
+
+    return desired_angles
+
+
+class RHexSmoothGait(Node):
     def __init__(self):
-        super().__init__('rhex_stepper')
+        super().__init__('rhex_smooth_gait')
 
         self.publisher = self.create_publisher(Float64MultiArray, '/robot1/velocity_controller/commands', 10)
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
@@ -45,20 +76,12 @@ class RHexStepper(Node):
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
-
-        self.active_tripod = TRIPOD_A
-        self.waiting_tripod = TRIPOD_B
-        self.leg_targets = {j: 0.0 for j in ALL_JOINTS}
-        self.leg_done = {j: False for j in ALL_JOINTS}
-        self.step_index = {j: 0 for j in ALL_JOINTS}
-
+        self.time_elapsed = 0.0
         self.moving = False
-        self.step_direction = 1.0  # forward
 
     def cmd_vel_callback(self, msg: Twist):
         if abs(msg.linear.x) > 0.1:
             self.moving = True
-            self.step_direction = 1.0 if msg.linear.x > 0 else -1.0
         else:
             self.moving = False
             self.publish_stop()
@@ -76,35 +99,21 @@ class RHexStepper(Node):
         msg.data = [0.0] * len(ALL_JOINTS)
         self.publisher.publish(msg)
 
-    def start_step(self):
-        for leg in self.active_tripod:
-            self.step_index[leg] += 1
-            self.leg_targets[leg] = self.step_index[leg] * self.step_direction * STEP_ANGLE
-            self.leg_done[leg] = False
-        self.get_logger().info(f"Stepping tripod: {self.active_tripod}")
-
     def update(self):
         if not self.moving:
             return
 
-        # If all legs in the active tripod are done, switch tripods
-        if all(self.leg_done[leg] for leg in self.active_tripod):
-            self.active_tripod, self.waiting_tripod = self.waiting_tripod, self.active_tripod
-            self.start_step()
+        self.time_elapsed += 1.0 / FREQUENCY
+        desired_angles = get_desired_angles(self.time_elapsed)
 
         commands = []
-        for j in ALL_JOINTS:
-            if j in self.active_tripod and not self.leg_done[j]:
-                target = self.leg_targets[j]
-                error = normalize_angle(target - self.joint_angles[j])
-                vel = self.joint_velocities[j]
-                cmd = KP * error - KD * vel
-                commands.append(cmd)
-
-                if abs(error) < STEP_TOLERANCE:
-                    self.leg_done[j] = True
-            else:
-                commands.append(0.0)
+        for i, joint in enumerate(ALL_JOINTS):
+            target = desired_angles[i]
+            current = self.joint_angles[joint]
+            vel = self.joint_velocities[joint]
+            error = normalize_angle(target - current)
+            cmd = KP * error - KD * vel
+            commands.append(cmd)
 
         msg = Float64MultiArray()
         msg.data = commands
@@ -113,7 +122,7 @@ class RHexStepper(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = RHexStepper()
+    node = RHexSmoothGait()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
