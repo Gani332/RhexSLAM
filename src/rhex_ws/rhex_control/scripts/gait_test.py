@@ -107,7 +107,7 @@ class RHexSimpleStepper(Node):
 
         # Check progress of the step
         done = all(
-            abs(self.joint_angles[leg] - self.step_index[leg] * self.step_direction) < 0.1
+            abs(self.joint_angles[leg] - self.step_index[leg] * self.step_direction) < 0.3
             for leg in self.current_tripod
         )
 
