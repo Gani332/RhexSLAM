@@ -9,8 +9,8 @@ import math
 
 STEP_SIZE=6.2
 FREQUENCY=100
-KP = 0.5
-KD = 4.0
+KP = 0.1
+KD = 10.0
 
 ALL_JOINTS = [
     'front_left_leg_joint',
