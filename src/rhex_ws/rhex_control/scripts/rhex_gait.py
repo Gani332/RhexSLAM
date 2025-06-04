@@ -75,4 +75,48 @@ class RHexStepper(Node):
         msg.data = [0.0] * len(ALL_JOINTS)
         self.publisher.publish(msg)
 
-    def start_ste_
+    def start_step(self):
+        for leg in self.active_tripod:
+            self.leg_targets[leg] = self.joint_angles[leg] + self.step_direction * STEP_ANGLE
+            self.leg_done[leg] = False
+        self.get_logger().info(f"Stepping tripod: {self.active_tripod}")
+
+    def update(self):
+        if not self.moving:
+            return
+
+        # If no tripod is currently stepping, start one
+        if all(self.leg_done[leg] for leg in self.active_tripod):
+            # Switch tripods
+            self.active_tripod, self.waiting_tripod = self.waiting_tripod, self.active_tripod
+            self.start_step()
+
+        commands = []
+        for j in ALL_JOINTS:
+            if j in self.active_tripod and not self.leg_done[j]:
+                target = self.leg_targets[j]
+                error = normalize_angle(target - self.joint_angles[j])
+                vel = self.joint_velocities[j]
+                cmd = KP * error - KD * vel
+                commands.append(cmd)
+
+                if abs(error) < STEP_TOLERANCE:
+                    self.leg_done[j] = True
+            else:
+                commands.append(0.0)
+
+        msg = Float64MultiArray()
+        msg.data = commands
+        self.publisher.publish(msg)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = RHexStepper()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
