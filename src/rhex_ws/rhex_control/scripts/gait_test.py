@@ -7,10 +7,10 @@ import time
 from geometry_msgs.msg import Twist
 import math
 
-STEP_SIZE=6.28
+STEP_SIZE=6.2
 FREQUENCY=100
-KP = 1.0
-KD = 2.0
+KP = 0.5
+KD = 4.0
 
 ALL_JOINTS = [
     'front_left_leg_joint',
