@@ -12,7 +12,7 @@ KP = 1.0
 KD = 1.0
 
 # Gait parameters
-STEP_ANGLE = 1.2  # radians (~70 deg)
+STEP_ANGLE = 6.28  # radians (~70 deg)
 FREQUENCY = 100  # Hz
 STEP_TOLERANCE = 0.2  # rad threshold to consider "arrived"
 
