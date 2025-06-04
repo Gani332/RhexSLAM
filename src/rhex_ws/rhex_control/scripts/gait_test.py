@@ -50,6 +50,11 @@ class RHexSimpleStepper(Node):
                 self.joint_angles[name] = pos
                 self.joint_velocities[name] = vel
 
+        # DEBUG: Print current joint angles
+        self.get_logger().info("Joint Angles:")
+        for j in ALL_JOINTS:
+            self.get_logger().info(f"  {j}: {self.joint_angles[j]:.2f}")
+
     def update(self):
         now = time.time()
 
@@ -73,6 +78,11 @@ class RHexSimpleStepper(Node):
                 return
 
         if self.stepping:
+            # DEBUG: Check how far each leg in tripod has moved
+            for leg in self.current_tripod:
+                moved = abs(self.joint_angles[leg] - self.step_start_angles[leg])
+                self.get_logger().info(f"{leg} moved: {moved:.2f} / {STEP_AMOUNT:.2f}")
+
             all_reached = all(
                 abs(self.joint_angles[leg] - self.step_start_angles[leg]) >= STEP_AMOUNT
                 for leg in self.current_tripod
@@ -92,7 +102,6 @@ class RHexSimpleStepper(Node):
                 self.publish_pd_velocity(self.current_tripod)
 
     def publish_pd_velocity(self, tripod):
-
         commands = []
         for j in ALL_JOINTS:
             if j in tripod:
@@ -104,14 +113,15 @@ class RHexSimpleStepper(Node):
                 cmd = 0.0
             commands.append(cmd)
 
+        # DEBUG: Print motor commands
+        self.get_logger().info("Motor Commands:")
+        for j, cmd in zip(ALL_JOINTS, commands):
+            self.get_logger().info(f"  {j}: {cmd:.2f}")
+
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
 
-    def publish_velocity(self, velocity_list):
-        msg = Float64MultiArray()
-        msg.data = velocity_list
-        self.publisher.publish(msg)
 
 def main(args=None):
     rclpy.init(args=args)
