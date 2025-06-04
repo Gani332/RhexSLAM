@@ -43,6 +43,8 @@ class RHexSimpleStepper(Node):
         self.step_start_angles = {j: 0.0 for j in ALL_JOINTS}
         self.step_index = {j: 0 for j in ALL_JOINTS}
 
+        self.last_time = time.time()
+
         self.current_tripod = TRIPOD_A
         self.waiting_tripod = TRIPOD_B
 
@@ -99,6 +101,10 @@ class RHexSimpleStepper(Node):
 
 
     def update(self):
+        now = time.time()
+        dt = now - self.last_time
+        self.last_time = now
+        print(f"Update interval: {dt:.4f} seconds ({1/dt:.2f} Hz)")
         if not self.moving:
             return
 
