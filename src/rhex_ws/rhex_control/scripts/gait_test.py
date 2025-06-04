@@ -69,12 +69,13 @@ class RHexSimpleStepper(Node):
 
         if not self.initialized:
             if any(self.joint_angles.values()):
-                for leg in self.current_tripod:
+                for leg in ALL_JOINTS:
                     self.step_start_angles[leg] = self.joint_angles[leg]
                 self.stepping = True
                 self.initialized = True
                 self.get_logger().info(f"Initialized stepping with {self.center_leg}")
             return
+
 
         if self.in_pause:
             if now - self.pause_start_time >= self.pause_duration:
