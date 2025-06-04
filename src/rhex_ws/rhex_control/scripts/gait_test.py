@@ -57,7 +57,7 @@ class RHexSimpleStepper(Node):
     
     def update(self):
         msg = Float64MultiArray()
-        msg.data = [0, 0, 0, 0, 0, 0]
+        msg.data = [800, 800, 800, 800, 800, 800]
         self.publisher.publish(msg)
 
 
