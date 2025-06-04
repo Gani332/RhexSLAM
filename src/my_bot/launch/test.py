@@ -7,10 +7,10 @@ MOTOR_SPEEDS = [-800, 0, -800, 800, 800, 800]
 
 joint_names = [
     'front_left_leg_joint',
-    'centre_right_leg_joint',
+    'centre_left_leg_joint',
     'back_left_leg_joint',
     'front_right_leg_joint',
-    'centre_left_leg_joint',
+    'centre_right_leg_joint',
     'back_right_leg_joint'
 ]
 
