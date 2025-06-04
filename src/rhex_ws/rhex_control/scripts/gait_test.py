@@ -8,6 +8,8 @@ from geometry_msgs.msg import Twist
 
 STEP_SIZE=5.40
 FREQUENCY=100
+KP = 2.0
+KD = 1.0
 
 ALL_JOINTS = [
     'front_left_leg_joint',
@@ -17,6 +19,9 @@ ALL_JOINTS = [
     'centre_right_leg_joint',
     'back_right_leg_joint'
 ]
+
+TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
+TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 
 
 class RHexSimpleStepper(Node):
@@ -30,10 +35,15 @@ class RHexSimpleStepper(Node):
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
+        self.step_start_angles = {j: 0.0 for j in ALL_JOINTS}
 
+        self.current_tripod = TRIPOD_A
+        self.waiting_tripod = TRIPOD_B
 
         self.moving=False
+        self.initialized=False
         self.step_direction=STEP_SIZE
+        self.stepping=False
 
 
     def cmd_vel_callback(self, msg: Twist):
@@ -42,23 +52,70 @@ class RHexSimpleStepper(Node):
             self.step_direction = STEP_SIZE if msg.linear.x > 0 else -STEP_SIZE
         else:
             self.moving = False
+            self.stepping = False
+            self.publish_stop()
 
 
     def joint_state_callback(self, msg: JointState):
         dt = 1.0 / FREQUENCY
-        self.get_logger().info("Received JointState:")
-        for name, pos in zip(msg.name, msg.position):
-            self.get_logger().info(f"  {name}: {pos:.2f}")
+        # self.get_logger().info("Received JointState:")
+        # for name, pos in zip(msg.name, msg.position):
+        #     self.get_logger().info(f"  {name}: {pos:.2f}")
         for name, pos in zip(msg.name, msg.position):
             if name in self.joint_angles:
                 vel = (pos - self.joint_angles[name]) / dt
                 self.joint_velocities[name] = vel
                 self.joint_angles[name] = pos
     
-    def update(self):
+    def publish_stop(self):
         msg = Float64MultiArray()
-        msg.data = [800, 800, 800, 800, 800, 800]
+        msg.data = [0.0] * len(ALL_JOINTS)
         self.publisher.publish(msg)
+
+
+    def publish_pd_command(self, tripod):
+        commands = []
+        for j in ALL_JOINTS:
+            if j in tripod:
+                target = self.step_start_angles[j] + self.step_direction
+                error = target - self.joint_angles[j]
+                vel = self.joint_velocities[j]
+                cmd = KP * error - KD * vel
+            else:
+                cmd = 0.0
+            commands.append(cmd)
+
+        msg = Float64MultiArray()
+        msg.data = commands
+        self.publisher.publish(msg)
+
+
+
+    def update(self):
+        if not self.moving:
+            return
+
+        if not self.stepping:
+            # Start a new step
+            for leg in self.current_tripod:
+                self.step_start_angles[leg] = self.joint_angles[leg]
+            self.stepping = True
+            self.get_logger().info(f"Starting step for {self.current_tripod}")
+            return
+
+        # Check progress of the step
+        done = all(
+            abs(self.joint_angles[leg] - self.step_start_angles[leg]) >= abs(self.step_direction)
+            for leg in self.current_tripod
+        )
+
+        if done:
+            self.publish_stop()
+            self.current_tripod, self.waiting_tripod = self.waiting_tripod, self.current_tripod
+            self.stepping = False
+            self.get_logger().info(f"Step complete. Switching tripod.")
+        else:
+            self.publish_pd_command(self.current_tripod)
 
 
 
