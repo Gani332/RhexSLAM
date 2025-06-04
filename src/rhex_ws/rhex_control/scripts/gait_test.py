@@ -108,7 +108,7 @@ class RHexSimpleStepper(Node):
         for leg in self.current_tripod:
             target = self.step_index[leg] * self.step_direction
             actual = self.joint_angles[leg]
-            error = abs(actual - target)
+            error = abs(abs(actual) - target)
             print(f"Leg {leg}: angle={actual:.2f}, target={target:.2f}, error={error:.2f}")
 
         # Check progress of the step
