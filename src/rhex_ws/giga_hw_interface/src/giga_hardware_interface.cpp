@@ -148,7 +148,7 @@ return_type write(const rclcpp::Time &, const rclcpp::Duration &) override
     double velocity = joint_commands_[i];
 
        std::string joint_name = info_.joints[i].name;
-     if (joint_name == "front_left_leg_joint") {
+     if (joint_name == "back_left_leg_joint") {
        velocity = -velocity;
      }
 
