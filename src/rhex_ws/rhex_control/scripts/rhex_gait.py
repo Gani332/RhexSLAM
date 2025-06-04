@@ -37,32 +37,34 @@ def swing_trajectory(phase):
     """Smooth swing trajectory from back to front using cosine easing."""
     return SWING_START_ANGLE + (SWING_END_ANGLE - SWING_START_ANGLE) * 0.5 * (1 - math.cos(math.pi * phase))
 
-def get_desired_angles(time_elapsed):
-    """
-    Returns desired joint angles for each leg based on gait phase.
-    """
-    num_legs = len(ALL_JOINTS)
-    desired_angles = [SUPPORT_ANGLE] * num_legs
+def get_desired_angles(time_elapsed, step_indices):
+    desired_angles = [0.0] * len(ALL_JOINTS)
     t = time_elapsed % GAIT_CYCLE_PERIOD
-    half_cycle = GAIT_CYCLE_PERIOD / 2
+    half_T = GAIT_CYCLE_PERIOD / 2
 
-    # Define swing/support based on current phase
-    if t < half_cycle:
-        phase = t / half_cycle  # 0 → 1
-        for i, j in enumerate(ALL_JOINTS):
-            if j in TRIPOD_A:
-                desired_angles[i] = swing_trajectory(phase)
-            else:
-                desired_angles[i] = SUPPORT_ANGLE
+    if t < half_T:
+        phase = t / half_T
+        swing_tripod = TRIPOD_A
+        stance_tripod = TRIPOD_B
     else:
-        phase = (t - half_cycle) / half_cycle  # 0 → 1
-        for i, j in enumerate(ALL_JOINTS):
-            if j in TRIPOD_B:
-                desired_angles[i] = swing_trajectory(phase)
-            else:
-                desired_angles[i] = SUPPORT_ANGLE
+        phase = (t - half_T) / half_T
+        swing_tripod = TRIPOD_B
+        stance_tripod = TRIPOD_A
+
+    for i, joint in enumerate(ALL_JOINTS):
+        step = step_indices[joint]
+        if joint in swing_tripod:
+            # Compute next target step
+            start = step * (SWING_END_ANGLE - SWING_START_ANGLE)
+            end = (step + 1) * (SWING_END_ANGLE - SWING_START_ANGLE)
+            angle = start + (end - start) * 0.5 * (1 - math.cos(math.pi * phase))
+            desired_angles[i] = angle
+        else:
+            # Hold last reached support position
+            desired_angles[i] = step * (SWING_END_ANGLE - SWING_START_ANGLE)
 
     return desired_angles
+
 
 
 class RHexSmoothGait(Node):
@@ -73,6 +75,9 @@ class RHexSmoothGait(Node):
         self.joint_state_sub = self.create_subscription(JointState, '/robot1/joint_states', self.joint_state_callback, 10)
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
         self.timer = self.create_timer(1.0 / FREQUENCY, self.update)
+
+        self.step_indices = {j: 0 for j in ALL_JOINTS}
+        self.last_phase = 0.0
 
         self.joint_angles = {j: 0.0 for j in ALL_JOINTS}
         self.joint_velocities = {j: 0.0 for j in ALL_JOINTS}
@@ -104,7 +109,24 @@ class RHexSmoothGait(Node):
             return
 
         self.time_elapsed += 1.0 / FREQUENCY
-        desired_angles = get_desired_angles(self.time_elapsed)
+        t = self.time_elapsed % GAIT_CYCLE_PERIOD
+        half_T = GAIT_CYCLE_PERIOD / 2
+
+        # Phase: 0 → 1 for each swing
+        if t < half_T:
+            phase = t / half_T
+            active_tripod = TRIPOD_A
+        else:
+            phase = (t - half_T) / half_T
+            active_tripod = TRIPOD_B
+
+        # Detect phase wraparound to increment step index
+        if self.last_phase > phase:
+            for leg in active_tripod:
+                self.step_indices[leg] += 1
+        self.last_phase = phase
+
+        desired_angles = get_desired_angles(self.time_elapsed, self.step_indices)
 
         commands = []
         for i, joint in enumerate(ALL_JOINTS):
@@ -118,6 +140,7 @@ class RHexSmoothGait(Node):
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
+
 
 
 def main(args=None):
