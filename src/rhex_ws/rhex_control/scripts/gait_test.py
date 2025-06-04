@@ -75,16 +75,16 @@ class RHexSimpleStepper(Node):
 
     def publish_pd_command(self, tripod):
         commands = []
+        self.step_direction=self.step_direction+STEP_SIZE
         for j in ALL_JOINTS:
             if j in tripod:
-                target = self.step_start_angles[j] + self.step_direction
+                target = self.step_direction
                 error = target - self.joint_angles[j]
                 vel = self.joint_velocities[j]
                 cmd = KP * error - KD * vel
             else:
                 cmd = 0.0
             commands.append(cmd)
-
         msg = Float64MultiArray()
         msg.data = commands
         self.publisher.publish(msg)
@@ -105,7 +105,7 @@ class RHexSimpleStepper(Node):
 
         # Check progress of the step
         done = all(
-            abs(self.joint_angles[leg] - self.step_start_angles[leg]) >= abs(self.step_direction)
+            abs(self.joint_angles[leg]) >= abs(self.step_direction)
             for leg in self.current_tripod
         )
 
