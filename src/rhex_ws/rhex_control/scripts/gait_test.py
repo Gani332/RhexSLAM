@@ -41,7 +41,7 @@ class RHexSimpleStepper(Node):
                 self.joint_angles[name] = pos
     
     def update(self):
-        return 0
+        self.publisher.publish([-800, -800, 0, 800, 800, 800])
 
 
 
