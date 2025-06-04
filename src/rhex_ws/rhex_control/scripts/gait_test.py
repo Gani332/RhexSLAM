@@ -7,15 +7,15 @@ import time
 
 ALL_JOINTS = [
     'front_left_leg_joint',
-    'centre_left_leg_joint',
+    'centre_right_leg_joint',
     'back_left_leg_joint',
     'front_right_leg_joint',
-    'centre_right_leg_joint',
+    'centre_left_leg_joint',
     'back_right_leg_joint'
 ]
 
-TRIPOD_A = ['front_left_leg_joint', 'centre_left_leg_joint', 'back_left_leg_joint']
-TRIPOD_B = ['front_right_leg_joint', 'centre_right_leg_joint', 'back_right_leg_joint']
+TRIPOD_A = ['front_left_leg_joint', 'centre_right_leg_joint', 'back_left_leg_joint']
+TRIPOD_B = ['front_right_leg_joint', 'centre_left_leg_joint', 'back_right_leg_joint']
 
 STEP_AMOUNT = 5.40  # 2π radians
 
