@@ -101,10 +101,6 @@ class RHexSimpleStepper(Node):
 
 
     def update(self):
-        now = time.time()
-        dt = now - self.last_time
-        self.last_time = now
-        print(f"Update interval: {dt:.4f} seconds ({1/dt:.2f} Hz)")
         if not self.moving:
             return
 
